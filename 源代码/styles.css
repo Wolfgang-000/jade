@@ -1532,3 +1532,359 @@ body {
         flex-wrap: wrap;
     }
 }
+
+.about-page, .contact-page {
+    padding-bottom: 60px;
+}
+
+.page-hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 80px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.page-hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #d4af37;
+}
+
+.page-hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.about-section {
+    padding: 80px 0;
+    background: #fff;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-content h2 {
+    font-size: 36px;
+    color: #1a1a2e;
+    margin-bottom: 20px;
+}
+
+.about-content .lead {
+    font-size: 20px;
+    color: #d4af37;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+.about-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.about-features .feature {
+    padding: 25px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.about-features .feature i {
+    font-size: 40px;
+    color: #d4af37;
+    margin-bottom: 15px;
+}
+
+.about-features .feature h4 {
+    font-size: 18px;
+    color: #1a1a2e;
+    margin-bottom: 10px;
+}
+
+.about-features .feature p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-section {
+    padding: 80px 0;
+    background: #f9f9f9;
+}
+
+.timeline-section h2 {
+    text-align: center;
+    font-size: 36px;
+    color: #1a1a2e;
+    margin-bottom: 50px;
+}
+
+.timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, #d4af37, #f4e4bc);
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.timeline-item:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+.timeline-item .year {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #d4af37, #f4e4bc);
+    color: #1a1a2e;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 18px;
+    z-index: 1;
+}
+
+.timeline-item .content {
+    width: 45%;
+    padding: 25px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-item:nth-child(odd) .content {
+    text-align: right;
+}
+
+.timeline-item .content h4 {
+    font-size: 20px;
+    color: #1a1a2e;
+    margin-bottom: 10px;
+}
+
+.timeline-item .content p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.contact-section {
+    padding: 80px 0;
+    background: #fff;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.contact-info h2, .contact-form-wrapper h2 {
+    font-size: 32px;
+    color: #1a1a2e;
+    margin-bottom: 30px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.contact-item i {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #d4af37, #f4e4bc);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #1a1a2e;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.contact-item h4 {
+    font-size: 18px;
+    color: #1a1a2e;
+    margin-bottom: 5px;
+}
+
+.contact-item p {
+    font-size: 15px;
+    color: #666;
+    margin: 0;
+}
+
+.contact-item .sub {
+    font-size: 13px;
+    color: #999;
+}
+
+.contact-form-wrapper {
+    background: #f9f9f9;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.contact-form .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #1a1a2e;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #d4af37;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.map-section h2 {
+    font-size: 32px;
+    color: #1a1a2e;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.stores-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.store-item {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.store-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.store-item h4 {
+    font-size: 20px;
+    color: #d4af37;
+    margin-bottom: 15px;
+}
+
+.store-item p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 1024px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-image {
+        order: -1;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stores-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-item .year {
+        left: 20px;
+        transform: none;
+    }
+    
+    .timeline-item .content,
+    .timeline-item:nth-child(odd) .content {
+        width: calc(100% - 60px);
+        margin-left: 60px;
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-hero h1 {
+        font-size: 32px;
+    }
+    
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .stores-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-form .form-row {
+        grid-template-columns: 1fr;
+    }
+}

@@ -233,6 +233,12 @@ function navigateTo(page, params = {}) {
         case 'favorites':
             renderFavoritesPage();
             break;
+        case 'about':
+            renderAboutPage();
+            break;
+        case 'contact':
+            renderContactPage();
+            break;
         default:
             renderHomePage();
     }
@@ -1255,6 +1261,217 @@ function closeModal(runCallback) {
     if (runCallback && window.modalCallback) {
         window.modalCallback();
     }
+}
+
+function renderAboutPage() {
+    const mainContent = document.getElementById('mainContent');
+    mainContent.innerHTML = `
+        <div class="about-page">
+            <section class="page-hero">
+                <div class="container">
+                    <h1>关于我们</h1>
+                    <p>传承百年翡翠文化，臻于至善</p>
+                </div>
+            </section>
+            
+            <section class="about-section">
+                <div class="container">
+                    <div class="about-grid">
+                        <div class="about-content">
+                            <h2>御翠珠宝</h2>
+                            <p class="lead">创立于1920年，专注于翡翠珠宝的设计与制作</p>
+                            <p>一个世纪的传承与发展，御翠珠宝始终坚持"御翠臻品，尊贵传承"的品牌理念。我们精选缅甸顶级翡翠原石，由经验丰富的匠人精心雕琢，将东方美学与现代工艺完美融合。</p>
+                            <p>每一件御翠珠宝作品，都承载着我们对翡翠艺术的热爱与执着。从原石挑选到设计成型，从雕刻打磨到最终呈现，我们倾注全部心血，只为为您呈现最完美的翡翠珍品。</p>
+                            
+                            <div class="about-features">
+                                <div class="feature">
+                                    <i class="fas fa-gem"></i>
+                                    <h4>甄选原石</h4>
+                                    <p>深入缅甸矿场，精选顶级翡翠原石</p>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    <h4>匠心设计</h4>
+                                    <p>知名设计师量身定制设计方案</p>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-hands"></i>
+                                    <h4>精工雕琢</h4>
+                                    <p>数十年经验匠人手工雕刻</p>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h4>品质保证</h4>
+                                    <p>每件作品均配有权威鉴定证书</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&h=800&fit=crop" alt="御翠珠宝">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="timeline-section">
+                <div class="container">
+                    <h2>发展历程</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="year">1920</div>
+                            <div class="content">
+                                <h4>品牌创立</h4>
+                                <p>御翠珠宝在北京前门大街创立，开始翡翠批发业务</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">1985</div>
+                            <div class="content">
+                                <h4>工艺传承</h4>
+                                <p>第二代传人学成归来，引入现代玉雕工艺</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2000</div>
+                            <div class="content">
+                                <h4>品牌升级</h4>
+                                <p>正式启用"御翠珠宝"品牌，进军高端市场</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2015</div>
+                            <div class="content">
+                                <h4>电商布局</h4>
+                                <p>开启线上线下融合的全新零售模式</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2026</div>
+                            <div class="content">
+                                <h4>再创新篇</h4>
+                                <p>全国拥有50+门店，服务百万客户</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    `;
+}
+
+function renderContactPage() {
+    const mainContent = document.getElementById('mainContent');
+    mainContent.innerHTML = `
+        <div class="contact-page">
+            <section class="page-hero">
+                <div class="container">
+                    <h1>联系我们</h1>
+                    <p>竭诚为您服务，期待您的光临</p>
+                </div>
+            </section>
+            
+            <section class="contact-section">
+                <div class="container">
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <h2>联系信息</h2>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>总部地址</h4>
+                                    <p>北京市朝阳区建国路88号SOHO现代城B座1层</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>客服热线</h4>
+                                    <p>400-888-8888</p>
+                                    <p class="sub">周一至周日 9:00-21:00</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>电子邮箱</h4>
+                                    <p>service@yucui.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <h4>营业时间</h4>
+                                    <p>周一至周日 9:00-21:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-form-wrapper">
+                            <h2>在线留言</h2>
+                            <form class="contact-form" onsubmit="handleContactSubmit(event)">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>您的姓名</label>
+                                        <input type="text" id="contactName" placeholder="请输入姓名" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>联系电话</label>
+                                        <input type="tel" id="contactPhone" placeholder="请输入电话" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>电子邮箱</label>
+                                    <input type="email" id="contactEmail" placeholder="请输入邮箱">
+                                </div>
+                                <div class="form-group">
+                                    <label>留言内容</label>
+                                    <textarea id="contactMessage" rows="5" placeholder="请输入留言内容" required></textarea>
+                                </div>
+                                <button type="submit" class="btn">提交留言</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="map-section">
+                        <h2>门店分布</h2>
+                        <div class="stores-grid">
+                            <div class="store-item">
+                                <h4>北京总店</h4>
+                                <p>朝阳区建国路88号SOHO现代城</p>
+                                <p>电话：010-12345678</p>
+                            </div>
+                            <div class="store-item">
+                                <h4>上海旗舰店</h4>
+                                <p>静安区南京西路1718号</p>
+                                <p>电话：021-87654321</p>
+                            </div>
+                            <div class="store-item">
+                                <h4>深圳旗舰店</h4>
+                                <p>福田区华强北商业街</p>
+                                <p>电话：0755-11112222</p>
+                            </div>
+                            <div class="store-item">
+                                <h4>广州旗舰店</h4>
+                                <p>天河区太古汇商场</p>
+                                <p>电话：020-33334444</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    `;
+}
+
+function handleContactSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('contactName').value;
+    const phone = document.getElementById('contactPhone').value;
+    const email = document.getElementById('contactEmail').value;
+    const message = document.getElementById('contactMessage').value;
+    
+    showToast('留言提交成功！我们会尽快与您联系。', 'success');
+    e.target.reset();
 }
 
 document.addEventListener('DOMContentLoaded', init);
