@@ -1,0 +1,11 @@
+
+<view class="page">
+  <view class="hero"><view class="eyebrow">HEALTH MEMBER</view><view class="brand-title">会员活动中心</view><view class="lead">会员福利、专题活动与精选商品入口。</view></view>
+  <view class="container">
+    <view class="main-event" bindtap="openMain"><view class="mini">当前主活动</view><view class="event-title">{{mainActivity.name}}</view><view class="event-benefit">{{mainActivity.benefit}}</view><view class="event-meta">{{mainActivity.start}} — {{mainActivity.end}}</view><button class="primary">立即参加</button></view>
+  </view>
+  <view class="section"><view class="head"><view class="section-title">热门活动</view><view class="link" bindtap="openCenter">全部活动 →</view></view><activity-card wx:for="{{hotActivities}}" wx:key="id" activity="{{item}}" bind:open="openActivity"/></view>
+  <view class="section"><view class="head"><view><view class="section-title">会员精选</view><view class="section-sub">从活动页进入现有商城完成购买</view></view></view><view class="grid"><product-card wx:for="{{products}}" wx:key="id" product="{{item}}" bind:buy="buy"/></view></view>
+  <view class="quick"><view bindtap="openBenefits"><text>会员权益</text><text>优惠与福利</text></view><view bindtap="openService"><text>客服服务</text><text>购买问题咨询</text></view></view>
+  <view class="sticky safe-bottom"><button bindtap="openMall">进入商城查看更多商品</button></view>
+</view>

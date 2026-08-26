@@ -1,0 +1,2 @@
+
+.item{padding:28rpx 0;border-bottom:1rpx solid #ebe6e0}.top{display:flex;justify-content:space-between;gap:20rpx}.name{font-size:30rpx;font-weight:600}.sub{font-size:23rpx;color:#7d756f;margin-top:8rpx}.status{font-size:21rpx;color:#9b1c1f;white-space:nowrap}.meta{font-size:21rpx;color:#9d958f;margin-top:16rpx}.more{font-size:24rpx;color:#4e4742;font-weight:600;margin-top:16rpx}

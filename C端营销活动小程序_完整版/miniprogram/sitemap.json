@@ -1,0 +1,25 @@
+{
+  "desc": "活动公开页允许索引，隐私和webview页不索引",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "pages/home/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/activity/list"
+    },
+    {
+      "action": "allow",
+      "page": "pages/activity/detail"
+    },
+    {
+      "action": "disallow",
+      "page": "pages/privacy/index"
+    },
+    {
+      "action": "disallow",
+      "page": "pages/webview/index"
+    }
+  ]
+}

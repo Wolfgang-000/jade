@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>C端营销活动CMS · 完整高保真原型</title>
+<style>
+:root{
+  --bg:#f6f6f4;
+  --surface:#ffffff;
+  --surface-2:#faf9f7;
+  --surface-3:#f1f0ed;
+  --border:#e7e5e1;
+  --border-strong:#d7d3cd;
+  --text:#23211f;
+  --text-2:#6e6964;
+  --text-3:#9c9690;
+  --brand:#9b1c1f;
+  --brand-hover:#7f1719;
+  --brand-soft:#faeeee;
+  --gold:#b6955b;
+  --gold-soft:#f7f0e3;
+  --success:#2e7d32;
+  --success-soft:#edf6ee;
+  --warning:#a15c00;
+  --warning-soft:#fff5e7;
+  --danger:#b42318;
+  --danger-soft:#fff0ef;
+  --shadow:0 16px 40px rgba(35,25,20,.08);
+  --radius-sm:8px;
+  --radius-md:12px;
+  --radius-lg:16px;
+  --sidebar:228px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--text);background:var(--bg)}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.hidden{display:none!important}
+.app{min-height:100vh}
+.topbar{
+  position:sticky;top:0;z-index:50;height:64px;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px 0 calc(var(--sidebar) + 24px);backdrop-filter:blur(10px)
+}
+.brand-head{display:flex;align-items:center;gap:12px}
+.logo{width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ebd7ad 0,#c6a065 46%,#a87c38 100%);box-shadow:inset 0 1px 2px rgba(255,255,255,.6)}
+.brand-name{font-weight:700;letter-spacing:.2px}
+.brand-sub{font-size:12px;color:var(--text-3);margin-top:2px}
+.top-actions{display:flex;align-items:center;gap:8px}
+.sidebar{
+  position:fixed;left:0;top:0;bottom:0;width:var(--sidebar);background:#fcfbf9;border-right:1px solid var(--border);z-index:60;padding:16px 12px
+}
+.sidebar-brand{display:flex;align-items:center;gap:10px;padding:8px 10px 20px}
+.sidebar h5{margin:18px 10px 8px;font-size:11px;letter-spacing:.8px;color:var(--text-3);font-weight:600}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav-item{
+  display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;color:#514c47;text-align:left;padding:10px 12px;border-radius:8px;font-size:14px
+}
+.nav-item:hover{background:#f1efeb}
+.nav-item.active{background:#ebe8e2;color:#1d1b19;font-weight:600}
+.nav-icon{width:18px;text-align:center;opacity:.8}
+.main{margin-left:var(--sidebar);padding:28px 32px 64px}
+.page{max-width:1440px;margin:0 auto}
+.page-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:24px}
+.page-title{margin:0;font-size:28px;line-height:1.25;letter-spacing:-.4px}
+.page-desc{margin-top:8px;color:var(--text-2);font-size:14px}
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{
+  height:38px;padding:0 14px;border-radius:8px;border:1px solid var(--border-strong);background:#fff;color:#3b3733;font-weight:600;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:8px
+}
+.btn:hover{background:#f8f7f5}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.primary:hover{background:var(--brand-hover)}
+.btn.tertiary{border-color:transparent;background:transparent}
+.btn.danger{color:var(--danger);border-color:#efc6c2;background:#fff}
+.btn.gold{background:var(--gold-soft);border-color:#ead7b3;color:#735426}
+.btn.small{height:32px;padding:0 10px;font-size:13px}
+.btn.icon{width:38px;padding:0}
+.toolbar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px
+}
+.search{
+  position:relative;min-width:280px
+}
+.search input{
+  width:100%;height:38px;padding:0 12px 0 34px;border:1px solid var(--border-strong);border-radius:8px;background:#fff;outline:none
+}
+.search:before{content:"⌕";position:absolute;left:11px;top:7px;color:#8d8781}
+.tabs{display:flex;gap:20px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.tab{
+  border:0;background:transparent;padding:0 0 12px;color:var(--text-2);font-weight:600;position:relative
+}
+.tab.active{color:var(--text)}
+.tab.active:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--brand)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.kpi{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px
+}
+.kpi .label{font-size:13px;color:var(--text-2)}
+.kpi .value{font-size:28px;font-weight:700;margin-top:8px;letter-spacing:-.5px}
+.kpi .meta{font-size:12px;color:var(--text-3);margin-top:6px}
+.kpi .up{color:var(--success)}
+.kpi .down{color:var(--danger)}
+.panel{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px
+}
+.panel + .panel{margin-top:16px}
+.panel-hd{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.panel-title{font-weight:700;font-size:16px}
+.panel-sub{font-size:12px;color:var(--text-3);margin-top:4px}
+.panel-bd{padding:18px}
+.section-title{font-size:18px;font-weight:700;margin:24px 0 12px}
+.activity-table,.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:12px 14px;border-bottom:1px solid var(--border);text-align:left;font-size:13px;vertical-align:middle}
+.table th{color:var(--text-2);font-weight:600;background:#faf9f7;position:sticky;top:0}
+.table tr:hover td{background:#fcfbfa}
+.table tr:last-child td{border-bottom:0}
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:600}
+.status-pill.live{background:var(--success-soft);color:var(--success)}
+.status-pill.draft{background:#f1f0ed;color:#66615d}
+.status-pill.upcoming{background:#edf3fb;color:#305d8e}
+.status-pill.ended{background:#f1f0ed;color:#7d7771}
+.status-pill.blocked{background:var(--danger-soft);color:var(--danger)}
+.status-pill.approved{background:var(--success-soft);color:var(--success)}
+.status-pill.pending{background:var(--warning-soft);color:var(--warning)}
+.linkish{color:#6b4c2e;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.muted{color:var(--text-2)}
+.faint{color:var(--text-3)}
+.row-title{font-weight:600}
+.thumb{width:48px;height:48px;border-radius:8px;border:1px solid var(--border);background:linear-gradient(145deg,#faf7f0,#eee7dc);display:flex;align-items:center;justify-content:center;color:#b1aaa4;font-size:10px;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.editor-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:20px;align-items:start}
+.editor-main{min-width:0}
+.preview-side{position:sticky;top:84px}
+.editor-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:16px
+}
+.breadcrumb{font-size:12px;color:var(--text-3);margin-bottom:8px}
+.editor-title{font-size:26px;font-weight:700;margin:0}
+.editor-meta{display:flex;gap:10px;align-items:center;margin-top:8px;font-size:12px;color:var(--text-3)}
+.subtabs{display:flex;gap:24px;border-bottom:1px solid var(--border);margin:18px 0}
+.subtab{padding:0 0 12px;border:0;background:transparent;color:var(--text-2);font-weight:600}
+.subtab.active{color:var(--text);border-bottom:2px solid var(--brand)}
+.module-list{border-top:1px solid var(--border)}
+.module-row{
+  display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)
+}
+.drag{color:#a09a94;cursor:grab;font-size:18px;user-select:none}
+.module-name{font-weight:600;font-size:14px}
+.module-desc{font-size:12px;color:var(--text-3);margin-top:4px}
+.module-actions{display:flex;gap:6px}
+.add-module{
+  margin-top:14px;width:100%;height:42px;border:1px dashed var(--border-strong);border-radius:8px;background:#fff;color:#5d5751;font-weight:600
+}
+.form-section{padding:4px 0 20px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.form-section:last-child{border-bottom:0}
+.form-title{font-size:15px;font-weight:700;margin-bottom:14px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field label{display:block;font-size:12px;font-weight:600;color:#5e5954;margin-bottom:7px}
+.field input,.field textarea,.field select{
+  width:100%;border:1px solid var(--border-strong);border-radius:8px;background:#fff;outline:none;padding:10px 11px;font-size:14px;color:var(--text)
+}
+.field input,.field select{height:40px}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:#a49b92;box-shadow:0 0 0 3px rgba(123,115,107,.08)}
+.field .help{font-size:12px;color:var(--text-3);margin-top:6px;line-height:1.5}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
+.switch{position:relative;width:38px;height:22px;background:#d9d6d1;border-radius:999px;cursor:pointer;transition:.18s}
+.switch:after{content:"";position:absolute;width:18px;height:18px;left:2px;top:2px;background:#fff;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,.18);transition:.18s}
+.switch.on{background:var(--brand)}
+.switch.on:after{left:18px}
+.phone-wrap{background:#2a2826;padding:10px;border-radius:28px;box-shadow:var(--shadow)}
+.phone{border-radius:22px;overflow:hidden;background:#fff;height:760px;overflow-y:auto}
+.consumer{background:#faf8f5;min-height:100%;color:#292421}
+.c-header{padding:28px 20px 26px;background:#fff;border-bottom:1px solid #eee8e2}
+.c-eyebrow{font-size:11px;color:#9b1c1f;font-weight:700;letter-spacing:1px}
+.c-title{font-size:30px;line-height:1.18;font-weight:700;margin-top:8px;letter-spacing:-.3px}
+.c-sub{font-size:14px;color:#746d68;line-height:1.7;margin-top:10px}
+.c-meta{font-size:12px;color:#9b948f;margin-top:12px}
+.c-hero-cta{margin-top:18px}
+.c-btn{height:42px;border:0;border-radius:8px;background:#9b1c1f;color:#fff;font-weight:700;padding:0 16px}
+.c-section{padding:24px 16px 0}
+.c-section-title{font-size:20px;font-weight:700;margin-bottom:12px}
+.c-section-sub{font-size:12px;color:#8a827d;margin-top:-6px;margin-bottom:12px}
+.benefit-strip{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.benefit-item{background:#fff;border:1px solid #ece6df;border-radius:12px;padding:14px}
+.benefit-item strong{font-size:20px;color:#9b1c1f}
+.benefit-item span{display:block;font-size:12px;color:#817873;margin-top:4px}
+.hero-prod{background:#fff;border-top:1px solid #eee8e2;border-bottom:1px solid #eee8e2;padding:18px 16px}
+.hero-img{height:180px;background:linear-gradient(145deg,#f7f1e8,#ece2d7);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#aaa099;font-size:12px;overflow:hidden}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-prod .tag{display:inline-block;margin-top:14px;font-size:11px;font-weight:700;color:#86622e;background:#f7f0e3;padding:4px 8px;border-radius:6px}
+.hero-prod .name{font-size:18px;font-weight:700;margin-top:8px}
+.hero-prod .spec{font-size:12px;color:#8b837e;margin-top:4px}
+.hero-prod .sell{font-size:13px;color:#6e6762;line-height:1.6;margin-top:8px}
+.hero-prod .price{margin-top:12px}
+.hero-prod .price strong{font-size:26px;color:#9b1c1f}
+.hero-prod .price del{font-size:12px;color:#aaa29d;margin-left:8px}
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.c-prod{background:#fff;border:1px solid #ece6df;border-radius:12px;overflow:hidden}
+.c-prod-img{height:128px;background:linear-gradient(145deg,#f7f1e8,#ece2d7);display:flex;align-items:center;justify-content:center;color:#aca39d;font-size:11px;overflow:hidden}
+.c-prod-img img{width:100%;height:100%;object-fit:cover}
+.c-prod-bd{padding:11px}
+.c-prod-name{font-size:13px;font-weight:700;line-height:1.45;min-height:38px}
+.c-prod-spec{font-size:11px;color:#8b837e;margin-top:4px}
+.c-prod-price{margin-top:8px}
+.c-prod-price strong{font-size:18px;color:#9b1c1f}
+.c-prod-price del{font-size:11px;color:#aca39c;margin-left:5px}
+.c-prod .c-btn{width:100%;height:36px;margin-top:9px;font-size:12px}
+.trust{background:#fff;border-top:1px solid #eee8e2;border-bottom:1px solid #eee8e2;padding:18px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.trust .item{text-align:center}
+.trust .item b{display:block;font-size:13px}
+.trust .item span{display:block;font-size:10px;color:#8a827d;margin-top:3px}
+.rule{font-size:12px;color:#746d68;line-height:1.8}
+.c-sticky{position:sticky;bottom:0;padding:10px 14px 14px;background:rgba(255,255,255,.96);border-top:1px solid #eee8e2}
+.c-sticky .c-btn{width:100%;height:46px}
+.list-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.activity-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.activity-cover{height:150px;background:linear-gradient(145deg,#f6eee3,#e9ded2);display:flex;align-items:center;justify-content:center;color:#aaa099;overflow:hidden}
+.activity-cover img{width:100%;height:100%;object-fit:cover}
+.activity-card-bd{padding:14px}
+.activity-card .title{font-weight:700}
+.activity-card .desc{font-size:12px;color:var(--text-2);line-height:1.6;margin-top:6px}
+.activity-card .meta{font-size:12px;color:var(--text-3);margin-top:10px}
+.banner-row{display:grid;grid-template-columns:72px 1fr 110px 130px;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
+.banner-row:last-child{border-bottom:0}
+.banner-preview{height:44px;border:1px solid var(--border);border-radius:8px;background:linear-gradient(145deg,#f6eee3,#eadfd2);display:flex;align-items:center;justify-content:center;color:#aaa099;font-size:10px;overflow:hidden}
+.banner-preview img{width:100%;height:100%;object-fit:cover}
+.drawer-backdrop,.modal-backdrop{position:fixed;inset:0;background:rgba(24,20,18,.28);z-index:100;display:flex;justify-content:flex-end}
+.drawer{width:min(520px,100%);height:100%;background:#fff;box-shadow:-16px 0 50px rgba(30,20,15,.12);display:flex;flex-direction:column}
+.drawer-hd{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.drawer-bd{padding:20px;overflow:auto}
+.drawer-ft{margin-top:auto;padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;background:#fff}
+.modal-backdrop{align-items:center;justify-content:center}
+.modal{width:min(680px,calc(100% - 32px));max-height:86vh;background:#fff;border-radius:12px;box-shadow:0 28px 80px rgba(24,15,10,.24);overflow:hidden;display:flex;flex-direction:column}
+.modal-hd{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-bd{padding:20px;overflow:auto}
+.modal-ft{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
+.close{border:0;background:transparent;font-size:22px;color:#827b75}
+.empty{padding:48px 24px;text-align:center;color:var(--text-3)}
+.empty strong{display:block;color:var(--text-2);font-size:15px;margin-bottom:6px}
+.toast{position:fixed;right:24px;bottom:24px;background:#2a2725;color:#fff;padding:11px 14px;border-radius:8px;font-size:13px;z-index:200;box-shadow:var(--shadow)}
+.qr{width:180px;height:180px;background:
+  linear-gradient(90deg,#111 10px,transparent 10px) 0 0/18px 18px,
+  linear-gradient(#111 10px,transparent 10px) 0 0/18px 18px,
+  #fff;border:10px solid #fff;box-shadow:inset 0 0 0 1px #ddd;filter:contrast(150%)}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.check-row:last-child{border-bottom:0}
+.check-ok{color:var(--success);font-weight:700}
+.check-bad{color:var(--danger);font-weight:700}
+.source-chips{display:flex;flex-wrap:wrap;gap:8px}
+.source-chip{padding:7px 10px;border:1px solid var(--border);border-radius:999px;font-size:12px;background:#fff}
+.chart{height:220px;display:flex;align-items:flex-end;gap:14px;padding:16px 12px 4px;border-left:1px solid var(--border);border-bottom:1px solid var(--border)}
+.bar{flex:1;background:#b6955b;border-radius:4px 4px 0 0;min-height:10px;position:relative}
+.bar:after{content:attr(data-label);position:absolute;left:50%;transform:translateX(-50%);bottom:-24px;font-size:11px;color:var(--text-3);white-space:nowrap}
+.bar:before{content:attr(data-value);position:absolute;left:50%;transform:translateX(-50%);top:-20px;font-size:11px;color:var(--text-2)}
+.notice{padding:12px 14px;background:#fff8ec;border:1px solid #f0ddb7;border-radius:8px;color:#7b5d2b;font-size:12px;line-height:1.6}
+.file-drop{border:1px dashed var(--border-strong);border-radius:8px;padding:20px;text-align:center;color:var(--text-3);background:#fcfbf9}
+.file-drop input{display:none}
+@media(max-width:1200px){
+  :root{--sidebar:72px}
+  .sidebar-brand .copy,.sidebar h5,.nav-item .label{display:none}
+  .sidebar-brand{justify-content:center;padding-left:0;padding-right:0}
+  .nav-item{justify-content:center}
+  .topbar{padding-left:96px}
+  .editor-layout{grid-template-columns:1fr}
+  .preview-side{position:static}
+  .list-cards{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:800px){
+  .sidebar{display:none}
+  .topbar{padding:0 14px}
+  .main{margin-left:0;padding:18px 14px 50px}
+  .page-title-row,.toolbar{flex-direction:column;align-items:stretch}
+  .kpis{grid-template-columns:1fr 1fr}
+  .list-cards{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .editor-layout{grid-template-columns:1fr}
+  .search{min-width:0;width:100%}
+  .topbar .brand-sub{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo"></div>
+      <div class="copy">
+        <div style="font-weight:700">营销活动中台</div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:2px">C端 CMS</div>
+      </div>
+    </div>
+    <h5>运营</h5>
+    <div class="nav">
+      <button class="nav-item active" data-page="dashboard"><span class="nav-icon">⌂</span><span class="label">工作台</span></button>
+      <button class="nav-item" data-page="activities"><span class="nav-icon">▤</span><span class="label">活动管理</span></button>
+      <button class="nav-item" data-page="products"><span class="nav-icon">◫</span><span class="label">营销商品库</span></button>
+      <button class="nav-item" data-page="banners"><span class="nav-icon">▧</span><span class="label">Banner 管理</span></button>
+      <button class="nav-item" data-page="analytics"><span class="nav-icon">⌁</span><span class="label">数据中心</span></button>
+    </div>
+    <h5>系统</h5>
+    <div class="nav">
+      <button class="nav-item" data-page="settings"><span class="nav-icon">⚙</span><span class="label">系统设置</span></button>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <div class="brand-head">
+      <div>
+        <div class="brand-name" id="topTitle">工作台</div>
+        <div class="brand-sub" id="topSub">营销活动全局概览</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="btn" id="frontPreviewBtn">前台预览</button>
+      <button class="btn primary" id="newActivityTop">新建活动</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page" id="pageRoot"></div>
+  </main>
+</div>
+
+<div id="overlayRoot"></div>
+<div id="toastRoot"></div>
+
+<script>
+const now = new Date();
+const state = {
+  currentPage:'dashboard',
+  currentActivityId:'a1',
+  editorTab:'content',
+  previewMode:'activity',
+  source:'wechat',
+  data:{
+    settings:{
+      siteName:'天仁健康会员活动中心',
+      mallUrl:'https://example.com/mall',
+      customerServiceUrl:'https://example.com/service',
+      activityBaseUrl:'https://example.com/activity/',
+      publicAccountUrl:'https://example.com/wechat',
+      miniProgramUrl:'https://example.com/miniprogram'
+    },
+    activities:[
+      {id:'a1',name:'9月会员福利日',subtitle:'会员专享 · 精选健康好物',template:'member',status:'live',start:'2026-09-01',end:'2026-09-07',banner:'',bannerTitle:'会员福利日',bannerDesc:'会员专享 · 限时7天',primaryBenefit:'最高立减 ¥20',mallUrl:'https://example.com/mall',modules:[
+        {id:'m1',type:'hero',name:'主视觉 Banner',desc:'会员福利日 / 活动时间 / 核心权益'},
+        {id:'m2',type:'benefits',name:'会员权益',desc:'满59减5 / 满99减10'},
+        {id:'m3',type:'heroProduct',name:'本期主推',desc:'1个主推商品'},
+        {id:'m4',type:'products',name:'更多会员精选',desc:'5个商品 · 双列布局'},
+        {id:'m5',type:'trust',name:'品质与服务',desc:'正品保障 / 客服支持 / 售后'},
+        {id:'m6',type:'rules',name:'活动规则',desc:'时间 / 优惠 / 跳转说明'}
+      ],productIds:['p1','p2','p3','p4','p5','p6'],productOverrides:{
+        p1:{price:19.9,tag:'本期主推',sell:'会员精选，适合活动主推展示',url:'https://example.com/p1'},
+        p2:{price:29.9,tag:'会员价',sell:'',url:'https://example.com/p2'},
+        p3:{price:39.9,tag:'热销',sell:'',url:'https://example.com/p3'},
+        p4:{price:49.9,tag:'推荐',sell:'',url:'https://example.com/p4'},
+        p5:{price:59.9,tag:'会员优选',sell:'',url:'https://example.com/p5'},
+        p6:{price:69.9,tag:'新品',sell:'',url:'https://example.com/p6'}
+      },channels:{wechat:true,group:true,moments:true,official:true,poster:true,sms:true},qrEnabled:true,notes:'',createdAt:'2026-08-20',updatedAt:'2026-08-26 16:10'},
+      {id:'a2',name:'秋冬健康季',subtitle:'季节主题 · 家庭常备优选',template:'season',status:'draft',start:'2026-09-15',end:'2026-11-30',banner:'',bannerTitle:'秋冬健康季',bannerDesc:'季节主题 · 家庭常备优选',primaryBenefit:'精选专题组合',mallUrl:'https://example.com/mall',modules:[
+        {id:'m1',type:'hero',name:'主视觉 Banner',desc:'主题与季节氛围'},
+        {id:'m2',type:'scene',name:'场景分组',desc:'咽喉舒护 / 家庭常备 / 会员优选'},
+        {id:'m3',type:'trust',name:'品质与服务',desc:'服务与信任说明'},
+        {id:'m4',type:'rules',name:'活动规则',desc:'专题活动规则'}
+      ],productIds:['p1','p2','p3','p4'],productOverrides:{},channels:{wechat:true,group:true,moments:true,official:true,poster:true,sms:false},qrEnabled:true,notes:'',createdAt:'2026-08-22',updatedAt:'2026-08-26 15:42'},
+      {id:'a3',name:'新品体验专题',subtitle:'新品首发 · 品质与体验并重',template:'new',status:'upcoming',start:'2026-09-10',end:'2026-09-20',banner:'',bannerTitle:'新品体验专题',bannerDesc:'新品首发 · 品质与体验并重',primaryBenefit:'新品尝鲜',mallUrl:'https://example.com/mall',modules:[
+        {id:'m1',type:'hero',name:'主视觉 Banner',desc:'新品首发'},
+        {id:'m2',type:'heroProduct',name:'新品主推',desc:'1个新品大卡'},
+        {id:'m3',type:'story',name:'新品卖点说明',desc:'适用场景 / 核心卖点 / 信任信息'},
+        {id:'m4',type:'products',name:'更多新品',desc:'4个商品'},
+        {id:'m5',type:'rules',name:'活动规则',desc:'活动说明'}
+      ],productIds:['p6','p3','p4'],productOverrides:{},channels:{wechat:true,group:true,moments:true,official:true,poster:true,sms:false},qrEnabled:true,notes:'',createdAt:'2026-08-24',updatedAt:'2026-08-26 14:20'}
+    ],
+    products:[
+      {id:'p1',name:'商品A / 复方草珊瑚含片',brand:'示例品牌',spec:'0.44g×48片',category:'健康商品',dailyPrice:29.9,defaultActivityPrice:19.9,url:'https://example.com/p1',image:'',publicStatus:'allow',adStatus:'approved',status:'active'},
+      {id:'p2',name:'商品B / 清咽滴丸',brand:'示例品牌',spec:'20mg×30丸',category:'健康商品',dailyPrice:39.9,defaultActivityPrice:29.9,url:'https://example.com/p2',image:'',publicStatus:'allow',adStatus:'approved',status:'active'},
+      {id:'p3',name:'商品C / 金喉健喷雾',brand:'示例品牌',spec:'20ml',category:'健康商品',dailyPrice:49.9,defaultActivityPrice:39.9,url:'https://example.com/p3',image:'',publicStatus:'allow',adStatus:'approved',status:'active'},
+      {id:'p4',name:'商品D / 秋冬常备',brand:'示例品牌',spec:'标准规格',category:'健康商品',dailyPrice:59.9,defaultActivityPrice:49.9,url:'https://example.com/p4',image:'',publicStatus:'allow',adStatus:'approved',status:'active'},
+      {id:'p5',name:'商品E / 会员优选',brand:'示例品牌',spec:'标准规格',category:'健康商品',dailyPrice:69.9,defaultActivityPrice:59.9,url:'https://example.com/p5',image:'',publicStatus:'allow',adStatus:'pending',status:'active'},
+      {id:'p6',name:'商品F / 新品推荐',brand:'示例品牌',spec:'标准规格',category:'健康商品',dailyPrice:79.9,defaultActivityPrice:69.9,url:'https://example.com/p6',image:'',publicStatus:'allow',adStatus:'approved',status:'active'}
+    ],
+    banners:[
+      {id:'b1',title:'9月会员福利日',subtitle:'会员专享 · 限时7天',image:'',linkType:'activity',linkValue:'a1',status:'active',sort:1},
+      {id:'b2',title:'秋冬健康季',subtitle:'季节专题 · 家庭常备优选',image:'',linkType:'activity',linkValue:'a2',status:'active',sort:2}
+    ],
+    analytics:{
+      pv:3820,uv:1456,productClicks:613,mallJumps:402,
+      source:{wechat:480,group:362,moments:248,official:182,poster:146,sms:38},
+      productClicksById:{p1:188,p2:132,p3:96,p4:81,p5:62,p6:54},
+      daily:[210,256,318,402,498,615,720]
+    }
+  }
+};
+
+function save(){localStorage.setItem('cMarketingCMSComplete',JSON.stringify(state.data))}
+function load(){
+  const raw=localStorage.getItem('cMarketingCMSComplete');
+  if(raw){try{state.data=JSON.parse(raw)}catch(e){}}
+}
+load();
+
+const pageRoot=document.getElementById('pageRoot');
+const overlayRoot=document.getElementById('overlayRoot');
+const toastRoot=document.getElementById('toastRoot');
+
+function toast(msg){
+  toastRoot.innerHTML='<div class="toast">'+msg+'</div>';
+  setTimeout(()=>toastRoot.innerHTML='',2200);
+}
+function setTop(title,sub){
+  document.getElementById('topTitle').textContent=title;
+  document.getElementById('topSub').textContent=sub||'';
+}
+function statusLabel(s){
+  return {live:'进行中',draft:'草稿',upcoming:'即将开始',ended:'已结束'}[s]||s;
+}
+function statusClass(s){return s}
+function adLabel(s){return {approved:'审核通过',pending:'待审核',blocked:'禁止推广'}[s]||s}
+function adClass(s){return {approved:'approved',pending:'pending',blocked:'blocked'}[s]||'pending'}
+function money(v){return '¥'+Number(v||0).toFixed(2)}
+function productById(id){return state.data.products.find(x=>x.id===id)}
+function activityById(id){return state.data.activities.find(x=>x.id===id)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+
+function render(){
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('active',el.dataset.page===state.currentPage));
+  if(state.currentPage==='dashboard') renderDashboard();
+  if(state.currentPage==='activities') renderActivities();
+  if(state.currentPage==='activityEditor') renderActivityEditor();
+  if(state.currentPage==='products') renderProducts();
+  if(state.currentPage==='banners') renderBanners();
+  if(state.currentPage==='analytics') renderAnalytics();
+  if(state.currentPage==='settings') renderSettings();
+  if(state.currentPage==='front') renderFrontPreview();
+}
+function renderDashboard(){
+  setTop('工作台','营销活动全局概览');
+  const a=state.data.analytics;
+  const live=state.data.activities.filter(x=>x.status==='live').length;
+  const draft=state.data.activities.filter(x=>x.status==='draft').length;
+  pageRoot.innerHTML=`
+  <div class="page-title-row">
+    <div><h1 class="page-title">工作台</h1><div class="page-desc">先看异常和待办，再决定今天要处理什么。</div></div>
+    <div class="actions"><button class="btn" onclick="state.currentPage='analytics';render()">查看数据</button><button class="btn primary" onclick="newActivity()">新建活动</button></div>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><div class="label">活动访问 UV</div><div class="value">${a.uv.toLocaleString()}</div><div class="meta up">近7日 +18.4%</div></div>
+    <div class="kpi"><div class="label">商城跳转人数</div><div class="value">${a.mallJumps.toLocaleString()}</div><div class="meta">${(a.mallJumps/a.uv*100).toFixed(1)}% 跳转率</div></div>
+    <div class="kpi"><div class="label">进行中活动</div><div class="value">${live}</div><div class="meta">草稿 ${draft} 个</div></div>
+    <div class="kpi"><div class="label">待审核商品</div><div class="value">${state.data.products.filter(p=>p.adStatus==='pending').length}</div><div class="meta ${state.data.products.some(p=>p.adStatus==='pending')?'down':''}">发布前需处理</div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-hd"><div><div class="panel-title">需要处理</div><div class="panel-sub">按影响程度排序</div></div></div>
+    <div class="panel-bd">
+      <div class="check-row"><div><div class="row-title">商品E / 会员优选：广告审核状态为“待审核”</div><div class="faint" style="font-size:12px;margin-top:4px">当前被“9月会员福利日”引用，可能阻塞发布。</div></div><button class="btn small" onclick="state.currentPage='products';render()">去处理</button></div>
+      <div class="check-row"><div><div class="row-title">秋冬健康季仍为草稿</div><div class="faint" style="font-size:12px;margin-top:4px">计划 9月15日开始，建议提前完成素材和商品配置。</div></div><button class="btn small" onclick="openActivity('a2')">继续编辑</button></div>
+      <div class="check-row"><div><div class="row-title">微信群渠道贡献最高</div><div class="faint" style="font-size:12px;margin-top:4px">建议继续强化微信群活动入口和专属链接。</div></div><button class="btn small" onclick="state.currentPage='analytics';render()">查看来源</button></div>
+    </div>
+  </div>
+  <div class="section-title">最近活动</div>
+  <div class="panel"><table class="table">
+    <thead><tr><th>活动</th><th>状态</th><th>时间</th><th>商品</th><th>最后更新</th><th></th></tr></thead>
+    <tbody>${state.data.activities.map(x=>`<tr>
+      <td><div class="row-title">${esc(x.name)}</div><div class="faint" style="font-size:12px;margin-top:3px">${esc(x.subtitle)}</div></td>
+      <td><span class="status-pill ${statusClass(x.status)}">${statusLabel(x.status)}</span></td>
+      <td>${x.start} — ${x.end}</td>
+      <td>${x.productIds.length}</td>
+      <td>${esc(x.updatedAt||'')}</td>
+      <td><button class="btn small" onclick="openActivity('${x.id}')">编辑</button></td>
+    </tr>`).join('')}</tbody>
+  </table></div>`;
+}
+function renderActivities(){
+  setTop('活动管理','创建、复制、发布和归档活动');
+  pageRoot.innerHTML=`
+  <div class="page-title-row">
+    <div><h1 class="page-title">活动管理</h1><div class="page-desc">让运营人员完成从模板到发布的完整流程，无需修改代码。</div></div>
+    <div class="actions"><button class="btn primary" onclick="newActivity()">新建活动</button></div>
+  </div>
+  <div class="toolbar">
+    <div class="search"><input id="activitySearch" placeholder="搜索活动名称" oninput="filterActivityTable()"></div>
+    <div class="actions"><button class="btn" onclick="duplicateCurrentActivity()">复制当前活动</button></div>
+  </div>
+  <div class="tabs">
+    <button class="tab active">全部 ${state.data.activities.length}</button>
+    <button class="tab">进行中 ${state.data.activities.filter(x=>x.status==='live').length}</button>
+    <button class="tab">草稿 ${state.data.activities.filter(x=>x.status==='draft').length}</button>
+    <button class="tab">已结束 ${state.data.activities.filter(x=>x.status==='ended').length}</button>
+  </div>
+  <div class="panel"><table class="table" id="activityTable">
+  <thead><tr><th>活动</th><th>状态</th><th>模板</th><th>活动时间</th><th>商品</th><th>渠道</th><th></th></tr></thead>
+  <tbody>${state.data.activities.map(a=>`<tr data-name="${esc(a.name.toLowerCase())}">
+    <td><div class="row-title">${esc(a.name)}</div><div class="faint" style="font-size:12px;margin-top:4px">${esc(a.subtitle)}</div></td>
+    <td><span class="status-pill ${statusClass(a.status)}">${statusLabel(a.status)}</span></td>
+    <td>${{member:'会员福利',season:'季节专题',new:'新品专题',simple:'简洁导流'}[a.template]||a.template}</td>
+    <td>${a.start}<br><span class="faint">至 ${a.end}</span></td>
+    <td>${a.productIds.length}</td>
+    <td>${Object.values(a.channels||{}).filter(Boolean).length}</td>
+    <td><button class="btn small" onclick="openActivity('${a.id}')">编辑</button></td>
+  </tr>`).join('')}</tbody></table></div>`;
+}
+function filterActivityTable(){
+  const q=(document.getElementById('activitySearch').value||'').toLowerCase();
+  document.querySelectorAll('#activityTable tbody tr').forEach(tr=>tr.style.display=tr.dataset.name.includes(q)?'':'none');
+}
+function openActivity(id){state.currentActivityId=id;state.currentPage='activityEditor';state.editorTab='content';render()}
+function newActivity(){
+  const id='a'+Date.now();
+  state.data.activities.unshift({
+    id,name:'未命名活动',subtitle:'',template:'member',status:'draft',start:'2026-09-01',end:'2026-09-07',banner:'',bannerTitle:'会员福利日',bannerDesc:'会员专享',primaryBenefit:'会员福利',mallUrl:state.data.settings.mallUrl,
+    modules:[
+      {id:'m'+Date.now()+'1',type:'hero',name:'主视觉 Banner',desc:'活动名称 / 核心权益'},
+      {id:'m'+Date.now()+'2',type:'benefits',name:'会员权益',desc:'优惠券与福利'},
+      {id:'m'+Date.now()+'3',type:'products',name:'精选商品',desc:'商品推荐'},
+      {id:'m'+Date.now()+'4',type:'trust',name:'品质与服务',desc:'信任信息'},
+      {id:'m'+Date.now()+'5',type:'rules',name:'活动规则',desc:'规则与说明'}
+    ],productIds:[],productOverrides:{},channels:{wechat:true,group:true,moments:true,official:false,poster:true,sms:false},qrEnabled:true,notes:'',createdAt:new Date().toISOString().slice(0,10),updatedAt:'刚刚'
+  });
+  state.currentActivityId=id;save();state.currentPage='activityEditor';render();toast('已创建活动草稿');
+}
+function duplicateCurrentActivity(){
+  const src=activityById(state.currentActivityId)||state.data.activities[0];
+  if(!src)return;
+  const copy=JSON.parse(JSON.stringify(src));copy.id='a'+Date.now();copy.name=src.name+' - 副本';copy.status='draft';copy.updatedAt='刚刚';
+  copy.modules=copy.modules.map(m=>({...m,id:'m'+Date.now()+Math.random()}));
+  state.data.activities.unshift(copy);save();state.currentActivityId=copy.id;state.currentPage='activityEditor';render();toast('已复制活动');
+}
+function renderActivityEditor(){
+  const a=activityById(state.currentActivityId)||state.data.activities[0];
+  setTop('活动编辑',a.name);
+  pageRoot.innerHTML=`
+  <div class="editor-head">
+    <div><div class="breadcrumb">活动管理 / ${esc(a.name)}</div><h1 class="editor-title">${esc(a.name)}</h1>
+      <div class="editor-meta"><span class="status-pill ${statusClass(a.status)}">${statusLabel(a.status)}</span><span>最后保存：${esc(a.updatedAt||'')}</span></div>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="openFrontActivity('${a.id}')">手机预览</button>
+      <button class="btn" onclick="duplicateCurrentActivity()">复制</button>
+      <button class="btn primary" onclick="openPublish('${a.id}')">发布活动</button>
+    </div>
+  </div>
+  <div class="subtabs">
+    ${['content','products','promotion','settings'].map(t=>`<button class="subtab ${state.editorTab===t?'active':''}" onclick="state.editorTab='${t}';render()">${{content:'内容',products:'商品',promotion:'推广',settings:'设置'}[t]}</button>`).join('')}
+  </div>
+  <div class="editor-layout">
+    <div class="editor-main">${renderEditorTab(a)}</div>
+    <aside class="preview-side">${renderPhonePreview(a)}</aside>
+  </div>`;
+}
+function renderEditorTab(a){
+  if(state.editorTab==='content') return `
+    <div class="panel">
+      <div class="panel-hd"><div><div class="panel-title">页面内容</div><div class="panel-sub">拖拽排序，点击“编辑”配置模块</div></div></div>
+      <div class="panel-bd">
+        <div class="module-list" id="moduleList">
+          ${a.modules.map((m,i)=>`<div class="module-row" draggable="true" data-index="${i}">
+            <div class="drag">⋮⋮</div>
+            <div><div class="module-name">${esc(m.name)}</div><div class="module-desc">${esc(m.desc||'')}</div></div>
+            <div class="module-actions"><button class="btn small" onclick="editModule('${m.id}')">编辑</button><button class="btn small tertiary" onclick="removeModule('${m.id}')">删除</button></div>
+          </div>`).join('')}
+        </div>
+        <button class="add-module" onclick="openAddModule()">＋ 添加内容模块</button>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-hd"><div class="panel-title">活动基础信息</div></div>
+      <div class="panel-bd">
+        <div class="form-grid">
+          <div class="field"><label>活动名称</label><input value="${esc(a.name)}" oninput="updateActivity('name',this.value)"></div>
+          <div class="field"><label>活动副标题</label><input value="${esc(a.subtitle)}" oninput="updateActivity('subtitle',this.value)"></div>
+          <div class="field"><label>开始时间</label><input type="date" value="${a.start}" onchange="updateActivity('start',this.value)"></div>
+          <div class="field"><label>结束时间</label><input type="date" value="${a.end}" onchange="updateActivity('end',this.value)"></div>
+        </div>
+      </div>
+    </div>`;
+  if(state.editorTab==='products') return renderActivityProducts(a);
+  if(state.editorTab==='promotion') return renderPromotion(a);
+  return renderActivitySettings(a);
+}
+function renderActivityProducts(a){
+  const rows=a.productIds.map(id=>{
+    const p=productById(id);if(!p)return '';
+    const o=a.productOverrides?.[id]||{};
+    return `<tr>
+      <td><div style="display:flex;align-items:center;gap:10px"><div class="thumb">${p.image?`<img src="${p.image}">`:'图片'}</div><div><div class="row-title">${esc(p.name)}</div><div class="faint" style="font-size:12px;margin-top:3px">${esc(p.spec)}</div></div></div></td>
+      <td>${money(p.dailyPrice)}</td>
+      <td><input style="width:90px;height:34px;border:1px solid var(--border-strong);border-radius:8px;padding:0 8px" value="${o.price??p.defaultActivityPrice}" onchange="updateActivityProduct('${id}','price',this.value)"></td>
+      <td><input style="width:100px;height:34px;border:1px solid var(--border-strong);border-radius:8px;padding:0 8px" value="${esc(o.tag||'')}" onchange="updateActivityProduct('${id}','tag',this.value)"></td>
+      <td><span class="status-pill ${adClass(p.adStatus)}">${adLabel(p.adStatus)}</span></td>
+      <td><span class="${(o.url||p.url)?'linkish':'faint'}">${(o.url||p.url)?'已设置':'未设置'}</span></td>
+      <td><button class="btn small" onclick="openProductOverride('${id}')">编辑</button> <button class="btn small tertiary" onclick="removeActivityProduct('${id}')">移除</button></td>
+    </tr>`;
+  }).join('');
+  return `<div class="panel">
+    <div class="panel-hd"><div><div class="panel-title">活动商品 ${a.productIds.length}</div><div class="panel-sub">活动价只影响当前活动，不修改商品库基础价格</div></div><button class="btn primary small" onclick="openProductPicker()">＋ 添加商品</button></div>
+    <div class="panel-bd" style="padding:0;overflow:auto">
+      <table class="table"><thead><tr><th>商品</th><th>日常价</th><th>活动价</th><th>标签</th><th>合规</th><th>链接</th><th>操作</th></tr></thead>
+      <tbody>${rows||`<tr><td colspan="7"><div class="empty"><strong>还没有活动商品</strong>从营销商品库添加商品</div></td></tr>`}</tbody></table>
+    </div>
+  </div>`;
+}
+function renderPromotion(a){
+  const base=state.data.settings.activityBaseUrl+(a.id||'activity');
+  return `<div class="panel">
+    <div class="panel-hd"><div><div class="panel-title">推广链接</div><div class="panel-sub">同一活动按渠道生成不同 source 参数</div></div></div>
+    <div class="panel-bd">
+      <div class="form-section">
+        <div class="form-title">活动 URL</div>
+        <div class="field"><input value="${base}?source=wechat" readonly></div>
+      </div>
+      <div class="form-section">
+        <div class="form-title">渠道链接</div>
+        <div class="source-chips">
+          ${[['wechat','微信好友'],['group','微信群'],['moments','朋友圈'],['official','公众号'],['poster','海报'],['sms','短信']].map(([k,n])=>`<button class="source-chip" onclick="copySource('${k}')">${n} · ?source=${k}</button>`).join('')}
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-title">活动二维码</div>
+        <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+          <div class="qr"></div>
+          <div><div class="row-title">扫码进入当前活动</div><div class="faint" style="font-size:12px;line-height:1.7;margin-top:6px">正式生产版应生成真实二维码，并支持下载 PNG / SVG。</div><button class="btn small gold" style="margin-top:10px" onclick="toast('原型：已模拟下载二维码')">下载二维码</button></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+function renderActivitySettings(a){
+  return `<div class="panel">
+    <div class="panel-hd"><div class="panel-title">活动设置</div></div>
+    <div class="panel-bd">
+      <div class="form-section">
+        <div class="form-title">模板与状态</div>
+        <div class="form-grid">
+          <div class="field"><label>模板</label><select onchange="updateActivity('template',this.value)">
+            <option value="member" ${a.template==='member'?'selected':''}>会员福利长页</option>
+            <option value="new" ${a.template==='new'?'selected':''}>新品专题页</option>
+            <option value="season" ${a.template==='season'?'selected':''}>季节专题页</option>
+            <option value="simple" ${a.template==='simple'?'selected':''}>简洁导流页</option>
+          </select></div>
+          <div class="field"><label>状态</label><select onchange="updateActivity('status',this.value)">
+            <option value="draft" ${a.status==='draft'?'selected':''}>草稿</option>
+            <option value="upcoming" ${a.status==='upcoming'?'selected':''}>即将开始</option>
+            <option value="live" ${a.status==='live'?'selected':''}>进行中</option>
+            <option value="ended" ${a.status==='ended'?'selected':''}>已结束</option>
+          </select></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-title">商城与客服</div>
+        <div class="field"><label>商城首页链接</label><input value="${esc(a.mallUrl||state.data.settings.mallUrl)}" onchange="updateActivity('mallUrl',this.value)"></div>
+      </div>
+      <div class="form-section">
+        <div class="form-title">发布控制</div>
+        <div class="toggle-row"><div><div class="row-title">生成活动二维码</div><div class="faint" style="font-size:12px">发布后自动生成二维码</div></div><div class="switch ${a.qrEnabled?'on':''}" onclick="toggleActivity('qrEnabled')"></div></div>
+      </div>
+      <div class="form-section">
+        <div class="form-title">内部备注</div>
+        <div class="field"><textarea placeholder="仅后台可见" onchange="updateActivity('notes',this.value)">${esc(a.notes||'')}</textarea></div>
+      </div>
+      <button class="btn danger" onclick="deleteActivity('${a.id}')">删除活动</button>
+    </div>
+  </div>`;
+}
+function updateActivity(k,v){
+  const a=activityById(state.currentActivityId);a[k]=v;a.updatedAt='刚刚';save();
+  if(k==='name'){document.querySelector('.editor-title').textContent=v;document.getElementById('topSub').textContent=v}
+}
+function toggleActivity(k){const a=activityById(state.currentActivityId);a[k]=!a[k];save();render()}
+function updateActivityProduct(id,k,v){
+  const a=activityById(state.currentActivityId);a.productOverrides=a.productOverrides||{};a.productOverrides[id]=a.productOverrides[id]||{};
+  a.productOverrides[id][k]=k==='price'?Number(v):v;a.updatedAt='刚刚';save();toast('已保存');
+}
+function removeActivityProduct(id){const a=activityById(state.currentActivityId);a.productIds=a.productIds.filter(x=>x!==id);save();render()}
+function deleteActivity(id){
+  if(!confirm('确认删除此活动？'))return;
+  state.data.activities=state.data.activities.filter(x=>x.id!==id);save();state.currentPage='activities';render();toast('活动已删除')
+}
+
+function renderPhonePreview(a){
+  return `<div class="panel">
+    <div class="panel-hd"><div><div class="panel-title">手机预览</div><div class="panel-sub">消费者视角</div></div><button class="btn small" onclick="openFrontActivity('${a.id}')">放大预览</button></div>
+    <div class="panel-bd"><div class="phone-wrap"><div class="phone">${consumerActivityHTML(a,true)}</div></div></div>
+  </div>`;
+}
+function consumerActivityHTML(a,compact=false){
+  const prods=a.productIds.map(productById).filter(Boolean);
+  const ov=a.productOverrides||{};
+  const hero=prods[0];
+  const rest=prods.slice(1);
+  const heroO=hero?(ov[hero.id]||{}):{};
+  return `<div class="consumer">
+    <div class="c-header">
+      <div class="c-eyebrow">MEMBER EVENT</div>
+      <div class="c-title">${esc(a.bannerTitle||a.name)}</div>
+      <div class="c-sub">${esc(a.bannerDesc||a.subtitle)}</div>
+      <div class="c-meta">${a.start} — ${a.end}</div>
+      <div class="c-hero-cta"><button class="c-btn" onclick="scrollConsumer()">查看会员精选</button></div>
+    </div>
+    <div class="c-section">
+      <div class="c-section-title">本期会员权益</div>
+      <div class="benefit-strip">
+        <div class="benefit-item"><strong>¥5</strong><span>满59可用</span></div>
+        <div class="benefit-item"><strong>¥10</strong><span>满99可用</span></div>
+      </div>
+    </div>
+    ${hero?`<div class="c-section"><div class="c-section-title">本期主推</div></div>
+    <div class="hero-prod">
+      <div class="hero-img">${hero.image?`<img src="${hero.image}">`:'商品主图'}</div>
+      <span class="tag">${esc(heroO.tag||'本期主推')}</span>
+      <div class="name">${esc(hero.name)}</div>
+      <div class="spec">${esc(hero.spec)}</div>
+      <div class="sell">${esc(heroO.sell||'会员精选商品，点击后进入现有C端商城完成购买。')}</div>
+      <div class="price"><strong>${money(heroO.price??hero.defaultActivityPrice)}</strong><del>${money(hero.dailyPrice)}</del></div>
+      <button class="c-btn" style="width:100%;margin-top:12px" onclick="simulateProductClick('${hero.id}','${esc(heroO.url||hero.url)}')">立即购买</button>
+    </div>`:''}
+    ${rest.length?`<div class="c-section" id="productArea"><div class="c-section-title">更多会员精选</div>
+      <div class="product-grid">${rest.map(p=>{const o=ov[p.id]||{};return `<div class="c-prod">
+        <div class="c-prod-img">${p.image?`<img src="${p.image}">`:'商品图片'}</div>
+        <div class="c-prod-bd">
+          <div class="c-prod-name">${esc(p.name)}</div><div class="c-prod-spec">${esc(p.spec)}</div>
+          <div class="c-prod-price"><strong>${money(o.price??p.defaultActivityPrice)}</strong><del>${money(p.dailyPrice)}</del></div>
+          <button class="c-btn" onclick="simulateProductClick('${p.id}','${esc(o.url||p.url)}')">立即购买</button>
+        </div></div>`}).join('')}</div></div>`:''}
+    <div class="c-section"><div class="c-section-title">品质与服务</div></div>
+    <div class="trust"><div class="item"><b>正品保障</b><span>合规商品展示</span></div><div class="item"><b>客服支持</b><span>购买问题快速响应</span></div><div class="item"><b>商城成交</b><span>订单回到现有商城</span></div></div>
+    <div class="c-section"><div class="c-section-title">活动规则</div><div class="rule">活动时间、商品与实际价格以商城页面为准。点击“立即购买”后跳转到现有C端商城商品页完成交易。</div></div>
+    <div style="height:24px"></div>
+    <div class="c-sticky"><button class="c-btn" onclick="simulateMallJump('${esc(a.mallUrl||state.data.settings.mallUrl)}')">进入商城查看更多商品</button></div>
+  </div>`;
+}
+function scrollConsumer(){const el=document.getElementById('productArea');if(el)el.scrollIntoView({behavior:'smooth'})}
+function simulateProductClick(id,url){state.data.analytics.productClicks++;state.data.analytics.productClicksById[id]=(state.data.analytics.productClicksById[id]||0)+1;save();toast('已记录商品点击；正式版将跳转商城')}
+function simulateMallJump(url){state.data.analytics.mallJumps++;save();toast('已记录商城跳转；正式版将打开商城')}
+function openFrontActivity(id){state.currentActivityId=id;state.currentPage='front';state.previewMode='activity';render()}
+function renderFrontPreview(){
+  const a=activityById(state.currentActivityId)||state.data.activities[0];
+  setTop('前台预览','消费者端页面');
+  pageRoot.innerHTML=`
+  <div class="page-title-row"><div><h1 class="page-title">消费者前台</h1><div class="page-desc">首页 → 活动中心 → 活动详情 → 现有商城</div></div>
+  <div class="actions"><button class="btn ${state.previewMode==='home'?'primary':''}" onclick="state.previewMode='home';render()">首页</button><button class="btn ${state.previewMode==='center'?'primary':''}" onclick="state.previewMode='center';render()">活动中心</button><button class="btn ${state.previewMode==='activity'?'primary':''}" onclick="state.previewMode='activity';render()">活动详情</button><button class="btn" onclick="state.currentPage='activityEditor';render()">返回后台</button></div></div>
+  <div class="panel"><div class="panel-bd" style="background:#f1f0ed;display:flex;justify-content:center;padding:28px">
+    <div class="phone-wrap" style="width:410px;max-width:100%"><div class="phone">
+      ${state.previewMode==='home'?consumerHomeHTML():state.previewMode==='center'?consumerCenterHTML():consumerActivityHTML(a)}
+    </div></div>
+  </div></div>`;
+}
+function consumerHomeHTML(){
+  const live=state.data.activities.filter(x=>x.status==='live')[0]||state.data.activities[0];
+  const products=state.data.products.slice(0,4);
+  return `<div class="consumer">
+    <div class="c-header"><div class="c-eyebrow">HEALTH MEMBER</div><div class="c-title">${esc(state.data.settings.siteName)}</div><div class="c-sub">会员福利、专题活动与精选商品入口。</div></div>
+    <div class="c-section"><div class="c-section-title">${esc(live.name)}</div><div class="c-section-sub">${esc(live.subtitle)}</div>
+      <div class="box" style="border:1px solid #ece6df;border-radius:12px;background:#fff;padding:16px">
+        <div style="font-size:12px;color:#9b1c1f;font-weight:700">当前主活动</div>
+        <div style="font-size:20px;font-weight:700;margin-top:8px">${esc(live.primaryBenefit||'会员专享')}</div>
+        <div style="font-size:12px;color:#8a827d;margin-top:8px">${live.start} — ${live.end}</div>
+        <button class="c-btn" style="margin-top:14px" onclick="state.currentActivityId='${live.id}';state.previewMode='activity';render()">立即参加</button>
+      </div>
+    </div>
+    <div class="c-section"><div class="c-section-title">热门活动</div>
+      <div style="display:grid;gap:10px">${state.data.activities.map(x=>`<div class="box" style="border:1px solid #ece6df;border-radius:12px;background:#fff;padding:14px" onclick="state.currentActivityId='${x.id}';state.previewMode='activity';render()"><div style="font-weight:700">${esc(x.name)}</div><div style="font-size:12px;color:#8a827d;margin-top:4px">${esc(x.subtitle)}</div></div>`).join('')}</div>
+    </div>
+    <div class="c-section"><div class="c-section-title">精选商品</div><div class="product-grid">${products.map(p=>`<div class="c-prod"><div class="c-prod-img">${p.image?`<img src="${p.image}">`:'商品图片'}</div><div class="c-prod-bd"><div class="c-prod-name">${esc(p.name)}</div><div class="c-prod-price"><strong>${money(p.defaultActivityPrice)}</strong></div><button class="c-btn">查看</button></div></div>`).join('')}</div></div>
+    <div class="c-section"><div class="benefit-strip"><div class="benefit-item"><strong>会员</strong><span>专享权益</span></div><div class="benefit-item"><strong>优惠</strong><span>活动福利</span></div></div></div>
+    <div style="height:24px"></div>
+  </div>`;
+}
+function consumerCenterHTML(){
+  return `<div class="consumer">
+    <div class="c-header"><div class="c-eyebrow">ACTIVITY CENTER</div><div class="c-title">活动中心</div><div class="c-sub">正在进行、即将开始与历史活动。</div></div>
+    <div class="c-section"><div class="c-section-title">正在进行</div>
+      <div style="display:grid;gap:10px">${state.data.activities.map(x=>`<div class="box" style="border:1px solid #ece6df;border-radius:12px;background:#fff;padding:14px"><div style="display:flex;justify-content:space-between;gap:10px"><div><div style="font-weight:700">${esc(x.name)}</div><div style="font-size:12px;color:#8a827d;margin-top:5px">${x.start} — ${x.end}</div><div style="font-size:12px;color:#746d68;margin-top:6px">${esc(x.subtitle)}</div></div><span class="status-pill ${statusClass(x.status)}" style="align-self:flex-start">${statusLabel(x.status)}</span></div><button class="c-btn" style="margin-top:12px" onclick="state.currentActivityId='${x.id}';state.previewMode='activity';render()">${x.status==='upcoming'?'查看预告':'立即参加'}</button></div>`).join('')}</div>
+    </div><div style="height:24px"></div></div>`;
+}
+
+function editModule(mid){
+  const a=activityById(state.currentActivityId);const m=a.modules.find(x=>x.id===mid);
+  overlayRoot.innerHTML=`<div class="drawer-backdrop" onclick="if(event.target===this)closeOverlay()"><div class="drawer">
+    <div class="drawer-hd"><div><div class="panel-title">编辑 ${esc(m.name)}</div><div class="panel-sub">只展示与当前模块有关的设置</div></div><button class="close" onclick="closeOverlay()">×</button></div>
+    <div class="drawer-bd">
+      <div class="form-section"><div class="field"><label>模块名称</label><input id="modName" value="${esc(m.name)}"></div></div>
+      <div class="form-section"><div class="field"><label>模块说明</label><textarea id="modDesc">${esc(m.desc||'')}</textarea></div></div>
+      ${m.type==='hero'?`<div class="form-section"><div class="field"><label>主标题</label><input id="bannerTitle" value="${esc(a.bannerTitle||a.name)}"></div><div class="field" style="margin-top:12px"><label>副标题</label><input id="bannerDesc" value="${esc(a.bannerDesc||a.subtitle)}"></div><div class="field" style="margin-top:12px"><label>核心利益点</label><input id="primaryBenefit" value="${esc(a.primaryBenefit||'')}"></div><div class="field" style="margin-top:12px"><label>Banner 图片</label><div class="file-drop"><label style="cursor:pointer"><input type="file" accept="image/*" onchange="uploadActivityBanner(event)"><span>点击上传图片</span></label></div></div></div>`:''}
+    </div>
+    <div class="drawer-ft"><button class="btn" onclick="closeOverlay()">取消</button><button class="btn primary" onclick="saveModuleEdit('${mid}')">保存</button></div>
+  </div></div>`;
+}
+function saveModuleEdit(mid){
+  const a=activityById(state.currentActivityId);const m=a.modules.find(x=>x.id===mid);
+  m.name=document.getElementById('modName').value;m.desc=document.getElementById('modDesc').value;
+  if(document.getElementById('bannerTitle')){a.bannerTitle=document.getElementById('bannerTitle').value;a.bannerDesc=document.getElementById('bannerDesc').value;a.primaryBenefit=document.getElementById('primaryBenefit').value}
+  save();closeOverlay();render();toast('模块已保存')
+}
+function uploadActivityBanner(e){
+  const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{const a=activityById(state.currentActivityId);a.banner=r.result;save();toast('Banner 已上传')};r.readAsDataURL(file)
+}
+function openAddModule(){
+  const types=[['benefits','会员权益'],['heroProduct','本期主推'],['products','商品推荐'],['trust','品质与服务'],['story','品牌/内容说明'],['rules','活动规则'],['service','客服入口']];
+  overlayRoot.innerHTML=`<div class="modal-backdrop" onclick="if(event.target===this)closeOverlay()"><div class="modal"><div class="modal-hd"><div class="panel-title">添加内容模块</div><button class="close" onclick="closeOverlay()">×</button></div><div class="modal-bd"><div class="list-cards" style="grid-template-columns:1fr 1fr">${types.map(([t,n])=>`<button class="activity-card" style="text-align:left;padding:16px" onclick="addModule('${t}','${n}')"><div class="title">${n}</div><div class="desc">加入活动页面后可继续编辑与排序。</div></button>`).join('')}</div></div></div></div>`;
+}
+function addModule(type,name){
+  const a=activityById(state.currentActivityId);a.modules.push({id:'m'+Date.now(),type,name,desc:'可编辑模块'});save();closeOverlay();render();toast('模块已添加')
+}
+function removeModule(mid){const a=activityById(state.currentActivityId);a.modules=a.modules.filter(x=>x.id!==mid);save();render()}
+function closeOverlay(){overlayRoot.innerHTML=''}
+
+function openProductPicker(){
+  const a=activityById(state.currentActivityId);
+  const options=state.data.products.filter(p=>!a.productIds.includes(p.id));
+  overlayRoot.innerHTML=`<div class="modal-backdrop" onclick="if(event.target===this)closeOverlay()"><div class="modal"><div class="modal-hd"><div><div class="panel-title">从营销商品库添加</div><div class="panel-sub">只能选择允许公众营销且合规状态可用的商品</div></div><button class="close" onclick="closeOverlay()">×</button></div><div class="modal-bd">
+    ${options.length?`<table class="table"><thead><tr><th>商品</th><th>日常价</th><th>合规</th><th></th></tr></thead><tbody>${options.map(p=>`<tr><td>${esc(p.name)}</td><td>${money(p.dailyPrice)}</td><td><span class="status-pill ${adClass(p.adStatus)}">${adLabel(p.adStatus)}</span></td><td><button class="btn small" ${p.publicStatus!=='allow'||p.adStatus!=='approved'?'disabled style="opacity:.4;cursor:not-allowed"':''} onclick="addProductToActivity('${p.id}')">添加</button></td></tr>`).join('')}</tbody></table>`:`<div class="empty"><strong>没有可添加商品</strong>所有商品都已在活动中</div>`}
+  </div></div></div>`;
+}
+function addProductToActivity(id){
+  const a=activityById(state.currentActivityId);if(!a.productIds.includes(id))a.productIds.push(id);save();closeOverlay();render();toast('商品已加入活动')
+}
+function openProductOverride(id){
+  const a=activityById(state.currentActivityId);const p=productById(id);const o=a.productOverrides?.[id]||{};
+  overlayRoot.innerHTML=`<div class="drawer-backdrop"><div class="drawer">
+  <div class="drawer-hd"><div><div class="panel-title">编辑活动商品</div><div class="panel-sub">${esc(p.name)}</div></div><button class="close" onclick="closeOverlay()">×</button></div>
+  <div class="drawer-bd">
+    <div class="form-section"><div class="field"><label>活动价</label><input id="ovPrice" value="${o.price??p.defaultActivityPrice}"></div></div>
+    <div class="form-section"><div class="field"><label>活动标签</label><input id="ovTag" value="${esc(o.tag||'')}"></div></div>
+    <div class="form-section"><div class="field"><label>推荐卖点</label><textarea id="ovSell">${esc(o.sell||'')}</textarea></div></div>
+    <div class="form-section"><div class="field"><label>购买链接</label><input id="ovUrl" value="${esc(o.url||p.url)}"></div></div>
+  </div>
+  <div class="drawer-ft"><button class="btn" onclick="closeOverlay()">取消</button><button class="btn primary" onclick="saveProductOverride('${id}')">保存</button></div>
+  </div></div>`;
+}
+function saveProductOverride(id){
+  const a=activityById(state.currentActivityId);a.productOverrides=a.productOverrides||{};a.productOverrides[id]={
+    ...(a.productOverrides[id]||{}),price:Number(document.getElementById('ovPrice').value),tag:document.getElementById('ovTag').value,sell:document.getElementById('ovSell').value,url:document.getElementById('ovUrl').value
+  };save();closeOverlay();render();toast('活动商品已保存')
+}
+
+function openPublish(id){
+  const a=activityById(id);const checks=publishChecks(a);const pass=checks.every(x=>x.ok);
+  overlayRoot.innerHTML=`<div class="modal-backdrop"><div class="modal">
+    <div class="modal-hd"><div><div class="panel-title">发布检查</div><div class="panel-sub">发布前自动检查关键配置</div></div><button class="close" onclick="closeOverlay()">×</button></div>
+    <div class="modal-bd"><div class="checklist">${checks.map(c=>`<div class="check-row"><div>${esc(c.label)}</div><div class="${c.ok?'check-ok':'check-bad'}">${c.ok?'通过':'需处理'}</div></div>`).join('')}</div>
+    ${pass?`<div class="notice" style="margin-top:16px">检查通过。发布后系统将生成独立活动 URL、二维码和各渠道 source 链接。</div>`:`<div class="notice" style="margin-top:16px;background:#fff0ef;border-color:#f0c5c1;color:#8c2b25">存在未通过项，建议处理后再发布。</div>`}
+    </div>
+    <div class="modal-ft"><button class="btn" onclick="closeOverlay()">取消</button><button class="btn primary" ${pass?'':'disabled style="opacity:.4;cursor:not-allowed"'} onclick="publishActivity('${id}')">确认发布</button></div>
+  </div></div>`;
+}
+function publishChecks(a){
+  const products=a.productIds.map(productById).filter(Boolean);
+  return [
+    {label:'活动名称与时间已填写',ok:!!a.name&&!!a.start&&!!a.end},
+    {label:'至少包含 1 个商品',ok:products.length>0},
+    {label:'所有活动商品允许公众营销',ok:products.every(p=>p.publicStatus==='allow')},
+    {label:'所有活动商品广告审核通过',ok:products.every(p=>p.adStatus==='approved')},
+    {label:'所有商品购买链接已设置',ok:products.every(p=>(a.productOverrides?.[p.id]?.url||p.url))},
+    {label:'商城首页链接已设置',ok:!!(a.mallUrl||state.data.settings.mallUrl)}
+  ];
+}
+function publishActivity(id){const a=activityById(id);a.status='live';a.updatedAt='刚刚';save();closeOverlay();render();toast('活动已发布')}
+
+function renderProducts(){
+  setTop('营销商品库','维护营销展示字段、商城链接和合规状态');
+  pageRoot.innerHTML=`
+  <div class="page-title-row"><div><h1 class="page-title">营销商品库</h1><div class="page-desc">不是ERP商品主数据，只保存营销活动需要的信息。</div></div>
+    <div class="actions"><button class="btn" onclick="exportProductsCSV()">导出CSV</button><button class="btn primary" onclick="openProductEdit()">新增商品</button></div></div>
+  <div class="toolbar"><div class="search"><input id="productSearch" placeholder="搜索商品 / 品牌 / 规格" oninput="filterProductTable()"></div><div class="actions"><button class="btn" onclick="openImportProducts()">批量导入</button></div></div>
+  <div class="panel"><div style="overflow:auto"><table class="table" id="productTable"><thead><tr><th>商品</th><th>品牌 / 规格</th><th>日常价</th><th>默认活动价</th><th>公众营销</th><th>广告审核</th><th>商城链接</th><th></th></tr></thead>
+  <tbody>${state.data.products.map(p=>`<tr data-name="${esc((p.name+' '+p.brand+' '+p.spec).toLowerCase())}">
+    <td><div style="display:flex;align-items:center;gap:10px"><div class="thumb">${p.image?`<img src="${p.image}">`:'图片'}</div><div class="row-title">${esc(p.name)}</div></div></td>
+    <td>${esc(p.brand)}<br><span class="faint">${esc(p.spec)}</span></td>
+    <td>${money(p.dailyPrice)}</td><td>${money(p.defaultActivityPrice)}</td>
+    <td>${p.publicStatus==='allow'?'<span class="status-pill approved">允许</span>':'<span class="status-pill blocked">禁止</span>'}</td>
+    <td><span class="status-pill ${adClass(p.adStatus)}">${adLabel(p.adStatus)}</span></td>
+    <td>${p.url?'<span class="linkish">已设置</span>':'<span class="faint">未设置</span>'}</td>
+    <td><button class="btn small" onclick="openProductEdit('${p.id}')">编辑</button></td></tr>`).join('')}</tbody></table></div></div>`;
+}
+function filterProductTable(){
+  const q=(document.getElementById('productSearch').value||'').toLowerCase();
+  document.querySelectorAll('#productTable tbody tr').forEach(tr=>tr.style.display=tr.dataset.name.includes(q)?'':'none')
+}
+function openProductEdit(id=''){
+  const p=id?productById(id):{id:'p'+Date.now(),name:'',brand:'',spec:'',category:'健康商品',dailyPrice:0,defaultActivityPrice:0,url:'',image:'',publicStatus:'allow',adStatus:'pending',status:'active'};
+  overlayRoot.innerHTML=`<div class="drawer-backdrop"><div class="drawer">
+    <div class="drawer-hd"><div><div class="panel-title">${id?'编辑商品':'新增商品'}</div><div class="panel-sub">营销商品库</div></div><button class="close" onclick="closeOverlay()">×</button></div>
+    <div class="drawer-bd">
+      <div class="form-section"><div class="field"><label>商品名称</label><input id="pName" value="${esc(p.name)}"></div></div>
+      <div class="form-grid">
+        <div class="field"><label>品牌</label><input id="pBrand" value="${esc(p.brand)}"></div>
+        <div class="field"><label>规格</label><input id="pSpec" value="${esc(p.spec)}"></div>
+        <div class="field"><label>日常价</label><input id="pDaily" value="${p.dailyPrice}"></div>
+        <div class="field"><label>默认活动价</label><input id="pAct" value="${p.defaultActivityPrice}"></div>
+      </div>
+      <div class="form-section" style="margin-top:18px"><div class="field"><label>商城商品链接</label><input id="pUrl" value="${esc(p.url)}"></div></div>
+      <div class="form-grid">
+        <div class="field"><label>公众营销状态</label><select id="pPublic"><option value="allow" ${p.publicStatus==='allow'?'selected':''}>允许</option><option value="block" ${p.publicStatus!=='allow'?'selected':''}>禁止</option></select></div>
+        <div class="field"><label>广告审核状态</label><select id="pAd"><option value="approved" ${p.adStatus==='approved'?'selected':''}>审核通过</option><option value="pending" ${p.adStatus==='pending'?'selected':''}>待审核</option><option value="blocked" ${p.adStatus==='blocked'?'selected':''}>禁止推广</option></select></div>
+      </div>
+      <div class="form-section" style="margin-top:18px"><div class="field"><label>商品图片</label><div class="file-drop"><label style="cursor:pointer"><input type="file" accept="image/*" onchange="uploadProductImage(event,'${p.id}')">点击上传 JPG / PNG</label></div></div></div>
+    </div>
+    <div class="drawer-ft">${id?`<button class="btn danger" onclick="deleteProduct('${p.id}')">删除</button>`:''}<button class="btn" onclick="closeOverlay()">取消</button><button class="btn primary" onclick="saveProduct('${p.id}','${id?'edit':'new'}')">保存</button></div>
+  </div></div>`;
+  if(!id)window.__newProduct=p;
+}
+function uploadProductImage(e,id){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const p=productById(id)||window.__newProduct;if(p)p.image=r.result;toast('商品图片已读取')};r.readAsDataURL(f)}
+function saveProduct(id,mode){
+  let p=mode==='new'?window.__newProduct:productById(id);
+  Object.assign(p,{name:document.getElementById('pName').value,brand:document.getElementById('pBrand').value,spec:document.getElementById('pSpec').value,dailyPrice:Number(document.getElementById('pDaily').value),defaultActivityPrice:Number(document.getElementById('pAct').value),url:document.getElementById('pUrl').value,publicStatus:document.getElementById('pPublic').value,adStatus:document.getElementById('pAd').value});
+  if(mode==='new')state.data.products.unshift(p);save();closeOverlay();render();toast('商品已保存')
+}
+function deleteProduct(id){if(!confirm('确认删除商品？'))return;state.data.products=state.data.products.filter(x=>x.id!==id);state.data.activities.forEach(a=>a.productIds=a.productIds.filter(x=>x!==id));save();closeOverlay();render()}
+function openImportProducts(){overlayRoot.innerHTML=`<div class="modal-backdrop"><div class="modal"><div class="modal-hd"><div class="panel-title">批量导入商品</div><button class="close" onclick="closeOverlay()">×</button></div><div class="modal-bd"><div class="notice">原型版提供CSV字段示意。正式版建议支持模板下载、错误校验、预览和部分成功导入。</div><div class="file-drop" style="margin-top:16px">拖入或选择 CSV 文件（原型不实际解析）</div></div><div class="modal-ft"><button class="btn" onclick="closeOverlay()">关闭</button></div></div></div>`}
+function exportProductsCSV(){
+  let csv='商品名称,品牌,规格,日常价,默认活动价,商城链接,公众营销状态,广告审核状态\n'+state.data.products.map(p=>[p.name,p.brand,p.spec,p.dailyPrice,p.defaultActivityPrice,p.url,p.publicStatus,p.adStatus].map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n');
+  downloadBlob('营销商品库.csv',new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}))
+}
+
+function renderBanners(){
+  setTop('Banner 管理','首页主视觉与活动入口');
+  pageRoot.innerHTML=`
+  <div class="page-title-row"><div><h1 class="page-title">Banner 管理</h1><div class="page-desc">控制首页主视觉，不把跳转链接写死在代码里。</div></div><div class="actions"><button class="btn primary" onclick="openBannerEdit()">新增 Banner</button></div></div>
+  <div class="panel"><div class="panel-bd">
+    ${state.data.banners.sort((a,b)=>a.sort-b.sort).map(b=>`<div class="banner-row">
+      <div class="banner-preview">${b.image?`<img src="${b.image}">`:'Banner'}</div>
+      <div><div class="row-title">${esc(b.title)}</div><div class="faint" style="font-size:12px;margin-top:4px">${esc(b.subtitle)}</div></div>
+      <div><span class="status-pill ${b.status==='active'?'approved':'draft'}">${b.status==='active'?'展示中':'已下线'}</span></div>
+      <div><button class="btn small" onclick="openBannerEdit('${b.id}')">编辑</button></div>
+    </div>`).join('')}
+  </div></div>`;
+}
+function openBannerEdit(id=''){
+  const b=id?state.data.banners.find(x=>x.id===id):{id:'b'+Date.now(),title:'',subtitle:'',image:'',linkType:'activity',linkValue:'',status:'active',sort:state.data.banners.length+1};
+  overlayRoot.innerHTML=`<div class="drawer-backdrop"><div class="drawer"><div class="drawer-hd"><div class="panel-title">${id?'编辑 Banner':'新增 Banner'}</div><button class="close" onclick="closeOverlay()">×</button></div>
+  <div class="drawer-bd">
+    <div class="form-section"><div class="field"><label>标题</label><input id="bTitle" value="${esc(b.title)}"></div></div>
+    <div class="form-section"><div class="field"><label>副标题</label><input id="bSubtitle" value="${esc(b.subtitle)}"></div></div>
+    <div class="form-grid"><div class="field"><label>跳转类型</label><select id="bType"><option value="activity" ${b.linkType==='activity'?'selected':''}>活动</option><option value="url" ${b.linkType==='url'?'selected':''}>外部链接</option></select></div><div class="field"><label>跳转目标</label><input id="bLink" value="${esc(b.linkValue)}"></div></div>
+    <div class="form-section" style="margin-top:18px"><div class="field"><label>Banner图片</label><div class="file-drop"><label style="cursor:pointer"><input type="file" accept="image/*" onchange="uploadBannerImage(event,'${b.id}')">点击上传图片</label></div></div></div>
+  </div>
+  <div class="drawer-ft"><button class="btn" onclick="closeOverlay()">取消</button><button class="btn primary" onclick="saveBanner('${b.id}','${id?'edit':'new'}')">保存</button></div></div></div>`;
+  if(!id)window.__newBanner=b;
+}
+function uploadBannerImage(e,id){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const b=state.data.banners.find(x=>x.id===id)||window.__newBanner;if(b)b.image=r.result;toast('Banner 图片已读取')};r.readAsDataURL(f)}
+function saveBanner(id,mode){
+  let b=mode==='new'?window.__newBanner:state.data.banners.find(x=>x.id===id);
+  Object.assign(b,{title:document.getElementById('bTitle').value,subtitle:document.getElementById('bSubtitle').value,linkType:document.getElementById('bType').value,linkValue:document.getElementById('bLink').value});
+  if(mode==='new')state.data.banners.push(b);save();closeOverlay();render();toast('Banner 已保存')
+}
+
+function renderAnalytics(){
+  setTop('数据中心','从数据中发现下一步动作');
+  const a=state.data.analytics;
+  const totalSource=Object.values(a.source).reduce((x,y)=>x+y,0);
+  const srcNames={wechat:'微信好友',group:'微信群',moments:'朋友圈',official:'公众号',poster:'门店海报',sms:'短信'};
+  pageRoot.innerHTML=`
+  <div class="page-title-row"><div><h1 class="page-title">数据中心</h1><div class="page-desc">重点看渠道、商品点击和商城跳转，不只堆数字。</div></div></div>
+  <div class="kpis">
+    <div class="kpi"><div class="label">UV</div><div class="value">${a.uv.toLocaleString()}</div><div class="meta up">近7日增长</div></div>
+    <div class="kpi"><div class="label">PV</div><div class="value">${a.pv.toLocaleString()}</div><div class="meta">人均 ${(a.pv/a.uv).toFixed(1)} 次</div></div>
+    <div class="kpi"><div class="label">商品点击</div><div class="value">${a.productClicks.toLocaleString()}</div><div class="meta">${(a.productClicks/a.uv*100).toFixed(1)}% 点击/UV</div></div>
+    <div class="kpi"><div class="label">商城跳转</div><div class="value">${a.mallJumps.toLocaleString()}</div><div class="meta">${(a.mallJumps/a.uv*100).toFixed(1)}% 跳转率</div></div>
+  </div>
+  <div class="panel"><div class="panel-hd"><div><div class="panel-title">7日访问趋势</div><div class="panel-sub">用于判断活动热度是否持续</div></div></div><div class="panel-bd" style="padding-bottom:36px"><div class="chart">${a.daily.map((v,i)=>`<div class="bar" style="height:${Math.max(15,v/8)}px" data-label="D${i+1}" data-value="${v}"></div>`).join('')}</div></div></div>
+  <div class="section-title">渠道贡献</div>
+  <div class="panel"><table class="table"><thead><tr><th>渠道</th><th>访问量</th><th>占比</th><th>建议</th></tr></thead><tbody>
+    ${Object.entries(a.source).sort((x,y)=>y[1]-x[1]).map(([k,v],i)=>`<tr><td>${srcNames[k]}</td><td>${v}</td><td>${(v/totalSource*100).toFixed(1)}%</td><td>${i===0?'当前首要渠道，建议继续强化':'保持测试与对比'}</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="section-title">商品点击排名</div>
+  <div class="panel"><table class="table"><thead><tr><th>商品</th><th>点击</th><th>占比</th><th>动作</th></tr></thead><tbody>
+    ${Object.entries(a.productClicksById).sort((x,y)=>y[1]-x[1]).map(([id,v],i)=>{const p=productById(id);return `<tr><td>${esc(p?.name||id)}</td><td>${v}</td><td>${(v/a.productClicks*100).toFixed(1)}%</td><td>${i===0?'保持主推位':'继续观察'}</td></tr>`}).join('')}
+  </tbody></table></div>`;
+}
+function renderSettings(){
+  setTop('系统设置','统一管理全局链接和基础配置');
+  const s=state.data.settings;
+  pageRoot.innerHTML=`
+  <div class="page-title-row"><div><h1 class="page-title">系统设置</h1><div class="page-desc">所有链接从后台维护，不写死在页面源代码中。</div></div><div class="actions"><button class="btn primary" onclick="saveSettings()">保存设置</button></div></div>
+  <div class="panel"><div class="panel-bd">
+    <div class="form-section"><div class="form-title">站点基础信息</div><div class="form-grid">
+      <div class="field"><label>站点名称</label><input id="sName" value="${esc(s.siteName)}"></div>
+      <div class="field"><label>活动基础URL</label><input id="sBase" value="${esc(s.activityBaseUrl)}"></div>
+    </div></div>
+    <div class="form-section"><div class="form-title">跳转链接</div><div class="form-grid">
+      <div class="field"><label>商城首页</label><input id="sMall" value="${esc(s.mallUrl)}"></div>
+      <div class="field"><label>客服链接</label><input id="sService" value="${esc(s.customerServiceUrl)}"></div>
+      <div class="field"><label>公众号链接</label><input id="sOfficial" value="${esc(s.publicAccountUrl)}"></div>
+      <div class="field"><label>小程序链接</label><input id="sMini" value="${esc(s.miniProgramUrl)}"></div>
+    </div></div>
+    <div class="form-section"><div class="form-title">数据备份</div><div class="actions"><button class="btn" onclick="exportJSON()">导出JSON备份</button><button class="btn" onclick="resetDemo()">恢复演示数据</button></div></div>
+  </div></div>`;
+}
+function saveSettings(){
+  Object.assign(state.data.settings,{siteName:document.getElementById('sName').value,activityBaseUrl:document.getElementById('sBase').value,mallUrl:document.getElementById('sMall').value,customerServiceUrl:document.getElementById('sService').value,publicAccountUrl:document.getElementById('sOfficial').value,miniProgramUrl:document.getElementById('sMini').value});
+  save();toast('设置已保存')
+}
+function exportJSON(){downloadBlob('C端营销活动CMS数据备份.json',new Blob([JSON.stringify(state.data,null,2)],{type:'application/json'}))}
+function resetDemo(){if(confirm('确认清除本地修改并恢复演示数据？')){localStorage.removeItem('cMarketingCMSComplete');location.reload()}}
+function downloadBlob(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+
+function copySource(k){navigator.clipboard?.writeText(state.data.settings.activityBaseUrl+state.currentActivityId+'?source='+k);toast('渠道链接已复制')}
+document.querySelectorAll('.nav-item').forEach(el=>el.addEventListener('click',()=>{state.currentPage=el.dataset.page;render()}));
+document.getElementById('frontPreviewBtn').onclick=()=>{state.currentPage='front';state.previewMode='home';render()};
+document.getElementById('newActivityTop').onclick=newActivity;
+
+// drag reorder
+document.addEventListener('dragstart',e=>{const row=e.target.closest('.module-row');if(row)window.__dragIndex=Number(row.dataset.index)});
+document.addEventListener('dragover',e=>{if(e.target.closest('.module-row'))e.preventDefault()});
+document.addEventListener('drop',e=>{const row=e.target.closest('.module-row');if(!row||window.__dragIndex==null)return;e.preventDefault();const to=Number(row.dataset.index);const a=activityById(state.currentActivityId);const [item]=a.modules.splice(window.__dragIndex,1);a.modules.splice(to,0,item);save();render();window.__dragIndex=null});
+
+render();
+</script>
+</body>
+</html>

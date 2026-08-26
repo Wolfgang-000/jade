@@ -1,0 +1,5 @@
+1. 安装微信开发者工具。
+2. 导入本文件夹作为项目。
+3. project.config.json 已设置 miniprogramRoot=miniprogram/。
+4. touristappid 可先看UI；正式开发替换成公司小程序AppID。
+5. Web管理后台位于 cms-admin/index.html，可直接浏览器打开。

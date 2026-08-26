@@ -1,0 +1,1 @@
+.head{padding:64rpx 32rpx 32rpx;background:#fff}.eyebrow{font-size:20rpx;color:#9b1c1f;letter-spacing:3rpx;font-weight:700}.title{font-size:52rpx;font-weight:650;margin-top:14rpx}.desc{font-size:26rpx;color:#766e68;line-height:1.7;margin-top:14rpx}.note{font-size:23rpx;color:#918984;margin-top:24rpx;line-height:1.7}

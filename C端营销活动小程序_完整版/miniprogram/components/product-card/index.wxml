@@ -1,0 +1,5 @@
+
+<view class="card">
+  <view class="pic"><image wx:if="{{product.image}}" src="{{product.image}}" mode="aspectFill"/><text wx:else>商品图片</text></view>
+  <view class="body"><view class="name">{{product.name}}</view><view class="spec">{{product.spec}}</view><view class="price-row"><text class="price">¥{{product.activityPrice}}</text><text class="old">¥{{product.dailyPrice}}</text></view><button class="buy" bindtap="onBuy">立即购买</button></view>
+</view>

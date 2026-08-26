@@ -1,0 +1,1 @@
+Page({call(){wx.makePhoneCall({phoneNumber:'4000000000'})},copy(){wx.setClipboardData({data:'客服微信：your-service-id'})}})

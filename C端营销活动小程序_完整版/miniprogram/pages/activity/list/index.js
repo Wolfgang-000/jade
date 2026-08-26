@@ -1,0 +1,1 @@
+const api=require('../../../services/api');const {track}=require('../../../utils/tracker');Page({data:{activities:[]},async onLoad(){this.setData({activities:await api.getActivities()});track('activity_center_view')},openActivity(e){wx.navigateTo({url:'/pages/activity/detail/index?id='+e.detail.id})}})

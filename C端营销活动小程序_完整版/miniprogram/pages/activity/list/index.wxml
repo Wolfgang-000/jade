@@ -1,0 +1,1 @@
+<view class="page"><view class="title"><view class="eyebrow">ACTIVITY CENTER</view><view class="h1">活动中心</view><view class="desc">正在进行与即将开始的会员活动。</view></view><view class="section"><activity-card wx:for="{{activities}}" wx:key="id" activity="{{item}}" bind:open="openActivity"/></view></view>

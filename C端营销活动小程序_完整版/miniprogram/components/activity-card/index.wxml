@@ -1,0 +1,2 @@
+
+<view class="item" bindtap="open"><view class="top"><view><view class="name">{{activity.name}}</view><view class="sub">{{activity.subtitle}}</view></view><view class="status">{{activity.status==='live'?'进行中':'即将开始'}}</view></view><view class="meta">{{activity.start}} — {{activity.end}}</view><view class="more">{{activity.status==='live'?'立即参加':'查看预告'}} →</view></view>

@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/activity/list",
+    "pages/activity/detail",
+    "pages/benefits/index",
+    "pages/service/index",
+    "pages/webview/index",
+    "pages/privacy/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "会员活动中心",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f7f5f2",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}
