@@ -1,1 +1,12 @@
-<view class="page"><view class="head"><view class="eyebrow">SERVICE</view><view class="title">客服与帮助</view><view class="desc">活动、优惠、商品跳转或购买问题，可联系现有商城客服。</view></view><view class="section"><button class="btn-primary" bindtap="call">拨打客服电话</button><view style="height:20rpx"></view><button class="btn-secondary" bindtap="copy">复制客服微信</button><view class="note">正式上线前请替换为真实客服信息。</view></view></view>
+<view class="section">
+  <view class="eyebrow">SERVICE</view><view class="h2" style="margin-top:10rpx">专业服务，不把所有问题交给同一个入口</view>
+  <view class="section-sub">购物客服解决订单、物流和售后；药师服务处理用药与专业商品咨询。</view>
+</view>
+<view class="section">
+  <view class="service-grid">
+    <view class="service-card" bindtap="toast"><text class="strong">购物客服</text><text>订单、支付、物流、优惠和售后问题</text><view class="link" style="margin-top:18rpx">立即咨询 →</view></view>
+    <view class="service-card" bindtap="pharmacist"><text class="strong">药师咨询</text><text>商品信息、用药注意事项与专业服务边界</text><view class="link" style="margin-top:18rpx">咨询药师 →</view></view>
+    <view class="service-card" bindtap="afterSales"><text class="strong">售后服务</text><text>退换、异常、签收与服务政策</text><view class="link" style="margin-top:18rpx">查看售后 →</view></view>
+    <view class="service-card" bindtap="toast"><text class="strong">常见问题</text><text>配送、会员、发票、隐私和账户帮助</text><view class="link" style="margin-top:18rpx">查看帮助 →</view></view>
+  </view>
+</view>

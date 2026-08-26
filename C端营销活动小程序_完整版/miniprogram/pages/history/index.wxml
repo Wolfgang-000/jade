@@ -1,0 +1,8 @@
+<view class="surface" style="padding:20rpx 32rpx;display:flex;justify-content:flex-end" wx:if="{{list.length}}"><button class="btn-text faint" bindtap="clear">清除浏览记录</button></view>
+<view wx:if="{{list.length}}" class="product-list">
+  <view class="product-row" wx:for="{{list}}" wx:key="id" bindtap="go" data-id="{{item.id}}">
+    <image class="product-row__img" src="{{item.image}}" mode="aspectFill"></image>
+    <view class="product-row__content"><view class="product-row__name">{{item.name}}</view><view class="product-row__meta">{{item.brand}} · {{item.spec}}</view><view class="product-row__bottom"><text class="price-small" wx:if="{{item.price}}">¥{{item.price}}</text></view></view>
+  </view>
+</view>
+<view wx:else class="empty-state"><text class="strong">暂无浏览记录</text><text>最近查看过的商品会出现在这里，方便快速回看。</text></view>

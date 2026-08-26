@@ -1,1 +1,7 @@
-<view class="page"><view class="title"><view class="eyebrow">ACTIVITY CENTER</view><view class="h1">活动中心</view><view class="desc">正在进行与即将开始的会员活动。</view></view><view class="section"><activity-card wx:for="{{activities}}" wx:key="id" activity="{{item}}" bind:open="openActivity"/></view></view>
+<view class="section"><view class="eyebrow">CAMPAIGNS</view><view class="h2" style="margin-top:10rpx">活动中心</view><view class="section-sub">品牌活动、会员日、新品和季节专题统一管理，避免传统促销噪音。</view></view>
+<view class="section section--tight safe-bottom">
+  <view class="activity-list-card" wx:for="{{activities}}" wx:key="id" bindtap="detail" data-id="{{item.id}}">
+    <image class="activity-list-img" src="{{item.image}}" mode="aspectFill"></image>
+    <view class="activity-list-body"><view class="row-between"><view class="h3">{{item.title}}</view><text class="tag {{item.status==='live'?'tag-success':'tag-brand'}}">{{item.status==='live'?'进行中':'即将开始'}}</text></view><view class="section-sub">{{item.subtitle}}</view><view class="link" style="margin-top:16rpx">{{item.cta}} →</view></view>
+  </view>
+</view>

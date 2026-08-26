@@ -1,19 +1,72 @@
 {
   "pages": [
     "pages/home/index",
-    "pages/activity/list",
-    "pages/activity/detail",
-    "pages/benefits/index",
+    "pages/search/index",
+    "pages/search-result/index",
+    "pages/category/index",
+    "pages/product-list/index",
+    "pages/product-detail/index",
+    "pages/spec-selector/index",
+    "pages/cart/index",
+    "pages/checkout/index",
+    "pages/payment/index",
+    "pages/payment-success/index",
+    "pages/orders/index",
+    "pages/order-detail/index",
+    "pages/logistics/index",
+    "pages/member/index",
+    "pages/profile/index",
+    "pages/favorites/index",
+    "pages/history/index",
+    "pages/coupons/index",
+    "pages/points/index",
+    "pages/address/index",
     "pages/service/index",
-    "pages/webview/index",
-    "pages/privacy/index"
+    "pages/pharmacist/index",
+    "pages/brand/index",
+    "pages/activity/list/index",
+    "pages/activity/detail/index",
+    "pages/health/index",
+    "pages/settings/index",
+    "pages/privacy/index",
+    "pages/agreement/index",
+    "pages/instructions/index",
+    "pages/after-sales/index"
   ],
   "window": {
-    "navigationBarTitleText": "会员活动中心",
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "澄和健康",
+    "navigationBarBackgroundColor": "#FBFAF8",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#f7f5f2",
+    "backgroundColor": "#F7F4EF",
     "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#8B8580",
+    "selectedColor": "#5E4B43",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/category/index",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/health/index",
+        "text": "健康"
+      },
+      {
+        "pagePath": "pages/cart/index",
+        "text": "购物袋"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",

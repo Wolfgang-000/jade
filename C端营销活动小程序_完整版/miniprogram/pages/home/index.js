@@ -1,3 +1,12 @@
-
-const api=require('../../services/api');const router=require('../../utils/router');const {track}=require('../../utils/tracker')
-Page({data:{mainActivity:{},activities:[],products:[],loading:true},async onLoad(options){const app=getApp();if(options.source)app.globalData.source=options.source;const data=await api.getHome();this.setData({...data,hotActivities:(data.activities||[]).slice(0,2),loading:false});track('home_view')},openMain(){wx.navigateTo({url:'/pages/activity/detail/index?id='+this.data.mainActivity.id})},openActivity(e){wx.navigateTo({url:'/pages/activity/detail/index?id='+e.detail.id})},openCenter(){wx.navigateTo({url:'/pages/activity/list/index'})},openBenefits(){wx.navigateTo({url:'/pages/benefits/index'})},openService(){wx.navigateTo({url:'/pages/service/index'})},buy(e){track('product_click',{productId:e.detail.product.id});router.openMallProduct(e.detail.product)},openMall(){track('mall_jump',{from:'home'});router.openMallHome()}})
+const {products,categories,scenes,brands,activities,articles}=require('../../data/mock');
+Page({
+  data:{products:products.slice(0,6),categories:categories.map(x=>({...x,short:x.name.slice(0,2)})),scenes,brands,activities,articles,hero:activities[0]},
+  goSearch(){wx.navigateTo({url:'/pages/search/index'})},
+  goMember(){wx.navigateTo({url:'/pages/member/index'})},
+  goActivity(){wx.navigateTo({url:'/pages/activity/detail/index?id=a1'})},
+  goActivityList(){wx.navigateTo({url:'/pages/activity/list/index'})},
+  goCategory(){wx.switchTab({url:'/pages/category/index'})},
+  goProduct(e){wx.navigateTo({url:'/pages/product-detail/index?id='+e.currentTarget.dataset.id})},
+  goBrand(e){wx.navigateTo({url:'/pages/brand/index?id='+e.currentTarget.dataset.id})},
+  goHealth(){wx.switchTab({url:'/pages/health/index'})}
+});

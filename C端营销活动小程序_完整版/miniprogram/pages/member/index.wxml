@@ -1,0 +1,23 @@
+<view class="member-hero">
+  <view class="member-card-top">
+    <view class="row" style="gap:18rpx"><view class="avatar">林</view><view><view class="member-name">{{member.name}}</view><view class="member-badge">{{member.level}} · PREMIUM MEMBER</view></view></view>
+    <text style="color:#D8C6A6">NO. 0826</text>
+  </view>
+  <view class="member-progress"><view class="progress-line"><view class="progress-fill"></view></view><view class="progress-copy">距离下一等级还差 1,240 成长值</view></view>
+</view>
+<view class="member-quick">
+  <view class="member-quick-item" bindtap="points"><text class="strong">{{member.points}}</text><text>积分</text></view>
+  <view class="member-quick-item" bindtap="coupons"><text class="strong">3</text><text>优惠券</text></view>
+  <view class="member-quick-item" bindtap="activity"><text class="strong">2</text><text>专属活动</text></view>
+  <view class="member-quick-item" bindtap="service"><text class="strong">1V1</text><text>会员客服</text></view>
+</view>
+<view class="section">
+  <view class="section-title">会员权益</view>
+  <view class="menu" style="margin-top:22rpx">
+    <view class="menu-row"><text>会员专享价</text><text class="muted">精选商品自动识别 ›</text></view>
+    <view class="menu-row" bindtap="points"><text>积分回馈</text><text class="muted">消费与任务累计 ›</text></view>
+    <view class="menu-row"><text>生日礼遇</text><text class="muted">生日月专属权益 ›</text></view>
+    <view class="menu-row" bindtap="activity"><text>会员活动</text><text class="muted">优先参与 ›</text></view>
+    <view class="menu-row" bindtap="service"><text>专属服务</text><text class="muted">客服 / 药师入口 ›</text></view>
+  </view>
+</view>

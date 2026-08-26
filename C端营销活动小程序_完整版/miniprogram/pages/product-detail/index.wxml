@@ -1,0 +1,59 @@
+<view wx:if="{{product}}">
+  <view class="pdp-gallery">
+    <swiper indicator-dots autoplay interval="4200" circular>
+      <swiper-item wx:for="{{product.gallery}}" wx:key="*this"><image src="{{item}}" mode="aspectFill"></image></swiper-item>
+    </swiper>
+  </view>
+
+  <view class="pdp-main">
+    <view class="pdp-tags"><text class="tag">{{product.otc}}</text><text class="tag tag-brand" wx:for="{{product.tags}}" wx:key="*this">{{item}}</text></view>
+    <view class="pdp-name">{{product.name}}</view>
+    <view class="pdp-generic">通用名称：{{product.generic}}</view>
+    <view class="pdp-price" wx:if="{{product.price}}">
+      <text class="price">¥{{product.price}}</text><text class="old-price">¥{{product.oldPrice}}</text>
+      <view class="pdp-member">金卡会员价 <text class="strong">¥{{product.memberPrice}}</text> · 登录后自动识别权益</view>
+    </view>
+    <view class="notice" style="margin:24rpx -32rpx -28rpx" wx:if="{{product.regulatoryMode==='rx'}}">
+      该商品为受监管购买流程示意，不提供普通“立即购买”。实际业务应根据法规、资质、处方与药师审核规则配置。
+    </view>
+  </view>
+
+  <view class="pdp-block">
+    <view class="pdp-row"><text class="label">规格</text><text>{{product.spec}}</text></view>
+    <view class="pdp-row"><text class="label">配送</text><text>预计 1–3 个工作日 · 以收货地址可配送范围为准</text></view>
+    <view class="pdp-row"><text class="label">库存</text><text wx:if="{{product.stock>0}}">现货</text><text wx:else>需确认</text></view>
+    <view class="pdp-row"><text class="label">服务</text><text class="link" bindtap="pharmacist">咨询药师 →</text></view>
+  </view>
+
+  <view class="pdp-block">
+    <view class="h3">专业信息</view>
+    <view class="pdp-row"><text class="label">品牌</text><text>{{product.brand}}</text></view>
+    <view class="pdp-row"><text class="label">生产企业</text><text>{{product.maker}}</text></view>
+    <view class="pdp-row"><text class="label">批准/注册</text><text>{{product.approval}}</text></view>
+    <view class="pdp-row"><text class="label">储存条件</text><text>{{product.storage}}</text></view>
+    <view class="pdp-row"><text class="label">效期说明</text><text>{{product.expiry}}</text></view>
+    <button class="btn-text" style="margin-top:16rpx" bindtap="instructions">查看完整说明书 / 产品说明 →</button>
+  </view>
+
+  <view class="pdp-block">
+    <view class="h3">商品介绍</view>
+    <view class="section-sub" style="margin-top:14rpx">{{product.sell}}</view>
+    <image src="{{product.gallery[0]}}" mode="widthFix" style="width:100%;margin-top:24rpx"></image>
+  </view>
+
+  <view class="pdp-block">
+    <view class="trust-row">
+      <view class="trust-item"><text class="strong">正品保障</text><text>资质信息可查</text></view>
+      <view class="trust-item"><text class="strong">专业药师</text><text>购前咨询支持</text></view>
+      <view class="trust-item"><text class="strong">隐私保护</text><text>敏感信息克制展示</text></view>
+    </view>
+  </view>
+
+  <view class="pdp-spacer"></view>
+  <view class="pdp-bottom">
+    <button class="pdp-icon" bindtap="service"><text class="strong">客</text><text>客服</text></button>
+    <button class="pdp-icon" bindtap="toggleFav"><text class="strong">{{isFav?'♥':'♡'}}</text><text>收藏</text></button>
+    <button class="btn-secondary" bindtap="addCart" wx:if="{{product.regulatoryMode!=='rx'}}">加入购物袋</button>
+    <button class="btn-primary" bindtap="buyNow">{{product.regulatoryMode==='rx'?'咨询药师':'立即购买'}}</button>
+  </view>
+</view>

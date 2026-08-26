@@ -1,0 +1,2 @@
+<view class="points-hero"><view class="eyebrow">MEMBER POINTS</view><view class="points-number">{{points}}</view><view class="section-sub">积分可用于符合规则的会员权益与订单抵扣</view></view>
+<view class="section"><view class="section-title">积分明细</view><view class="menu" style="margin-top:18rpx"><view class="menu-row" wx:for="{{records}}" wx:key="date"><view><view>{{item.title}}</view><view class="caption">{{item.date}}</view></view><text class="strong">{{item.value}}</text></view></view></view>

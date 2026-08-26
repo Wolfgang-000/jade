@@ -1,0 +1,13 @@
+<view wx:if="{{order}}">
+  <view class="surface" style="padding:34rpx 32rpx"><view class="eyebrow">ORDER STATUS</view><view class="h2" style="margin-top:10rpx">{{order.status}}</view><view class="section-sub">{{order.logistics}} · 预计 1–3 个工作日</view></view>
+  <view class="checkout-block" bindtap="logistics"><view class="row-between"><view><view class="row-title">物流信息</view><view class="caption">查看配送时间轴与最新节点</view></view><text>›</text></view></view>
+  <view class="checkout-block"><view class="checkout-title">收货信息</view><view class="address-main">林女士 · 138****6688</view><view class="address-sub">广东省广州市天河区 · 示例收货地址</view></view>
+  <view class="checkout-block"><view class="order-product"><image class="order-img" src="{{order.product.image}}" mode="aspectFill"></image><view><view class="row-title">{{order.product.name}}</view><view class="caption">{{order.product.spec}} × {{order.qty}}</view><view class="price-small" style="margin-top:14rpx">¥{{order.amount}}</view></view></view></view>
+  <view class="checkout-block">
+    <view class="summary-row"><text>订单编号</text><text>{{order.id}}</text></view>
+    <view class="summary-row"><text>下单时间</text><text>{{order.created}}</text></view>
+    <view class="summary-row"><text>支付方式</text><text>微信支付</text></view>
+    <view class="summary-row total-row"><text>实付金额</text><text>¥{{order.amount}}</text></view>
+  </view>
+  <view class="container" style="padding-top:28rpx;display:flex;gap:14rpx"><button class="btn-secondary" style="flex:1" bindtap="service">联系客服</button><button class="btn-primary" style="flex:1" bindtap="afterSales">申请售后</button></view>
+</view>

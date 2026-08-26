@@ -1,0 +1,7 @@
+<view wx:if="{{list.length}}" class="product-list">
+  <view class="product-row" wx:for="{{list}}" wx:key="id" bindtap="go" data-id="{{item.id}}">
+    <image class="product-row__img" src="{{item.image}}" mode="aspectFill"></image>
+    <view class="product-row__content"><view class="product-row__name">{{item.name}}</view><view class="product-row__meta">{{item.brand}} · {{item.spec}}</view><view class="product-row__bottom"><text class="price-small">¥{{item.memberPrice}}</text><button class="btn-secondary" style="height:60rpx;margin-top:12rpx" catchtap="cart" data-id="{{item.id}}">加入购物袋</button></view></view>
+  </view>
+</view>
+<view wx:else class="empty-state"><text class="strong">还没有收藏商品</text><text>收藏会帮助你更快回到常购和关注商品。</text></view>

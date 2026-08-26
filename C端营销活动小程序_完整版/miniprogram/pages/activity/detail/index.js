@@ -1,3 +1,6 @@
-
-const api=require('../../../services/api');const router=require('../../../utils/router');const {track}=require('../../../utils/tracker')
-Page({data:{activity:{products:[]},hero:{},rest:[]},async onLoad(o){const a=await api.getActivity(o.id);this.setData({activity:a,hero:a.products[0]||{},rest:a.products.slice(1)});track('activity_view',{activityId:a.id})},buy(e){track('product_click',{activityId:this.data.activity.id,productId:e.detail.product.id});router.openMallProduct(e.detail.product)},buyHero(){const p=this.data.hero;track('product_click',{activityId:this.data.activity.id,productId:p.id,position:'hero'});router.openMallProduct(p)},openMall(){track('mall_jump',{activityId:this.data.activity.id});router.openMallHome()},openService(){wx.navigateTo({url:'/pages/service/index'})}})
+const {activities,products}=require('../../../data/mock');
+Page({
+ data:{activity:null,products:products.slice(0,5)},
+ onLoad(o){this.setData({activity:activities.find(x=>x.id===(o.id||'a1'))||activities[0]})},
+ product(e){wx.navigateTo({url:'/pages/product-detail/index?id='+e.currentTarget.dataset.id})}
+});

@@ -1,0 +1,28 @@
+<view class="notice">提交订单前会校验：库存、最新价格、优惠、配送范围、购买限制与必要的身份/处方要求。</view>
+<view class="checkout-block" bindtap="address">
+  <view class="checkout-title">收货地址</view>
+  <view class="address-main">林女士 · 138****6688</view>
+  <view class="address-sub">广东省广州市天河区 · 示例收货地址 88 号</view>
+</view>
+<view class="checkout-block">
+  <view class="checkout-title">商品清单</view>
+  <view class="order-product" wx:for="{{items}}" wx:key="key">
+    <image class="order-img" src="{{item.product.image}}" mode="aspectFill"></image>
+    <view><view class="row-title">{{item.product.name}}</view><view class="caption">{{item.spec}} × {{item.qty}}</view><view class="price-small" style="margin-top:14rpx">¥{{item.product.memberPrice}}</view></view>
+  </view>
+</view>
+<view class="checkout-block">
+  <view class="menu-row" style="padding:0"><text>配送方式</text><text class="muted">标准配送 ›</text></view>
+  <view class="menu-row" style="padding:0"><text>优惠券</text><text class="muted">会员满59减5 ›</text></view>
+  <view class="menu-row" style="padding:0"><text>积分抵扣</text><text class="muted">使用 200 积分 ›</text></view>
+  <view class="menu-row" style="padding:0"><text>发票</text><text class="muted">不开发票 ›</text></view>
+  <view class="menu-row" style="padding:0"><text>买家留言</text><text class="muted">选填 ›</text></view>
+</view>
+<view class="checkout-block">
+  <view class="summary-row"><text>商品金额</text><text>¥{{amount}}</text></view>
+  <view class="summary-row"><text>运费</text><text>¥0.00</text></view>
+  <view class="summary-row"><text>会员 / 优惠 / 积分</text><text>-¥{{discount}}</text></view>
+  <view class="summary-row total-row"><text>预计实付</text><text>¥{{total}}</text></view>
+</view>
+<view class="bottom-space"></view>
+<view class="cart-footer"><view></view><view class="total"><text class="strong">¥{{total}}</text><text>最终金额以支付前校验为准</text></view><button class="btn-primary" bindtap="submit">提交订单</button></view>

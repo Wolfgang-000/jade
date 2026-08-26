@@ -1,0 +1,9 @@
+<view class="tabs" style="background:#fff;padding:20rpx 32rpx;display:flex;gap:14rpx">
+  <text class="chip {{active===item?'active':''}}" wx:for="{{tabs}}" wx:key="*this" bindtap="tab" data-t="{{item}}">{{item}}</text>
+</view>
+<view class="section section--tight">
+  <view class="coupon" wx:for="{{list}}" wx:key="title">
+    <view class="coupon-value"><view><text class="strong">¥{{item.value}}</text><view class="caption">{{item.condition}}</view></view></view>
+    <view class="coupon-info"><view class="h3">{{item.title}}</view><view class="caption" style="margin-top:8rpx">{{item.time}}</view><view class="link" style="margin-top:18rpx">去使用 →</view></view>
+  </view>
+</view>

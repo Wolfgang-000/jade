@@ -1,0 +1,10 @@
+<view class="section section--tight">
+  <view class="menu">
+    <view class="menu-row" bindtap="nav" data-url="/pages/privacy/index"><text>隐私政策</text><text>›</text></view>
+    <view class="menu-row" bindtap="nav" data-url="/pages/agreement/index"><text>用户协议</text><text>›</text></view>
+    <view class="menu-row" bindtap="clear"><text>清除浏览记录</text><text>›</text></view>
+    <view class="menu-row"><text>消息通知</text><text class="muted">按需订阅 ›</text></view>
+    <view class="menu-row"><text>账号与授权</text><text>›</text></view>
+  </view>
+</view>
+<view class="section"><view class="caption">版本 1.0.0 · 商业高保真原型</view></view>

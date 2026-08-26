@@ -1,0 +1,9 @@
+Page({
+ data:{amount:'0.00',method:'wechat',paying:false},
+ onLoad(o){this.setData({amount:o.amount||'0.00'})},
+ choose(e){this.setData({method:e.currentTarget.dataset.method})},
+ pay(){
+  this.setData({paying:true});
+  setTimeout(()=>{wx.redirectTo({url:'/pages/payment-success/index?amount='+this.data.amount})},650)
+ }
+});

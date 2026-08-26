@@ -1,0 +1,6 @@
+<view class="notice">可接入微信地址能力；特殊商品仍需按配送范围、储运条件与购买限制再次校验。</view>
+<view class="address-card" wx:for="{{addresses}}" wx:key="id" bindtap="choose">
+  <view class="row-between"><view class="row-title">{{item.name}} · {{item.phone}}</view><text class="tag tag-brand" wx:if="{{item.default}}">默认</text></view>
+  <view class="address-sub">{{item.detail}}</view>
+</view>
+<view class="container" style="padding-top:28rpx"><button class="btn-primary" bindtap="add">新增收货地址</button></view>

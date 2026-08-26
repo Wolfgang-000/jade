@@ -1,0 +1,2 @@
+<view class="surface" style="padding:30rpx 32rpx;border-bottom:1rpx solid var(--border)"><view class="h3">顺丰速运 · SF1234567890</view><view class="caption" style="margin-top:6rpx">预计明日送达</view></view>
+<view class="section"><view class="timeline"><view class="timeline-item {{item.active?'active':''}}" wx:for="{{steps}}" wx:key="time"><view class="timeline-title">{{item.title}}</view><view class="caption" style="margin-top:6rpx">{{item.desc}}</view><view class="timeline-time">{{item.time}}</view></view></view></view>

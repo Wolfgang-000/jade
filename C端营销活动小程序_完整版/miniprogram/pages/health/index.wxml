@@ -1,0 +1,13 @@
+<view class="health-hero">
+  <view class="eyebrow">HEALTH EDITORIAL</view><view class="h1" style="margin-top:10rpx">健康，不应该只在生病时被看见</view>
+  <view class="section-sub">内容、场景与药师服务共同帮助用户理解信息；不做疾病诊断，也不夸大商品功效。</view>
+  <button class="btn-secondary" style="width:240rpx;margin-top:24rpx" bindtap="pharmacist">咨询药师</button>
+</view>
+<view class="section">
+  <view class="section-title">健康场景</view>
+  <view class="scene-list" style="margin-top:22rpx"><view class="scene" wx:for="{{scenes}}" wx:key="id" bindtap="product"><view class="scene-title">{{item.title}}</view><view class="scene-desc">{{item.desc}}</view></view></view>
+</view>
+<view class="section safe-bottom">
+  <view class="section-title">专业内容</view>
+  <view class="article-list" style="margin-top:20rpx"><view class="health-topic" wx:for="{{articles}}" wx:key="id"><view class="tag tag-brand">{{item.category}}</view><view class="health-topic-title" style="margin-top:12rpx">{{item.title}}</view><view class="article-meta">{{item.meta}}</view><view class="link" style="margin-top:14rpx">阅读文章 →</view></view></view>
+</view>

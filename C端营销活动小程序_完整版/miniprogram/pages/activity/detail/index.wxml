@@ -1,11 +1,10 @@
-
-<view class="page">
-  <view class="hero"><view class="eyebrow">{{activity.eyebrow}}</view><view class="title">{{activity.name}}</view><view class="sub">{{activity.subtitle}}</view><view class="date">{{activity.start}} — {{activity.end}}</view><button class="hero-btn" bindtap="openMall">查看会员精选</button></view>
-  <view class="section"><view class="section-title">本期会员权益</view><view class="coupons"><view><text class="num">¥5</text><text>满59可用</text></view><view><text class="num">¥10</text><text>满99可用</text></view></view></view>
-  <view class="section"><view class="section-title">本期主推</view></view>
-  <view class="hero-product"><view class="pic"><image wx:if="{{hero.image}}" src="{{hero.image}}" mode="aspectFill"/><text wx:else>商品主图</text></view><view class="tag">{{hero.tag}}</view><view class="pname">{{hero.name}}</view><view class="spec">{{hero.spec}}</view><view class="sell">{{hero.sell}}</view><view class="price"><text>¥{{hero.activityPrice}}</text><text>¥{{hero.dailyPrice}}</text></view><button bindtap="buyHero">立即购买</button></view>
-  <view class="section"><view class="section-title">更多会员精选</view><view class="grid"><product-card wx:for="{{rest}}" wx:key="id" product="{{item}}" bind:buy="buy"/></view></view>
-  <view class="trust"><view><text>正品保障</text><text>合规商品展示</text></view><view><text>客服支持</text><text>购买问题响应</text></view><view><text>商城成交</text><text>订单回原商城</text></view></view>
-  <view class="section"><view class="section-title">活动规则</view><view class="rules">活动时间、商品与实际价格以商城页面为准。点击“立即购买”后跳转到现有C端商城完成交易。</view><view class="service-link" bindtap="openService">需要帮助？联系客服 →</view></view>
-  <view class="sticky safe-bottom"><button bindtap="openMall">进入商城查看更多商品</button></view>
+<view wx:if="{{activity}}">
+  <view class="activity-hero"><image src="{{activity.image}}" mode="aspectFill"></image><view class="activity-overlay"><view class="eyebrow" style="color:#fff">SEASONAL CAMPAIGN</view><view class="h1">{{activity.title}}</view><view style="font-size:25rpx;margin-top:12rpx;line-height:1.6">{{activity.subtitle}}</view></view></view>
+  <view class="section"><view class="h2">从健康准备，而不是从折扣开始</view><view class="section-sub">通过季节主题、家庭场景和专业服务组织商品；优惠作为决策辅助，而不是页面主角。</view></view>
+  <view class="section"><view class="member-panel"><view class="member-level">MEMBER BENEFITS</view><view class="member-title">会员专享价 · 积分 · 服务权益</view><view class="section-sub" style="color:#BDB5AE">登录会员后自动识别，不同时堆叠过多促销机制。</view></view></view>
+  <view class="section"><view class="section-title">本期主推</view><view class="editorial-feature" style="margin-top:22rpx">
+    <view class="editorial-main" bindtap="product" data-id="{{products[0].id}}"><image src="{{products[0].image}}" mode="aspectFill"></image><view class="editorial-copy"><view class="h3">{{products[0].name}}</view><view class="member-price">会员 ¥{{products[0].memberPrice}}</view></view></view>
+    <view class="editorial-side"><view class="editorial-tile" bindtap="product" data-id="{{products[3].id}}"><view class="eyebrow">HOME CARE</view><view class="h3">{{products[3].name}}</view></view><view class="editorial-tile" bindtap="product" data-id="{{products[4].id}}"><view class="eyebrow">WELLNESS</view><view class="h3">{{products[4].name}}</view></view></view>
+  </view></view>
+  <view class="section safe-bottom"><view class="section-title">更多精选</view><view class="product-grid" style="margin-top:22rpx"><view class="product-card" wx:for="{{products}}" wx:key="id" bindtap="product" data-id="{{item.id}}"><view class="product-card__image"><image src="{{item.image}}" mode="aspectFill"></image></view><view class="product-card__name">{{item.name}}</view><view class="price-small" style="margin-top:10rpx">¥{{item.price}}</view></view></view></view>
 </view>

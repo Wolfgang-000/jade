@@ -1,0 +1,25 @@
+<view wx:if="{{items.length}}">
+  <view class="notice">会员优惠在结算页统一计算；库存、配送范围与活动有效性将在提交订单前再次校验。</view>
+  <view class="cart-item" wx:for="{{items}}" wx:key="key">
+    <view class="checkbox {{item.checked?'checked':''}}" bindtap="toggle" data-key="{{item.key}}"></view>
+    <image class="cart-img" src="{{item.product.image}}" mode="aspectFill"></image>
+    <view>
+      <view class="cart-name">{{item.product.name}}</view>
+      <view class="cart-meta">{{item.spec}} · {{item.product.brand}}</view>
+      <view class="cart-price">¥{{item.product.memberPrice}}</view>
+      <view class="row-between" style="margin-top:16rpx">
+        <view class="quantity"><button class="qty-btn" bindtap="minus" data-key="{{item.key}}">−</button><text class="qty-value">{{item.qty}}</text><button class="qty-btn" bindtap="plus" data-key="{{item.key}}">＋</button></view>
+        <button class="btn-text faint" bindtap="remove" data-key="{{item.key}}">删除</button>
+      </view>
+    </view>
+  </view>
+  <view class="bottom-space"></view>
+  <view class="cart-footer">
+    <text class="caption">已选 {{items.length}} 件</text>
+    <view class="total"><text class="strong">¥{{total}}</text><text>已优惠 ¥{{discount}}</text></view>
+    <button class="btn-primary" bindtap="checkout">去结算</button>
+  </view>
+</view>
+<view wx:else class="empty-state">
+  <text class="strong">购物袋还是空的</text><text>把真正需要的健康商品放进购物袋，结算前会再次校验库存、优惠和购买限制。</text><button class="btn-primary" style="margin:28rpx auto 0;width:280rpx" bindtap="goHome">去逛逛</button>
+</view>

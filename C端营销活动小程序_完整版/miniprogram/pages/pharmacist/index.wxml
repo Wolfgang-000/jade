@@ -1,0 +1,5 @@
+<view class="notice">药师咨询用于专业信息与购药支持，不替代线下诊疗或医生诊断。</view>
+<view class="chat">
+  <view class="chat-row {{item.me?'me':''}}" wx:for="{{messages}}" wx:key="index"><view class="bubble">{{item.text}}</view></view>
+</view>
+<view class="chat-input"><input value="{{input}}" bindinput="input" placeholder="描述你的商品或用药问题"/><button class="btn-primary" style="height:72rpx" bindtap="send">发送</button></view>
