@@ -1,10 +1,49 @@
 <view wx:if="{{activity}}">
-  <view class="activity-hero"><image src="{{activity.image}}" mode="aspectFill"></image><view class="activity-overlay"><view class="eyebrow" style="color:#fff">SEASONAL CAMPAIGN</view><view class="h1">{{activity.title}}</view><view style="font-size:25rpx;margin-top:12rpx;line-height:1.6">{{activity.subtitle}}</view></view></view>
-  <view class="section"><view class="h2">从健康准备，而不是从折扣开始</view><view class="section-sub">通过季节主题、家庭场景和专业服务组织商品；优惠作为决策辅助，而不是页面主角。</view></view>
-  <view class="section"><view class="member-panel"><view class="member-level">MEMBER BENEFITS</view><view class="member-title">会员专享价 · 积分 · 服务权益</view><view class="section-sub" style="color:#BDB5AE">登录会员后自动识别，不同时堆叠过多促销机制。</view></view></view>
-  <view class="section"><view class="section-title">本期主推</view><view class="editorial-feature" style="margin-top:22rpx">
-    <view class="editorial-main" bindtap="product" data-id="{{products[0].id}}"><image src="{{products[0].image}}" mode="aspectFill"></image><view class="editorial-copy"><view class="h3">{{products[0].name}}</view><view class="member-price">会员 ¥{{products[0].memberPrice}}</view></view></view>
-    <view class="editorial-side"><view class="editorial-tile" bindtap="product" data-id="{{products[3].id}}"><view class="eyebrow">HOME CARE</view><view class="h3">{{products[3].name}}</view></view><view class="editorial-tile" bindtap="product" data-id="{{products[4].id}}"><view class="eyebrow">WELLNESS</view><view class="h3">{{products[4].name}}</view></view></view>
-  </view></view>
-  <view class="section safe-bottom"><view class="section-title">更多精选</view><view class="product-grid" style="margin-top:22rpx"><view class="product-card" wx:for="{{products}}" wx:key="id" bindtap="product" data-id="{{item.id}}"><view class="product-card__image"><image src="{{item.image}}" mode="aspectFill"></image></view><view class="product-card__name">{{item.name}}</view><view class="price-small" style="margin-top:10rpx">¥{{item.price}}</view></view></view></view>
+  <view class="activity-hero">
+    <image src="{{activity.image}}" mode="aspectFill"></image>
+    <view class="activity-overlay">
+      <view class="eyebrow" style="color:#fff">PROCUREMENT CAMPAIGN</view>
+      <view class="h1">{{activity.title}}</view>
+      <view style="font-size:25rpx;margin-top:12rpx;line-height:1.6">{{activity.subtitle}}</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="h2">围绕采购任务组织商品，而不是堆叠促销</view>
+    <view class="section-sub">重点呈现采购价、起订量、库存、供货状态与阶段性采购政策。</view>
+  </view>
+
+  <view class="section">
+    <view class="member-panel">
+      <view class="member-level">B2B PROCUREMENT</view>
+      <view class="member-title">采购条件清晰 · 库存可查 · 客服可协助</view>
+      <view class="section-sub" style="color:#BDB5AE">大单、缺货找货或特殊供货需求可直接联系客服。</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">本期主推</view>
+    <view class="editorial-feature" style="margin-top:22rpx">
+      <view class="editorial-main" bindtap="product" data-id="{{products[0].id}}">
+        <image src="{{products[0].image}}" mode="aspectFill"></image>
+        <view class="editorial-copy"><view class="h3">{{products[0].name}}</view><view class="member-price">采购价 ¥{{products[0].price}}</view></view>
+      </view>
+      <view class="editorial-side">
+        <view class="editorial-tile" bindtap="product" data-id="{{products[3].id}}"><view class="eyebrow">SEASONAL</view><view class="h3">{{products[3].name}}</view></view>
+        <view class="editorial-tile" bindtap="product" data-id="{{products[4].id}}"><view class="eyebrow">REPLENISH</view><view class="h3">{{products[4].name}}</view></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section safe-bottom">
+    <view class="section-title">更多采购商品</view>
+    <view class="product-grid" style="margin-top:22rpx">
+      <view class="product-card" wx:for="{{products}}" wx:key="id" bindtap="product" data-id="{{item.id}}">
+        <view class="product-card__image"><image src="{{item.image}}" mode="aspectFill"></image></view>
+        <view class="product-card__name">{{item.name}}</view>
+        <view class="price-small" style="margin-top:10rpx">采购价 ¥{{item.price}}</view>
+        <view class="caption">{{item.moq}}{{item.unit}}起订 · 库存{{item.stock}}{{item.unit}}</view>
+      </view>
+    </view>
+  </view>
 </view>
