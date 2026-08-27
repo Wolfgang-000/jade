@@ -26,7 +26,6 @@
     "pages/brand/index",
     "pages/activity/list/index",
     "pages/activity/detail/index",
-    "pages/health/index",
     "pages/settings/index",
     "pages/privacy/index",
     "pages/agreement/index",
@@ -53,10 +52,6 @@
       {
         "pagePath": "pages/category/index",
         "text": "分类"
-      },
-      {
-        "pagePath": "pages/health/index",
-        "text": "健康"
       },
       {
         "pagePath": "pages/cart/index",
