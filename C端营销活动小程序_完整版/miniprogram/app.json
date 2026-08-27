@@ -14,16 +14,11 @@
     "pages/orders/index",
     "pages/order-detail/index",
     "pages/logistics/index",
-    "pages/member/index",
     "pages/profile/index",
     "pages/favorites/index",
     "pages/history/index",
-    "pages/coupons/index",
-    "pages/points/index",
     "pages/address/index",
     "pages/service/index",
-    "pages/pharmacist/index",
-    "pages/brand/index",
     "pages/activity/list/index",
     "pages/activity/detail/index",
     "pages/settings/index",
@@ -33,7 +28,7 @@
     "pages/after-sales/index"
   ],
   "window": {
-    "navigationBarTitleText": "澄和健康",
+    "navigationBarTitleText": "澄和健康采购",
     "navigationBarBackgroundColor": "#FBFAF8",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#F7F4EF",
@@ -55,7 +50,7 @@
       },
       {
         "pagePath": "pages/cart/index",
-        "text": "购物袋"
+        "text": "采购单"
       },
       {
         "pagePath": "pages/profile/index",
