@@ -16,48 +16,55 @@
     <view class="pdp-name">{{product.name}}</view>
     <view class="pdp-generic">通用名称：{{product.generic}}</view>
 
-    <view class="price-zone" wx:if="{{product.regulatoryMode!=='rx'}}">
+    <view class="price-zone">
       <view class="price-line">
-        <text class="price">¥{{product.price}}</text>
-        <text class="old-price">¥{{product.oldPrice}}</text>
+        <text class="price">采购价 ¥{{product.price}}</text>
       </view>
       <view class="member-benefit-line">
-        <text class="member-mark">MEMBER</text>
-        <text>金卡会员价 ¥{{product.memberPrice}}</text>
-        <text class="member-benefit-link">查看权益 →</text>
+        <text class="member-mark">B2B</text>
+        <text>{{product.moq}}{{product.unit}}起订</text>
+        <text class="member-benefit-link">{{product.taxInclusive?'含税价':'税费另计'}}</text>
       </view>
     </view>
 
     <view class="rx-notice" wx:if="{{product.regulatoryMode==='rx'}}">
-      <view class="rx-title">受监管购买流程</view>
-      <view class="rx-copy">该商品不使用普通“立即购买”逻辑。实际业务应根据资质、处方、药师审核和平台规则配置。</view>
+      <view class="rx-title">采购资质要求</view>
+      <view class="rx-copy">该商品仅面向具备相应经营资质和经营范围的B端客户展示与采购，正式系统需在下单前完成资质校验。</view>
     </view>
   </view>
 
   <view class="pdp-block purchase-block">
     <view class="purchase-row" bindtap="selectSpec">
-      <text class="purchase-label">已选</text>
+      <text class="purchase-label">规格</text>
       <view class="purchase-value"><text>{{currentSpec}}</text><text class="purchase-arrow">›</text></view>
     </view>
     <view class="purchase-row">
-      <text class="purchase-label">配送</text>
-      <view class="purchase-value"><text>预计 1–3 个工作日</text><text class="purchase-sub">以收货地址可配送范围为准</text></view>
+      <text class="purchase-label">起订</text>
+      <view class="purchase-value"><text>{{product.moq}}{{product.unit}}起订</text><text class="purchase-sub">加入采购单默认按起订量</text></view>
     </view>
     <view class="purchase-row">
       <text class="purchase-label">库存</text>
       <view class="purchase-value">
-        <text class="stock-ok" wx:if="{{product.stock>10}}">现货充足</text>
-        <text class="stock-low" wx:elif="{{product.stock>0}}">仅剩 {{product.stock}} 件</text>
+        <text class="stock-ok" wx:if="{{product.stock>10}}">可售 {{product.stock}}{{product.unit}}</text>
+        <text class="stock-low" wx:elif="{{product.stock>0}}">仅剩 {{product.stock}}{{product.unit}}</text>
         <text class="stock-warn" wx:else>库存需确认</text>
       </view>
     </view>
+    <view class="purchase-row">
+      <text class="purchase-label">批号/效期</text>
+      <view class="purchase-value"><text>{{product.batch}}</text><text class="purchase-sub">效期：{{product.expiry}}</text></view>
+    </view>
+    <view class="purchase-row">
+      <text class="purchase-label">配送</text>
+      <view class="purchase-value"><text>以收货地区和订单量核算</text><text class="purchase-sub">正式下单前再次确认库存与运费</text></view>
+    </view>
   </view>
 
-  <view class="pdp-block pharmacist-entry" bindtap="pharmacist">
+  <view class="pdp-block pharmacist-entry" bindtap="service">
     <view>
-      <view class="service-kicker">PHARMACIST SERVICE</view>
-      <view class="service-title">购前不确定？先咨询药师</view>
-      <view class="service-copy">提供商品、用药注意事项与购药流程支持，不替代疾病诊断。</view>
+      <view class="service-kicker">CUSTOMER SERVICE</view>
+      <view class="service-title">采购有疑问？联系客服</view>
+      <view class="service-copy">支持大单询价、缺货找货、库存效期、订单物流、资质与售后问题。</view>
     </view>
     <view class="service-arrow">→</view>
   </view>
@@ -65,40 +72,40 @@
   <view class="pdp-block info-block">
     <view class="pdp-section-head">
       <view>
-        <view class="pdp-section-title">专业信息</view>
-        <view class="pdp-section-sub">购买前需要确认的核心资料</view>
+        <view class="pdp-section-title">商品与资质信息</view>
+        <view class="pdp-section-sub">采购前需要确认的核心资料</view>
       </view>
     </view>
     <view class="pdp-row"><text class="label">品牌</text><text>{{product.brand}}</text></view>
     <view class="pdp-row"><text class="label">生产企业</text><text>{{product.maker}}</text></view>
-    <view class="pdp-row"><text class="label">批准/注册</text><text>{{product.approval}}</text></view>
+    <view class="pdp-row"><text class="label">批准文号</text><text>{{product.approval}}</text></view>
     <view class="pdp-row"><text class="label">储存条件</text><text>{{product.storage}}</text></view>
-    <view class="pdp-row"><text class="label">效期说明</text><text>{{product.expiry}}</text></view>
-    <button class="info-link" bindtap="instructions">查看完整说明书 / 产品说明 →</button>
+    <view class="pdp-row"><text class="label">效期</text><text>{{product.expiry}}</text></view>
+    <button class="info-link" bindtap="instructions">查看完整说明书 / 产品资料 →</button>
   </view>
 
   <view class="pdp-block content-block">
-    <view class="pdp-section-title">商品介绍</view>
+    <view class="pdp-section-title">采购说明</view>
     <view class="content-lead">{{product.sell}}</view>
     <image class="content-image" src="{{product.gallery[0]}}" mode="widthFix"></image>
   </view>
 
   <view class="pdp-block trust-block">
     <view class="trust-row">
-      <view class="trust-item"><text class="strong">正品保障</text><text>资质信息可查</text></view>
-      <view class="trust-item"><text class="strong">专业药师</text><text>购前咨询支持</text></view>
-      <view class="trust-item"><text class="strong">隐私保护</text><text>敏感信息克制展示</text></view>
+      <view class="trust-item"><text class="strong">正规渠道</text><text>商品来源与资质可查</text></view>
+      <view class="trust-item"><text class="strong">履约确认</text><text>库存、批号、效期复核</text></view>
+      <view class="trust-item"><text class="strong">客服支持</text><text>报价、物流与售后协助</text></view>
     </view>
   </view>
 
   <view class="pdp-spacer"></view>
   <view class="pdp-bottom premium-pdp-bottom">
     <button class="pdp-icon" bindtap="service"><text class="icon-text">客</text><text>客服</text></button>
-    <button class="pdp-icon" bindtap="toggleFav"><text class="icon-text">{{isFav?'♥':'♡'}}</text><text>收藏</text></button>
+    <button class="pdp-icon" bindtap="toggleFav"><text class="icon-text">{{isFav?'♥':'♡'}}</text><text>常购</text></button>
     <button class="pdp-icon bag-icon" bindtap="goCart">
-      <text class="icon-text">袋</text><text>购物袋</text><text class="mini-badge" wx:if="{{cartCount>0}}">{{cartCount}}</text>
+      <text class="icon-text">单</text><text>采购单</text><text class="mini-badge" wx:if="{{cartCount>0}}">{{cartCount}}</text>
     </button>
-    <button class="btn-secondary pdp-cart-btn" bindtap="addCart" wx:if="{{product.regulatoryMode!=='rx'}}">加入购物袋</button>
-    <button class="btn-primary pdp-buy-btn" bindtap="buyNow">{{product.regulatoryMode==='rx'?'咨询药师':'立即购买'}}</button>
+    <button class="btn-secondary pdp-cart-btn" bindtap="addCart">加入采购单</button>
+    <button class="btn-primary pdp-buy-btn" bindtap="buyNow">立即采购</button>
   </view>
 </view>
