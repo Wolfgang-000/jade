@@ -1,28 +1,73 @@
-<view class="notice">提交订单前会校验：库存、最新价格、优惠、配送范围、购买限制与必要的身份/处方要求。</view>
-<view class="checkout-block" bindtap="address">
-  <view class="checkout-title">收货地址</view>
-  <view class="address-main">林女士 · 138****6688</view>
-  <view class="address-sub">广东省广州市天河区 · 示例收货地址 88 号</view>
-</view>
-<view class="checkout-block">
-  <view class="checkout-title">商品清单</view>
-  <view class="order-product" wx:for="{{items}}" wx:key="key">
-    <image class="order-img" src="{{item.product.image}}" mode="aspectFill"></image>
-    <view><view class="row-title">{{item.product.name}}</view><view class="caption">{{item.spec}} × {{item.qty}}</view><view class="price-small" style="margin-top:14rpx">¥{{item.product.memberPrice}}</view></view>
+<view class="checkout-page">
+  <view class="checkout-head">
+    <view class="checkout-title-main">确认订单</view>
+    <view class="checkout-sub-main">提交前将再次校验库存、价格、优惠与购买限制</view>
+  </view>
+
+  <view class="checkout-section address-card" bindtap="address">
+    <view class="section-eyebrow">DELIVERY</view>
+    <view class="address-line"><text class="address-name">{{address.name}}</text><text class="address-phone">{{address.phone}}</text></view>
+    <view class="address-detail">{{address.detail}}</view>
+    <view class="section-arrow">›</view>
+  </view>
+
+  <view class="checkout-section">
+    <view class="checkout-section-head">
+      <view><view class="checkout-section-title">商品清单</view><view class="checkout-section-sub">共 {{items.length}} 种商品</view></view>
+    </view>
+    <view class="order-product premium-order-product" wx:for="{{items}}" wx:key="key">
+      <image class="order-img" src="{{item.product.image}}" mode="aspectFill"></image>
+      <view class="order-product-copy">
+        <view class="row-title">{{item.product.name}}</view>
+        <view class="caption">{{item.product.brand}} · {{item.spec}} × {{item.qty}}</view>
+        <view class="order-product-bottom"><text class="member-chip">会员价</text><text class="price-small">¥{{item.product.memberPrice}}</text></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="checkout-section">
+    <view class="checkout-section-title">配送与优惠</view>
+    <view class="checkout-option-row">
+      <view><view class="option-title">配送方式</view><view class="option-sub">标准配送 · 预计 1–3 个工作日</view></view>
+      <text class="option-value">¥0.00</text>
+    </view>
+    <view class="checkout-option-row" bindtap="toggleCoupon">
+      <view><view class="option-title">优惠券</view><view class="option-sub">满59减5</view></view>
+      <view class="option-switch {{useCoupon?'on':''}}"><view class="switch-dot"></view></view>
+    </view>
+    <view class="checkout-option-row" bindtap="togglePoints">
+      <view><view class="option-title">积分抵扣</view><view class="option-sub">本单最多抵扣 ¥{{pointsDiscount}}</view></view>
+      <view class="option-switch {{usePoints?'on':''}}"><view class="switch-dot"></view></view>
+    </view>
+    <view class="checkout-option-row">
+      <view><view class="option-title">发票</view><view class="option-sub">按需开具</view></view>
+      <text class="option-link">不开发票 ›</text>
+    </view>
+    <view class="checkout-option-row">
+      <view><view class="option-title">买家留言</view><view class="option-sub">可备注配送或服务需求</view></view>
+      <text class="option-link">选填 ›</text>
+    </view>
+  </view>
+
+  <view class="checkout-section summary-section">
+    <view class="checkout-section-title">金额明细</view>
+    <view class="summary-row"><text>商品金额</text><text>¥{{amount}}</text></view>
+    <view class="summary-row"><text>会员优惠</text><text class="summary-saving">-¥{{memberDiscount}}</text></view>
+    <view class="summary-row"><text>优惠券</text><text class="summary-saving">-¥{{couponDiscount}}</text></view>
+    <view class="summary-row"><text>积分抵扣</text><text class="summary-saving">-¥{{pointsDiscount}}</text></view>
+    <view class="summary-row"><text>运费</text><text>¥{{freight}}</text></view>
+    <view class="summary-row total-row"><text>预计实付</text><text>¥{{total}}</text></view>
+  </view>
+
+  <view class="checkout-trust">
+    <view><text class="trust-title">正品保障</text><text class="trust-sub">商品资质可查</text></view>
+    <view><text class="trust-title">专业药师</text><text class="trust-sub">购前咨询支持</text></view>
+    <view><text class="trust-title">订单校验</text><text class="trust-sub">支付前再次确认</text></view>
+  </view>
+
+  <view class="bottom-space"></view>
+  <view class="checkout-footer">
+    <view class="checkout-footer-total"><text class="footer-label">实付</text><text class="footer-price">¥{{total}}</text><text class="footer-note">已优惠 ¥{{discount}}</text></view>
+    <button class="btn-primary submit-order-btn" bindtap="submit">提交订单</button>
   </view>
 </view>
-<view class="checkout-block">
-  <view class="menu-row" style="padding:0"><text>配送方式</text><text class="muted">标准配送 ›</text></view>
-  <view class="menu-row" style="padding:0"><text>优惠券</text><text class="muted">会员满59减5 ›</text></view>
-  <view class="menu-row" style="padding:0"><text>积分抵扣</text><text class="muted">使用 200 积分 ›</text></view>
-  <view class="menu-row" style="padding:0"><text>发票</text><text class="muted">不开发票 ›</text></view>
-  <view class="menu-row" style="padding:0"><text>买家留言</text><text class="muted">选填 ›</text></view>
-</view>
-<view class="checkout-block">
-  <view class="summary-row"><text>商品金额</text><text>¥{{amount}}</text></view>
-  <view class="summary-row"><text>运费</text><text>¥0.00</text></view>
-  <view class="summary-row"><text>会员 / 优惠 / 积分</text><text>-¥{{discount}}</text></view>
-  <view class="summary-row total-row"><text>预计实付</text><text>¥{{total}}</text></view>
-</view>
-<view class="bottom-space"></view>
-<view class="cart-footer"><view></view><view class="total"><text class="strong">¥{{total}}</text><text>最终金额以支付前校验为准</text></view><button class="btn-primary" bindtap="submit">提交订单</button></view>
