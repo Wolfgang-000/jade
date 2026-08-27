@@ -1,128 +1,187 @@
-<view class="home-top">
-  <view class="brand-row">
-    <view>
-      <view class="eyebrow">PHARMACY & WELLNESS</view>
-      <view class="brand-word">澄和健康</view>
-    </view>
-    <view class="brand-tools">
-      <button class="icon-circle" bindtap="goMember">会</button>
-      <button class="icon-circle" bindtap="goHealth">讯</button>
-    </view>
-  </view>
-  <view class="search-bar" bindtap="goSearch">
-    <text>⌕</text><text>搜索商品、通用名、品牌或健康需求</text>
-  </view>
-</view>
-
-<view class="hero" bindtap="goActivity">
-  <image src="{{hero.image}}" mode="aspectFill"></image>
-  <view class="hero-overlay">
-    <view class="eyebrow">SEASONAL EDIT</view>
-    <view class="h1">{{hero.title}}</view>
-    <view class="section-sub">{{hero.subtitle}}</view>
-    <view class="hero-cta">{{hero.cta}} →</view>
-  </view>
-</view>
-
-<view class="section">
-  <view class="section-head">
-    <view><view class="section-title">快捷服务</view><view class="section-sub">从真实健康需求开始，而不是从SKU开始</view></view>
-    <text class="link" bindtap="goCategory">全部分类</text>
-  </view>
-  <scroll-view class="category-scroll" scroll-x enable-flex="{{true}}" show-scrollbar="{{false}}">
-    <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="goCategory">
-      <view class="category-visual">{{item.short}}</view>
-      <view class="category-name">{{item.name}}</view>
-      <view class="category-desc">{{item.desc}}</view>
-    </view>
-  </scroll-view>
-</view>
-
-<view class="section">
-  <view class="member-panel" bindtap="goMember">
-    <view class="member-level">GOLD MEMBER · 金卡会员</view>
-    <view class="member-title">把健康消费变成长期会员服务</view>
-    <view class="member-stats">
-      <view class="member-stat"><text class="strong">2,860</text><text>可用积分</text></view>
-      <view class="member-stat"><text class="strong">3</text><text>可用权益</text></view>
-      <view class="member-stat"><text class="strong">2</text><text>专属优惠券</text></view>
-    </view>
-  </view>
-</view>
-
-<view class="section">
-  <view class="section-head">
-    <view><view class="section-title">精选推荐</view><view class="section-sub">兼顾视觉陈列、季节需求与会员价值</view></view>
-  </view>
-  <view class="editorial-feature">
-    <view class="editorial-main" bindtap="goProduct" data-id="p1">
-      <image src="{{products[0].image}}" mode="aspectFill"></image>
-      <view class="editorial-copy">
-        <view class="eyebrow">EDITOR'S PICK</view>
-        <view class="h3">{{products[0].name}}</view>
-        <view class="member-price">会员价 ¥{{products[0].memberPrice}}</view>
+<view class="home-shell">
+  <view class="home-top">
+    <view class="brand-row">
+      <view>
+        <view class="brand-kicker">PHARMACY & WELLNESS</view>
+        <view class="brand-word">澄和健康</view>
+      </view>
+      <view class="top-actions">
+        <button class="top-action" bindtap="goMember">会员</button>
+        <button class="top-action" bindtap="goPharmacist">药师</button>
+        <button class="bag-action" bindtap="goCart">
+          <text>购物袋</text>
+          <text class="bag-count" wx:if="{{cartCount>0}}">{{cartCount}}</text>
+        </button>
       </view>
     </view>
-    <view class="editorial-side">
-      <view class="editorial-tile" bindtap="goProduct" data-id="p4">
-        <view class="eyebrow">HOME CARE</view>
-        <view class="h3">{{products[3].name}}</view>
-        <view class="caption">{{products[3].spec}}</view>
-      </view>
-      <view class="editorial-tile" bindtap="goProduct" data-id="p5">
-        <view class="eyebrow">MEMBER SELECT</view>
-        <view class="h3">{{products[4].name}}</view>
-        <view class="caption">会员价 ¥{{products[4].memberPrice}}</view>
-      </view>
+
+    <view class="search-bar home-search" bindtap="goSearch">
+      <text class="search-icon">⌕</text>
+      <text>搜索商品、通用名、品牌或健康需求</text>
     </view>
   </view>
-</view>
 
-<view class="section">
-  <view class="section-head"><view><view class="section-title">更多好物</view><view class="section-sub">精选而非无限滚动</view></view></view>
-  <view class="product-grid">
-    <view class="product-card" wx:for="{{products}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
-      <view class="product-card__image">
+  <swiper class="hero-swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,.45)" indicator-active-color="#ffffff" autoplay interval="5200" circular>
+    <swiper-item wx:for="{{activities}}" wx:key="id">
+      <view class="hero-slide" bindtap="goActivity" data-id="{{item.id}}">
         <image src="{{item.image}}" mode="aspectFill"></image>
-        <view class="product-card__badge">{{item.otc}}</view>
+        <view class="hero-shade"></view>
+        <view class="hero-copy">
+          <view class="hero-kicker">SEASONAL EDIT</view>
+          <view class="hero-title">{{item.title}}</view>
+          <view class="hero-sub">{{item.subtitle}}</view>
+          <view class="hero-link">{{item.cta}} →</view>
+        </view>
       </view>
-      <view class="product-card__name">{{item.name}}</view>
-      <view class="product-card__meta">{{item.brand}} · {{item.spec}}</view>
-      <view class="product-card__price">
-        <view><text class="price-small">¥{{item.price}}</text><view class="member-price">会员 ¥{{item.memberPrice}}</view></view>
-        <view class="product-card__bag">＋</view>
+    </swiper-item>
+  </swiper>
+
+  <view class="service-proof">
+    <view class="proof-item"><text class="proof-title">正品保障</text><text class="proof-sub">资质信息可查</text></view>
+    <view class="proof-item" bindtap="goPharmacist"><text class="proof-title">专业药师</text><text class="proof-sub">购前用药咨询</text></view>
+    <view class="proof-item"><text class="proof-title">隐私服务</text><text class="proof-sub">敏感信息克制展示</text></view>
+  </view>
+
+  <view class="section home-section">
+    <view class="section-head">
+      <view>
+        <view class="section-title">快捷服务</view>
+        <view class="section-sub">从健康需求开始，而不是从 SKU 开始</view>
+      </view>
+      <text class="link" bindtap="goCategory">全部分类</text>
+    </view>
+    <scroll-view class="category-scroll premium-category-scroll" scroll-x enable-flex="{{true}}" show-scrollbar="{{false}}">
+      <view class="category-item premium-category" wx:for="{{categories}}" wx:key="id" bindtap="goCategory">
+        <view class="category-visual premium-category-visual">{{item.short}}</view>
+        <view class="category-name">{{item.name}}</view>
+        <view class="category-desc">{{item.desc}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section home-section service-entry-section">
+    <view class="service-entry" bindtap="goPharmacist">
+      <view>
+        <view class="service-kicker">PHARMACIST SERVICE</view>
+        <view class="service-title">不确定买什么，先问药师</view>
+        <view class="service-desc">商品、用药注意事项与购药流程支持，不替代疾病诊断。</view>
+      </view>
+      <view class="service-arrow">→</view>
+    </view>
+  </view>
+
+  <view class="section home-section">
+    <view class="member-panel premium-member" bindtap="goMember">
+      <view class="member-topline">
+        <view class="member-level">GOLD MEMBER · {{member.level}}</view>
+        <view class="member-link">查看权益 →</view>
+      </view>
+      <view class="member-title">把健康消费变成长期会员服务</view>
+      <view class="member-stats">
+        <view class="member-stat"><text class="strong">{{member.points}}</text><text>可用积分</text></view>
+        <view class="member-stat"><text class="strong">3</text><text>专属权益</text></view>
+        <view class="member-stat"><text class="strong">{{member.coupons}}</text><text>优惠券</text></view>
       </view>
     </view>
   </view>
-</view>
 
-<view class="section">
-  <view class="section-head"><view><view class="section-title">按场景选</view><view class="section-sub">场景 → 健康需求 → 商品解决方案</view></view></view>
-  <view class="scene-list">
-    <view class="scene" wx:for="{{scenes}}" wx:key="id" bindtap="goCategory">
-      <view class="scene-title">{{item.title}}</view>
-      <view class="scene-desc">{{item.desc}}</view>
+  <view class="section home-section">
+    <view class="section-head">
+      <view>
+        <view class="section-title">本周精选</view>
+        <view class="section-sub">少而精的编辑式陈列，减少选择压力</view>
+      </view>
+    </view>
+    <view class="editorial-feature premium-editorial">
+      <view class="editorial-main" bindtap="goProduct" data-id="{{products[0].id}}">
+        <image src="{{products[0].image}}" mode="aspectFill"></image>
+        <view class="editorial-copy">
+          <view class="editorial-kicker">EDITOR'S PICK</view>
+          <view class="editorial-name">{{products[0].name}}</view>
+          <view class="editorial-meta">{{products[0].brand}} · {{products[0].spec}}</view>
+          <view class="editorial-price">会员 ¥{{products[0].memberPrice}}</view>
+        </view>
+      </view>
+      <view class="editorial-side">
+        <view class="editorial-tile" bindtap="goProduct" data-id="{{products[3].id}}">
+          <view class="editorial-kicker">HOME CARE</view>
+          <view class="editorial-tile-name">{{products[3].name}}</view>
+          <view class="caption">{{products[3].spec}}</view>
+          <view class="tile-link">查看商品 →</view>
+        </view>
+        <view class="editorial-tile editorial-tile-alt" bindtap="goProduct" data-id="{{products[4].id}}">
+          <view class="editorial-kicker">MEMBER SELECT</view>
+          <view class="editorial-tile-name">{{products[4].name}}</view>
+          <view class="caption">会员 ¥{{products[4].memberPrice}}</view>
+          <view class="tile-link">查看商品 →</view>
+        </view>
+      </view>
     </view>
   </view>
-</view>
 
-<view class="section">
-  <view class="section-head"><view><view class="section-title">品牌专区</view><view class="section-sub">以品牌信任和产品体系组织内容</view></view></view>
-  <scroll-view class="brand-strip" scroll-x enable-flex="{{true}}" show-scrollbar="{{false}}">
-    <view class="brand-block" wx:for="{{brands}}" wx:key="id" bindtap="goBrand" data-id="{{item.id}}">
-      <view class="brand-logo">{{item.name}}</view>
-      <view class="brand-copy">{{item.desc}}</view>
-      <view class="link" style="margin-top:18rpx">进入品牌馆 →</view>
+  <view class="section home-section">
+    <view class="section-head">
+      <view>
+        <view class="section-title">精选好物</view>
+        <view class="section-sub">首页控制数量，更多商品通过搜索与分类发现</view>
+      </view>
     </view>
-  </scroll-view>
-</view>
+    <view class="product-grid premium-product-grid">
+      <view class="product-card premium-product-card" wx:for="{{products}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
+        <view class="product-card__image premium-product-image">
+          <image src="{{item.image}}" mode="aspectFill"></image>
+          <view class="product-card__badge">{{item.otc}}</view>
+        </view>
+        <view class="product-card__name">{{item.name}}</view>
+        <view class="product-card__meta">{{item.brand}} · {{item.spec}}</view>
+        <view class="stock-line">{{item.stock>0?'现货可售':'库存需确认'}}</view>
+        <view class="product-card__price">
+          <view>
+            <text class="price-small">¥{{item.price}}</text>
+            <view class="member-price">会员 ¥{{item.memberPrice}}</view>
+          </view>
+          <button class="quick-bag" catchtap="quickAdd" data-id="{{item.id}}">＋</button>
+        </view>
+      </view>
+    </view>
+  </view>
 
-<view class="section safe-bottom">
-  <view class="section-head"><view><view class="section-title">健康内容</view><view class="section-sub">专业信息服务于决策，不替代诊断</view></view><text class="link" bindtap="goHealth">查看更多</text></view>
-  <view class="article-list">
-    <view class="article" wx:for="{{articles}}" wx:key="id" bindtap="goHealth">
-      <view><view class="article-title">{{item.title}}</view><view class="article-meta">{{item.meta}}</view></view>
-      <view class="article-thumb image-placeholder">健康内容</view>
+  <view class="section home-section">
+    <view class="section-head"><view><view class="section-title">按场景选</view><view class="section-sub">场景 → 健康需求 → 商品解决方案</view></view></view>
+    <view class="scene-list premium-scenes">
+      <view class="scene premium-scene" wx:for="{{scenes}}" wx:key="id" bindtap="goCategory">
+        <view class="scene-index">0{{index+1}}</view>
+        <view class="scene-title">{{item.title}}</view>
+        <view class="scene-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section home-section">
+    <view class="section-head"><view><view class="section-title">品牌专区</view><view class="section-sub">以品牌信任和产品体系组织内容</view></view></view>
+    <scroll-view class="brand-strip premium-brand-strip" scroll-x enable-flex="{{true}}" show-scrollbar="{{false}}">
+      <view class="brand-block premium-brand" wx:for="{{brands}}" wx:key="id" bindtap="goBrand" data-id="{{item.id}}">
+        <view class="brand-logo">{{item.name}}</view>
+        <view class="brand-copy">{{item.desc}}</view>
+        <view class="link brand-link">进入品牌馆 →</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section home-section safe-bottom">
+    <view class="section-head">
+      <view><view class="section-title">健康内容</view><view class="section-sub">专业信息服务于决策，不替代诊断</view></view>
+      <text class="link" bindtap="goHealth">查看更多</text>
+    </view>
+    <view class="article-list premium-article-list">
+      <view class="article premium-article" wx:for="{{articles}}" wx:key="id" bindtap="goHealth">
+        <view>
+          <view class="article-category">{{item.category}}</view>
+          <view class="article-title">{{item.title}}</view>
+          <view class="article-meta">{{item.meta}}</view>
+        </view>
+        <view class="article-arrow">→</view>
+      </view>
     </view>
   </view>
 </view>
