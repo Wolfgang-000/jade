@@ -25,7 +25,7 @@ Page({
   toggleFav(){
     const yes=store.toggleFavorite(this.data.product.id);
     this.setData({isFav:yes});
-    wx.showToast({title:yes?'已收藏':'已取消收藏',icon:'none'});
+    wx.showToast({title:yes?'已加入常购':'已移出常购',icon:'none'});
   },
   selectSpec(){
     const p=this.data.product;
@@ -35,37 +35,46 @@ Page({
       success:r=>this.setData({currentSpec:list[r.tapIndex]})
     });
   },
+  canPurchase(){
+    const p=this.data.product;
+    const customer=getApp().globalData.customer||{};
+    if(p.regulatoryMode==='rx'&&!customer.qualified){
+      wx.showModal({
+        title:'需要采购资质',
+        content:'当前账号未通过对应经营资质校验，请联系客服处理后再采购。',
+        confirmText:'联系客服',
+        success:r=>{if(r.confirm)this.service()}
+      });
+      return false;
+    }
+    if(p.stock<=0){
+      wx.showToast({title:'当前库存需确认',icon:'none'});
+      return false;
+    }
+    return true;
+  },
   addCart(){
     const p=this.data.product;
-    if(p.regulatoryMode==='rx'){
-      wx.navigateTo({url:'/pages/pharmacist/index?productId='+p.id});
-      return;
-    }
-    if(p.stock<=0){wx.showToast({title:'当前库存需确认',icon:'none'});return}
-    store.addCart(p,1,this.data.currentSpec||p.spec);
+    if(!this.canPurchase())return;
+    store.addCart(p,p.moq||1,this.data.currentSpec||p.spec);
     this.setData({cartCount:store.getCartCount()});
-    wx.showToast({title:'已加入购物袋',icon:'success'});
+    wx.showToast({title:'已加入采购单',icon:'success'});
   },
   buyNow(){
     const p=this.data.product;
-    if(p.regulatoryMode==='rx'){
-      wx.navigateTo({url:'/pages/pharmacist/index?productId='+p.id});
-      return;
-    }
-    if(p.stock<=0){wx.showToast({title:'当前库存需确认',icon:'none'});return}
-    store.addCart(p,1,this.data.currentSpec||p.spec);
+    if(!this.canPurchase())return;
+    store.addCart(p,p.moq||1,this.data.currentSpec||p.spec);
     wx.switchTab({url:'/pages/cart/index'});
   },
   goCart(){wx.switchTab({url:'/pages/cart/index'})},
-  pharmacist(){wx.navigateTo({url:'/pages/pharmacist/index?productId='+this.data.product.id})},
   instructions(){wx.navigateTo({url:'/pages/instructions/index?id='+this.data.product.id})},
   service(){wx.navigateTo({url:'/pages/service/index'})},
   onShareAppMessage(){
     const p=this.data.product||{};
-    return {title:p.name||'澄和健康',path:'/pages/product-detail/index?id='+(p.id||'p1'),imageUrl:p.image||''};
+    return {title:(p.name||'澄和健康')+' · B端采购',path:'/pages/product-detail/index?id='+(p.id||'p1'),imageUrl:p.image||''};
   },
   onShareTimeline(){
     const p=this.data.product||{};
-    return {title:p.name||'澄和健康',query:'id='+(p.id||'p1'),imageUrl:p.image||''};
+    return {title:(p.name||'澄和健康')+' · B端采购',query:'id='+(p.id||'p1'),imageUrl:p.image||''};
   }
 });
