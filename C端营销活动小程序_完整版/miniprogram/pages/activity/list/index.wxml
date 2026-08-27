@@ -1,4 +1,4 @@
-<view class="section"><view class="eyebrow">CAMPAIGNS</view><view class="h2" style="margin-top:10rpx">活动中心</view><view class="section-sub">品牌活动、会员日、新品和季节专题统一管理，避免传统促销噪音。</view></view>
+<view class="section"><view class="eyebrow">PROCUREMENT CAMPAIGNS</view><view class="h2" style="margin-top:10rpx">采购活动</view><view class="section-sub">备货、新品、重点品种与阶段性采购政策集中展示，避免无效促销信息干扰。</view></view>
 <view class="section section--tight safe-bottom">
   <view class="activity-list-card" wx:for="{{activities}}" wx:key="id" bindtap="detail" data-id="{{item.id}}">
     <image class="activity-list-img" src="{{item.image}}" mode="aspectFill"></image>
