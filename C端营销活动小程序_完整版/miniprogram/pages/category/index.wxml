@@ -11,8 +11,5 @@
         <text class="strong">{{item}}</text><text>查看精选商品 →</text>
       </view>
     </view>
-    <view class="divider"></view>
-    <view class="h3">筛选维度</view>
-    <view class="chip-row" style="margin-top:18rpx"><text class="chip">品牌</text><text class="chip">价格</text><text class="chip">剂型</text><text class="chip">规格</text><text class="chip">适用人群</text><text class="chip">OTC属性</text></view>
   </scroll-view>
 </view>
