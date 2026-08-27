@@ -34,15 +34,6 @@ const products = [
     sell:'喷雾剂型信息清晰，适合场景化陈列。', tags:['随身健康'], specs:['20ml']
   },
   {
-    id:'p4', name:'电子体温计', generic:'电子体温计', brand:'康护', maker:'示例器械企业',
-    spec:'基础款', category:'医疗器械', otc:'器械', regulatoryMode:'device',
-    price:69.0, memberPrice:62.0, oldPrice:79.0, stock:40, sales:221,
-    image:'https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=900&q=80',
-    gallery:['https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=1200&q=80'],
-    approval:'医疗器械注册信息示例', storage:'常温干燥保存', expiry:'按器械说明书',
-    sell:'家庭健康监测常备设备。', tags:['家庭常备'], specs:['基础款','柔性探头款']
-  },
-  {
     id:'p5', name:'维生素C营养补充片', generic:'维生素C', brand:'Wellness Lab', maker:'示例营养企业',
     spec:'60片', category:'营养健康', otc:'营养', regulatoryMode:'wellness',
     price:88.0, memberPrice:79.0, oldPrice:99.0, stock:210, sales:735,
@@ -74,7 +65,7 @@ const products = [
 const categories = [
   {id:'c1', name:'家庭常备', desc:'日常健康管理', subs:['感冒发热','咽喉用药','肠胃健康','创伤护理']},
   {id:'c2', name:'儿童健康', desc:'家庭儿童照护', subs:['儿童感冒','儿童退热','儿童肠胃','护理用品']},
-  {id:'c3', name:'女性健康', desc:'日常与周期关怀', subs:['营养补充','个人护理','女性专区','家庭检测']},
+  {id:'c3', name:'女性健康', desc:'日常与周期关怀', subs:['营养补充','个人护理','女性专区','日常护理']},
   {id:'c4', name:'慢病管理', desc:'长期健康管理', subs:['血压管理','血糖管理','心脑血管','用药服务']},
   {id:'c5', name:'营养健康', desc:'日常营养支持', subs:['维生素矿物质','蛋白营养','中老年营养','运动营养']},
   {id:'c7', name:'个人护理', desc:'温和日常护理', subs:['口腔护理','皮肤护理','女性护理','消毒护理']},
@@ -85,7 +76,7 @@ const scenes = [
   {id:'s1',title:'家庭常备',desc:'把高频健康需求一次整理好'},
   {id:'s2',title:'换季健康',desc:'应对温差、咽喉与鼻部不适'},
   {id:'s3',title:'出差旅行',desc:'轻量、便携、场景明确'},
-  {id:'s4',title:'中老年健康',desc:'长期监测与日常补充'}
+  {id:'s4',title:'中老年健康',desc:'长期健康管理与日常补充'}
 ];
 
 const brands = [
@@ -97,13 +88,13 @@ const brands = [
 const activities = [
   {id:'a1',title:'秋冬健康守护计划',subtitle:'从家庭常备到季节护理，建立更从容的健康准备',cta:'查看专区',image:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=80',status:'live'},
   {id:'a2',title:'会员健康日',subtitle:'会员专享价与健康服务权益',cta:'会员专享',image:'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1400&q=80',status:'live'},
-  {id:'a3',title:'家庭健康焕新',subtitle:'测量、护理与常备物品精选',cta:'立即探索',image:'https://images.unsplash.com/photo-1580281657527-47f249e8f4df?auto=format&fit=crop&w=1400&q=80',status:'upcoming'}
+  {id:'a3',title:'家庭健康焕新',subtitle:'家庭常备、日常护理与营养健康精选',cta:'立即探索',image:'https://images.unsplash.com/photo-1580281657527-47f249e8f4df?auto=format&fit=crop&w=1400&q=80',status:'upcoming'}
 ];
 
 const articles = [
   {id:'h1',title:'换季时，家庭常备健康用品如何整理？',meta:'药师审核 · 6分钟阅读',category:'季节健康'},
-  {id:'h2',title:'OTC、处方药与医疗器械：购买前先看懂这些标识',meta:'用药知识 · 8分钟阅读',category:'用药知识'},
-  {id:'h3',title:'家庭血压监测：从设备选择到记录习惯',meta:'健康管理 · 5分钟阅读',category:'慢病管理'}
+  {id:'h2',title:'OTC与处方药：购买前先看懂这些标识',meta:'用药知识 · 8分钟阅读',category:'用药知识'},
+  {id:'h3',title:'慢病日常管理：如何建立稳定的用药与记录习惯',meta:'健康管理 · 5分钟阅读',category:'慢病管理'}
 ];
 
 const orders = [
