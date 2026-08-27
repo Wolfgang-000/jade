@@ -146,41 +146,13 @@
     </view>
   </view>
 
-  <view class="section home-section">
+  <view class="section home-section safe-bottom">
     <view class="section-head"><view><view class="section-title">按场景选</view><view class="section-sub">场景 → 健康需求 → 商品解决方案</view></view></view>
     <view class="scene-list premium-scenes">
       <view class="scene premium-scene" wx:for="{{scenes}}" wx:key="id" bindtap="goCategory">
         <view class="scene-index">0{{index+1}}</view>
         <view class="scene-title">{{item.title}}</view>
         <view class="scene-desc">{{item.desc}}</view>
-      </view>
-    </view>
-  </view>
-
-  <view class="section home-section">
-    <view class="section-head"><view><view class="section-title">品牌专区</view><view class="section-sub">以品牌信任和产品体系组织内容</view></view></view>
-    <scroll-view class="brand-strip premium-brand-strip" scroll-x enable-flex="{{true}}" show-scrollbar="{{false}}">
-      <view class="brand-block premium-brand" wx:for="{{brands}}" wx:key="id" bindtap="goBrand" data-id="{{item.id}}">
-        <view class="brand-logo">{{item.name}}</view>
-        <view class="brand-copy">{{item.desc}}</view>
-        <view class="link brand-link">进入品牌馆 →</view>
-      </view>
-    </scroll-view>
-  </view>
-
-  <view class="section home-section safe-bottom">
-    <view class="section-head">
-      <view><view class="section-title">健康内容</view><view class="section-sub">专业信息服务于决策，不替代诊断</view></view>
-      <text class="link" bindtap="goHealth">查看更多</text>
-    </view>
-    <view class="article-list premium-article-list">
-      <view class="article premium-article" wx:for="{{articles}}" wx:key="id" bindtap="goHealth">
-        <view>
-          <view class="article-category">{{item.category}}</view>
-          <view class="article-title">{{item.title}}</view>
-          <view class="article-meta">{{item.meta}}</view>
-        </view>
-        <view class="article-arrow">→</view>
       </view>
     </view>
   </view>
