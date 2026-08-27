@@ -1,10 +1,10 @@
 <view class="section">
-  <view class="eyebrow">ORDER PAYMENT</view><view class="h2" style="margin-top:10rpx">支付订单</view>
+  <view class="eyebrow">ORDER SETTLEMENT</view><view class="h2" style="margin-top:10rpx">订单结算</view>
   <view style="font-size:64rpx;font-weight:600;margin-top:34rpx">¥{{amount}}</view>
-  <view class="section-sub">原型使用模拟支付。生产环境接入微信支付前，应以服务端订单金额为准。</view>
+  <view class="section-sub">当前原型使用在线支付模拟。生产环境可按客户类型接入微信支付、对公转账或账期结算，并以服务端最终订单金额为准。</view>
 </view>
 <view class="section">
-  <view class="h3" style="margin-bottom:18rpx">支付方式</view>
-  <view class="payment-option" bindtap="choose" data-method="wechat"><view><view class="row-title">微信支付</view><view class="caption">推荐</view></view><view class="radio {{method==='wechat'?'active':''}}"></view></view>
+  <view class="h3" style="margin-bottom:18rpx">结算方式</view>
+  <view class="payment-option" bindtap="choose" data-method="wechat"><view><view class="row-title">在线支付</view><view class="caption">原型演示</view></view><view class="radio {{method==='wechat'?'active':''}}"></view></view>
 </view>
-<view class="container" style="padding-top:40rpx"><button class="btn-primary" loading="{{paying}}" bindtap="pay">确认支付 ¥{{amount}}</button></view>
+<view class="container" style="padding-top:40rpx"><button class="btn-primary" loading="{{paying}}" bindtap="pay">确认提交 ¥{{amount}}</button></view>
