@@ -1,4 +1,3 @@
-
 function getCart(){ return wx.getStorageSync('cart') || []; }
 function setCart(cart){ wx.setStorageSync('cart', cart); return cart; }
 function addCart(product, qty=1, spec=''){
@@ -21,8 +20,12 @@ function toggleCart(key){
   if(hit) hit.checked=!hit.checked;
   return setCart(cart);
 }
+function setAllChecked(checked){
+  return setCart(getCart().map(x=>({...x,checked:!!checked})));
+}
 function removeCart(key){ return setCart(getCart().filter(x=>x.key!==key)); }
 function clearChecked(){ return setCart(getCart().filter(x=>!x.checked)); }
+function getCartCount(){ return getCart().reduce((sum,x)=>sum+(x.qty||0),0); }
 function getFavorites(){return wx.getStorageSync('favorites')||[]}
 function toggleFavorite(id){
   const list=getFavorites(); const i=list.indexOf(id);
@@ -34,4 +37,4 @@ function addHistory(id){
   list=[id,...list.filter(x=>x!==id)].slice(0,30);
   wx.setStorageSync('history',list);
 }
-module.exports={getCart,addCart,updateQty,toggleCart,removeCart,clearChecked,getFavorites,toggleFavorite,addHistory};
+module.exports={getCart,addCart,updateQty,toggleCart,setAllChecked,removeCart,clearChecked,getCartCount,getFavorites,toggleFavorite,addHistory};
