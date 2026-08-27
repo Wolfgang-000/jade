@@ -1,4 +1,4 @@
-<view class="home-top"><view class="search-bar" bindtap="goSearch"><text>⌕</text><text>搜索商品、通用名、品牌</text></view></view>
+<view class="home-top"><view class="search-bar" bindtap="goSearch"><text>⌕</text><text>搜索商品、通用名、厂家或批准文号</text></view></view>
 <view class="category-page">
   <scroll-view class="category-left" scroll-y>
     <view class="category-left-item {{active===index?'active':''}}" wx:for="{{categories}}" wx:key="id" data-i="{{index}}" bindtap="choose">{{item.name}}</view>
@@ -8,7 +8,7 @@
     <view class="section-sub" style="margin-bottom:22rpx">{{categories[active].desc}}</view>
     <view class="subcat-grid">
       <view class="subcat-item" wx:for="{{categories[active].subs}}" wx:key="*this" bindtap="goList" data-name="{{item}}">
-        <text class="strong">{{item}}</text><text>查看精选商品 →</text>
+        <text class="strong">{{item}}</text><text>查看采购商品 →</text>
       </view>
     </view>
   </scroll-view>
