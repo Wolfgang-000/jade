@@ -3,10 +3,9 @@
 </view>
 <view class="filter-bar">
   <text class="filter-item {{sort==='综合'?'active':''}}" bindtap="setSort" data-sort="综合">综合</text>
-  <text class="filter-item {{sort==='销量'?'active':''}}" bindtap="setSort" data-sort="销量">销量</text>
+  <text class="filter-item {{sort==='销量'?'active':''}}" bindtap="setSort" data-sort="销量">动销</text>
   <text class="filter-item {{sort==='新品'?'active':''}}" bindtap="setSort" data-sort="新品">新品</text>
-  <text class="filter-item {{sort==='价格'?'active':''}}" bindtap="setSort" data-sort="价格">价格</text>
-  <text class="filter-item" bindtap="openFilter">筛选</text>
+  <text class="filter-item {{sort==='价格'?'active':''}}" bindtap="setSort" data-sort="价格">采购价</text>
 </view>
 <view wx:if="{{list.length}}" class="product-list">
   <view class="product-row" wx:for="{{list}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
@@ -14,9 +13,9 @@
     <view class="product-row__content">
       <view class="product-row__name">{{item.name}}</view>
       <view class="product-row__meta">{{item.brand}} · {{item.spec}} · {{item.maker}}</view>
-      <view class="product-row__tags"><text class="tag">{{item.otc}}</text><text class="tag tag-brand" wx:if="{{item.memberPrice}}">会员价</text></view>
-      <view class="product-row__bottom"><text class="price-small" wx:if="{{item.price}}">¥{{item.price}}</text><view class="member-price" wx:if="{{item.memberPrice}}">会员 ¥{{item.memberPrice}}</view></view>
+      <view class="product-row__tags"><text class="tag">{{item.otc}}</text><text class="tag tag-brand">{{item.moq}}{{item.unit}}起订</text></view>
+      <view class="product-row__bottom"><text class="price-small">采购价 ¥{{item.price}}</text><view class="member-price">库存 {{item.stock}}{{item.unit}}</view></view>
     </view>
   </view>
 </view>
-<view wx:else class="empty-state"><text class="strong">没有找到匹配商品</text><text>可以尝试通用名、品牌或更宽泛的健康需求关键词。</text></view>
+<view wx:else class="empty-state"><text class="strong">没有找到匹配商品</text><text>可以尝试商品名、通用名、品牌、厂家或批准文号。</text></view>
