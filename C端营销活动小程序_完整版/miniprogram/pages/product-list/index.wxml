@@ -1,10 +1,12 @@
-<view class="surface" style="padding:28rpx 32rpx 18rpx"><view class="h2">{{category}}</view><view class="section-sub">优先展示清晰规格、会员价与合规属性</view></view>
+<view class="surface" style="padding:28rpx 32rpx 18rpx">
+  <view class="h2">{{category}}</view>
+  <view class="section-sub">优先展示规格、采购价、起订量、库存与资质属性</view>
+</view>
 <view class="filter-bar">
   <text class="filter-item {{sort==='综合'?'active':''}}" data-sort="综合" bindtap="setSort">综合</text>
-  <text class="filter-item" data-sort="销量" bindtap="setSort">销量</text>
+  <text class="filter-item" data-sort="销量" bindtap="setSort">动销</text>
   <text class="filter-item" data-sort="新品" bindtap="setSort">新品</text>
-  <text class="filter-item" data-sort="价格" bindtap="setSort">价格</text>
-  <text class="filter-item" bindtap="filter">筛选</text>
+  <text class="filter-item" data-sort="价格" bindtap="setSort">采购价</text>
 </view>
 <view class="product-list">
   <view class="product-row" wx:for="{{list}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
@@ -12,9 +14,8 @@
     <view class="product-row__content">
       <view class="product-row__name">{{item.name}}</view>
       <view class="product-row__meta">{{item.brand}} · {{item.spec}}</view>
-      <view class="product-row__tags"><text class="tag">{{item.otc}}</text><text class="tag tag-brand">{{item.category}}</text></view>
-      <view class="product-row__bottom" wx:if="{{item.price}}"><text class="price-small">¥{{item.price}}</text><view class="member-price">会员 ¥{{item.memberPrice}}</view></view>
-      <view class="product-row__bottom" wx:else><text class="tag tag-warning">受监管商品流程</text></view>
+      <view class="product-row__tags"><text class="tag">{{item.otc}}</text><text class="tag tag-brand">{{item.moq}}{{item.unit}}起订</text></view>
+      <view class="product-row__bottom"><text class="price-small">采购价 ¥{{item.price}}</text><view class="member-price">库存 {{item.stock}}{{item.unit}}</view></view>
     </view>
   </view>
 </view>
