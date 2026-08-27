@@ -29,7 +29,7 @@
     <view><view class="section-title">快捷服务</view><view class="section-sub">从真实健康需求开始，而不是从SKU开始</view></view>
     <text class="link" bindtap="goCategory">全部分类</text>
   </view>
-  <scroll-view class="category-scroll" scroll-x show-scrollbar="{{false}}">
+  <scroll-view class="category-scroll" scroll-x enable-flex="{{true}}" show-scrollbar="{{false}}">
     <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="goCategory">
       <view class="category-visual">{{item.short}}</view>
       <view class="category-name">{{item.name}}</view>
@@ -108,7 +108,7 @@
 
 <view class="section">
   <view class="section-head"><view><view class="section-title">品牌专区</view><view class="section-sub">以品牌信任和产品体系组织内容</view></view></view>
-  <scroll-view class="brand-strip" scroll-x show-scrollbar="{{false}}">
+  <scroll-view class="brand-strip" scroll-x enable-flex="{{true}}" show-scrollbar="{{false}}">
     <view class="brand-block" wx:for="{{brands}}" wx:key="id" bindtap="goBrand" data-id="{{item.id}}">
       <view class="brand-logo">{{item.name}}</view>
       <view class="brand-copy">{{item.desc}}</view>
