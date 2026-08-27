@@ -1,35 +1,16 @@
-<view class="section">
-  <view class="eyebrow">CUSTOMER SERVICE</view>
-  <view class="h2" style="margin-top:10rpx">采购问题统一从客服入口处理</view>
-  <view class="section-sub">报价、找货、订单、物流、资质与售后集中在一个服务入口，减少B端客户判断成本。</view>
-</view>
+<view class="service-page">
+  <view class="service-head">
+    <view class="eyebrow">CUSTOMER SERVICE</view>
+    <view class="service-title">在线客服</view>
+    <view class="service-desc">采购、商品、订单、物流或售后问题，可直接与客服沟通。</view>
+  </view>
 
-<view class="section">
-  <view class="service-grid">
-    <view class="service-card" bindtap="contact">
-      <text class="strong">在线客服</text>
-      <text>日常采购、商品信息、订单状态与基础业务咨询</text>
-      <view class="link" style="margin-top:18rpx">立即咨询 →</view>
+  <view class="service-chat">
+    <view class="chat-icon">客</view>
+    <view class="chat-copy">
+      <view class="chat-title">联系客服</view>
+      <view class="chat-sub">进入在线聊天，由客服协助处理采购相关问题。</view>
     </view>
-    <view class="service-card" bindtap="quote">
-      <text class="strong">大单询价 / 缺货找货</text>
-      <text>批量采购、专项报价、缺货品种与长期采购需求</text>
-      <view class="link" style="margin-top:18rpx">提交需求 →</view>
-    </view>
-    <view class="service-card" bindtap="contact">
-      <text class="strong">订单与物流</text>
-      <text>发货进度、物流状态、到货时间与异常签收</text>
-      <view class="link" style="margin-top:18rpx">联系处理 →</view>
-    </view>
-    <view class="service-card" bindtap="afterSales">
-      <text class="strong">售后服务</text>
-      <text>破损、少货、退换、批号效期与其他订单异常</text>
-      <view class="link" style="margin-top:18rpx">查看售后 →</view>
-    </view>
-    <view class="service-card" bindtap="qualification">
-      <text class="strong">资质与账户协助</text>
-      <text>客户资质、经营范围、发票资料与采购账户问题</text>
-      <view class="link" style="margin-top:18rpx">联系客服 →</view>
-    </view>
+    <button class="chat-button" open-type="contact">开始聊天</button>
   </view>
 </view>
