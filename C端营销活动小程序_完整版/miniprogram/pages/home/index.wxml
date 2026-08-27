@@ -1,13 +1,15 @@
 <view class="home-shell">
   <view class="home-top">
     <view class="brand-row">
-      <view>
-        <view class="brand-kicker">PHARMACY & WELLNESS</view>
+      <view class="brand-lockup">
+        <view class="brand-kicker">PHARMACY · WELLNESS</view>
         <view class="brand-word">澄和健康</view>
       </view>
       <view class="top-actions">
         <button class="top-action" bindtap="goMember">会员</button>
+        <view class="action-divider"></view>
         <button class="top-action" bindtap="goPharmacist">药师</button>
+        <view class="action-divider"></view>
         <button class="bag-action" bindtap="goCart">
           <text>购物袋</text>
           <text class="bag-count" wx:if="{{cartCount>0}}">{{cartCount}}</text>
