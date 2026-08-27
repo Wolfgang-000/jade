@@ -1,4 +1,4 @@
-const {products,categories,scenes,brands,activities,articles}=require('../../data/mock');
+const {products,categories,scenes,activities}=require('../../data/mock');
 const store=require('../../utils/store');
 
 Page({
@@ -6,9 +6,7 @@ Page({
     products:products.slice(0,6),
     categories:categories.map(x=>({...x,short:x.name.slice(0,2)})),
     scenes,
-    brands,
     activities,
-    articles,
     cartCount:0,
     member:{name:'林女士',level:'金卡会员',points:2860,coupons:2}
   },
@@ -26,8 +24,6 @@ Page({
   goActivityList(){wx.navigateTo({url:'/pages/activity/list/index'})},
   goCategory(){wx.switchTab({url:'/pages/category/index'})},
   goProduct(e){wx.navigateTo({url:'/pages/product-detail/index?id='+e.currentTarget.dataset.id})},
-  goBrand(e){wx.navigateTo({url:'/pages/brand/index?id='+e.currentTarget.dataset.id})},
-  goHealth(){wx.switchTab({url:'/pages/health/index'})},
   goCart(){wx.switchTab({url:'/pages/cart/index'})},
   quickAdd(e){
     const id=e.currentTarget.dataset.id;
