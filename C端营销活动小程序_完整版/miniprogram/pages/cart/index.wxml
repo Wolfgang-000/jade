@@ -1,25 +1,74 @@
-<view wx:if="{{items.length}}">
-  <view class="notice">会员优惠在结算页统一计算；库存、配送范围与活动有效性将在提交订单前再次校验。</view>
-  <view class="cart-item" wx:for="{{items}}" wx:key="key">
-    <view class="checkbox {{item.checked?'checked':''}}" bindtap="toggle" data-key="{{item.key}}"></view>
-    <image class="cart-img" src="{{item.product.image}}" mode="aspectFill"></image>
+<view class="cart-page" wx:if="{{items.length}}">
+  <view class="cart-head">
     <view>
-      <view class="cart-name">{{item.product.name}}</view>
-      <view class="cart-meta">{{item.spec}} · {{item.product.brand}}</view>
-      <view class="cart-price">¥{{item.product.memberPrice}}</view>
-      <view class="row-between" style="margin-top:16rpx">
-        <view class="quantity"><button class="qty-btn" bindtap="minus" data-key="{{item.key}}">−</button><text class="qty-value">{{item.qty}}</text><button class="qty-btn" bindtap="plus" data-key="{{item.key}}">＋</button></view>
-        <button class="btn-text faint" bindtap="remove" data-key="{{item.key}}">删除</button>
+      <view class="cart-title">购物袋</view>
+      <view class="cart-sub">库存、价格与购买限制将在提交订单前再次校验</view>
+    </view>
+    <button class="continue-btn" bindtap="goHome">继续逛逛</button>
+  </view>
+
+  <view class="member-note">
+    <view>
+      <view class="member-note-title">会员价格已自动应用</view>
+      <view class="member-note-sub">结算页还会统一计算优惠券、积分和其他可用权益。</view>
+    </view>
+    <view class="member-saving">已省 ¥{{discount}}</view>
+  </view>
+
+  <view class="cart-select-row">
+    <view class="select-all" bindtap="toggleAll">
+      <view class="checkbox {{allChecked?'checked':''}}"></view>
+      <text>全选</text>
+    </view>
+    <text class="cart-count-copy">共 {{items.length}} 种商品</text>
+  </view>
+
+  <view class="cart-list">
+    <view class="cart-item premium-cart-item" wx:for="{{items}}" wx:key="key">
+      <view class="checkbox {{item.checked?'checked':''}}" bindtap="toggle" data-key="{{item.key}}"></view>
+      <image class="cart-img" src="{{item.product.image}}" mode="aspectFill" bindtap="goProduct" data-id="{{item.product.id}}"></image>
+      <view class="cart-content">
+        <view class="cart-name" bindtap="goProduct" data-id="{{item.product.id}}">{{item.product.name}}</view>
+        <view class="cart-meta">{{item.product.brand}} · {{item.spec}}</view>
+        <view class="cart-status-row">
+          <text class="cart-stock" wx:if="{{item.product.stock>0}}">现货可售</text>
+          <text class="cart-stock cart-stock-warn" wx:else>库存需确认</text>
+          <text class="cart-member-tag">会员价</text>
+        </view>
+        <view class="cart-price-line">
+          <view>
+            <text class="cart-price">¥{{item.product.memberPrice}}</text>
+            <text class="cart-old">¥{{item.product.price}}</text>
+          </view>
+          <button class="remove-btn" bindtap="remove" data-key="{{item.key}}">移除</button>
+        </view>
+        <view class="quantity premium-quantity">
+          <button class="qty-btn" bindtap="minus" data-key="{{item.key}}">−</button>
+          <text class="qty-value">{{item.qty}}</text>
+          <button class="qty-btn" bindtap="plus" data-key="{{item.key}}">＋</button>
+        </view>
       </view>
     </view>
   </view>
+
+  <view class="cart-summary">
+    <view class="summary-line"><text>商品金额</text><text>¥{{amount}}</text></view>
+    <view class="summary-line saving"><text>会员优惠</text><text>-¥{{discount}}</text></view>
+    <view class="summary-line total"><text>预计实付</text><text>¥{{total}}</text></view>
+    <view class="summary-help">最终金额以结算页库存、优惠和配送校验结果为准。</view>
+  </view>
+
   <view class="bottom-space"></view>
-  <view class="cart-footer">
-    <text class="caption">已选 {{items.length}} 件</text>
-    <view class="total"><text class="strong">¥{{total}}</text><text>已优惠 ¥{{discount}}</text></view>
-    <button class="btn-primary" bindtap="checkout">去结算</button>
+  <view class="cart-footer premium-cart-footer">
+    <view class="footer-select" bindtap="toggleAll"><view class="checkbox {{allChecked?'checked':''}}"></view><text>全选</text></view>
+    <view class="footer-total"><text class="footer-label">合计</text><text class="footer-price">¥{{total}}</text><text class="footer-meta">已选 {{selectedCount}} 件</text></view>
+    <button class="btn-primary checkout-btn" bindtap="checkout" disabled="{{selectedCount===0}}">去结算</button>
   </view>
 </view>
-<view wx:else class="empty-state">
-  <text class="strong">购物袋还是空的</text><text>把真正需要的健康商品放进购物袋，结算前会再次校验库存、优惠和购买限制。</text><button class="btn-primary" style="margin:28rpx auto 0;width:280rpx" bindtap="goHome">去逛逛</button>
+
+<view wx:else class="empty-state premium-empty">
+  <view class="empty-kicker">SHOPPING BAG</view>
+  <text class="strong">购物袋还是空的</text>
+  <text>把真正需要的健康商品放进购物袋。结算前会再次校验库存、优惠和购买限制。</text>
+  <button class="btn-primary empty-button" bindtap="goHome">去逛逛</button>
 </view>
