@@ -3,8 +3,8 @@
 </scroll-view>
 <view style="padding-top:16rpx">
   <view class="order-card" wx:for="{{orders}}" wx:key="id" bindtap="detail" data-id="{{item.id}}">
-    <view class="order-head"><text class="caption">订单 {{item.id}}</text><text class="order-status">{{item.status}}</text></view>
-    <view class="order-product"><image class="order-img" src="{{item.product.image}}" mode="aspectFill"></image><view><view class="row-title">{{item.product.name}}</view><view class="caption">{{item.product.spec}} × {{item.qty}}</view><view class="price-small" style="margin-top:16rpx">¥{{item.amount}}</view></view></view>
-    <view class="order-actions"><button class="btn-secondary" style="height:64rpx" catchtap="rebuy" data-id="{{item.id}}">再次购买</button><button class="btn-primary" style="height:64rpx">查看订单</button></view>
+    <view class="order-head"><text class="caption">采购单 {{item.id}}</text><text class="order-status">{{item.status}}</text></view>
+    <view class="order-product"><image class="order-img" src="{{item.product.image}}" mode="aspectFill"></image><view><view class="row-title">{{item.product.name}}</view><view class="caption">{{item.product.spec}} × {{item.qty}}{{item.product.unit}}</view><view class="price-small" style="margin-top:16rpx">¥{{item.amount}}</view></view></view>
+    <view class="order-actions"><button class="btn-secondary" style="height:64rpx" catchtap="rebuy" data-id="{{item.id}}">再次采购</button><button class="btn-primary" style="height:64rpx">查看订单</button></view>
   </view>
 </view>
