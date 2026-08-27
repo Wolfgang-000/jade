@@ -1,25 +1,29 @@
-<view class="profile-head" bindtap="member">
-  <view class="avatar">林</view>
-  <view style="flex:1"><view class="h3">{{member.name}}</view><view class="caption">{{member.level}} · {{member.points}} 积分</view></view><text>›</text>
+<view class="profile-head">
+  <view class="avatar">采</view>
+  <view style="flex:1">
+    <view class="h3">{{customer.companyName}}</view>
+    <view class="caption">{{customer.contactName}} · {{customer.level}} · {{customer.qualification}}</view>
+  </view>
 </view>
+
 <view class="section section--tight">
-  <view class="section-head"><view class="section-title">我的订单</view><text class="link" bindtap="orders">全部订单</text></view>
+  <view class="section-head"><view class="section-title">采购订单</view><text class="link" bindtap="orders">全部订单</text></view>
   <view class="member-quick">
     <view class="member-quick-item" bindtap="orders"><text class="strong">0</text><text>待付款</text></view>
-    <view class="member-quick-item" bindtap="orders"><text class="strong">1</text><text>待发货</text></view>
-    <view class="member-quick-item" bindtap="orders"><text class="strong">1</text><text>待收货</text></view>
+    <view class="member-quick-item" bindtap="orders"><text class="strong">{{customer.pendingShip}}</text><text>待发货</text></view>
+    <view class="member-quick-item" bindtap="orders"><text class="strong">{{customer.pendingReceive}}</text><text>待收货</text></view>
     <view class="member-quick-item" bindtap="orders"><text class="strong">0</text><text>售后</text></view>
   </view>
 </view>
+
 <view class="section section--tight">
-  <view class="section-title" style="margin-bottom:18rpx">健康与购物服务</view>
+  <view class="section-title" style="margin-bottom:18rpx">采购与账户服务</view>
   <view class="menu">
-    <view class="menu-row" bindtap="nav" data-url="/pages/pharmacist/index"><text>药师咨询</text><text>›</text></view>
-    <view class="menu-row" bindtap="nav" data-url="/pages/favorites/index"><text>我的收藏</text><text>›</text></view>
+    <view class="menu-row" bindtap="nav" data-url="/pages/favorites/index"><text>常购清单</text><text>›</text></view>
     <view class="menu-row" bindtap="nav" data-url="/pages/history/index"><text>浏览记录</text><text>›</text></view>
-    <view class="menu-row" bindtap="nav" data-url="/pages/address/index"><text>地址管理</text><text>›</text></view>
-    <view class="menu-row" bindtap="nav" data-url="/pages/coupons/index"><text>优惠券</text><text>›</text></view>
-    <view class="menu-row" bindtap="nav" data-url="/pages/service/index"><text>联系客服</text><text>›</text></view>
+    <view class="menu-row" bindtap="nav" data-url="/pages/address/index"><text>收货地址</text><text>›</text></view>
+    <view class="menu-row" bindtap="nav" data-url="/pages/service/index"><text>客服咨询</text><text>›</text></view>
+    <view class="menu-row" bindtap="nav" data-url="/pages/after-sales/index"><text>售后服务</text><text>›</text></view>
     <view class="menu-row" bindtap="nav" data-url="/pages/settings/index"><text>设置与隐私</text><text>›</text></view>
   </view>
 </view>
