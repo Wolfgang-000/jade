@@ -1,12 +1,35 @@
 <view class="section">
-  <view class="eyebrow">SERVICE</view><view class="h2" style="margin-top:10rpx">专业服务，不把所有问题交给同一个入口</view>
-  <view class="section-sub">购物客服解决订单、物流和售后；药师服务处理用药与专业商品咨询。</view>
+  <view class="eyebrow">CUSTOMER SERVICE</view>
+  <view class="h2" style="margin-top:10rpx">采购问题统一从客服入口处理</view>
+  <view class="section-sub">报价、找货、订单、物流、资质与售后集中在一个服务入口，减少B端客户判断成本。</view>
 </view>
+
 <view class="section">
   <view class="service-grid">
-    <view class="service-card" bindtap="toast"><text class="strong">购物客服</text><text>订单、支付、物流、优惠和售后问题</text><view class="link" style="margin-top:18rpx">立即咨询 →</view></view>
-    <view class="service-card" bindtap="pharmacist"><text class="strong">药师咨询</text><text>商品信息、用药注意事项与专业服务边界</text><view class="link" style="margin-top:18rpx">咨询药师 →</view></view>
-    <view class="service-card" bindtap="afterSales"><text class="strong">售后服务</text><text>退换、异常、签收与服务政策</text><view class="link" style="margin-top:18rpx">查看售后 →</view></view>
-    <view class="service-card" bindtap="toast"><text class="strong">常见问题</text><text>配送、会员、发票、隐私和账户帮助</text><view class="link" style="margin-top:18rpx">查看帮助 →</view></view>
+    <view class="service-card" bindtap="contact">
+      <text class="strong">在线客服</text>
+      <text>日常采购、商品信息、订单状态与基础业务咨询</text>
+      <view class="link" style="margin-top:18rpx">立即咨询 →</view>
+    </view>
+    <view class="service-card" bindtap="quote">
+      <text class="strong">大单询价 / 缺货找货</text>
+      <text>批量采购、专项报价、缺货品种与长期采购需求</text>
+      <view class="link" style="margin-top:18rpx">提交需求 →</view>
+    </view>
+    <view class="service-card" bindtap="contact">
+      <text class="strong">订单与物流</text>
+      <text>发货进度、物流状态、到货时间与异常签收</text>
+      <view class="link" style="margin-top:18rpx">联系处理 →</view>
+    </view>
+    <view class="service-card" bindtap="afterSales">
+      <text class="strong">售后服务</text>
+      <text>破损、少货、退换、批号效期与其他订单异常</text>
+      <view class="link" style="margin-top:18rpx">查看售后 →</view>
+    </view>
+    <view class="service-card" bindtap="qualification">
+      <text class="strong">资质与账户协助</text>
+      <text>客户资质、经营范围、发票资料与采购账户问题</text>
+      <view class="link" style="margin-top:18rpx">联系客服 →</view>
+    </view>
   </view>
 </view>
