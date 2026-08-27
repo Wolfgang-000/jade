@@ -1,11 +1,11 @@
 <view class="container" style="padding-top:24rpx">
   <view class="search-bar">
-    <text>⌕</text><input auto-focus value="{{keyword}}" bindinput="onInput" confirm-type="search" bindconfirm="search" placeholder="商品名 / 通用名 / 品牌 / 健康需求"/>
+    <text>⌕</text><input auto-focus value="{{keyword}}" bindinput="onInput" confirm-type="search" bindconfirm="search" placeholder="商品名 / 通用名 / 厂家 / 批准文号"/>
   </view>
 
   <view wx:if="{{suggestions.length}}" class="surface" style="margin-top:16rpx">
     <view class="menu-row" wx:for="{{suggestions}}" wx:key="id" bindtap="search" data-q="{{item.name}}">
-      <view><view>{{item.name}}</view><view class="caption">{{item.generic}} · {{item.brand}}</view></view><text>›</text>
+      <view><view>{{item.name}}</view><view class="caption">{{item.generic}} · {{item.brand}} · {{item.spec}}</view></view><text>›</text>
     </view>
   </view>
 
@@ -15,9 +15,9 @@
   </view>
 
   <view class="section" style="padding-left:0;padding-right:0">
-    <view class="section-title">热门搜索</view>
+    <view class="section-title">常用采购</view>
     <view class="chip-row" style="margin-top:20rpx"><view class="chip" wx:for="{{hot}}" wx:key="*this" bindtap="search" data-q="{{item}}">{{item}}</view></view>
   </view>
 
-  <view class="notice" style="margin-top:30rpx">症状关键词仅用于商品发现与内容检索，不用于疾病诊断。</view>
+  <view class="notice" style="margin-top:30rpx">采购结果仅展示当前账号可见商品；正式版需结合客户资质、区域与供货范围校验。</view>
 </view>
