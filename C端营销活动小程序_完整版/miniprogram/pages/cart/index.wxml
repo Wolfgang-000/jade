@@ -1,18 +1,17 @@
 <view class="cart-page" wx:if="{{items.length}}">
   <view class="cart-head">
     <view>
-      <view class="cart-title">购物袋</view>
-      <view class="cart-sub">库存、价格与购买限制将在提交订单前再次校验</view>
+      <view class="cart-title">采购单</view>
+      <view class="cart-sub">库存、起订量、价格与采购资质将在提交前再次校验</view>
     </view>
-    <button class="continue-btn" bindtap="goHome">继续逛逛</button>
+    <button class="continue-btn" bindtap="goHome">继续选品</button>
   </view>
 
   <view class="member-note">
     <view>
-      <view class="member-note-title">会员价格已自动应用</view>
-      <view class="member-note-sub">结算页还会统一计算优惠券、积分和其他可用权益。</view>
+      <view class="member-note-title">当前显示B端采购价</view>
+      <view class="member-note-sub">正式订单以提交时库存、区域、数量及业务政策校验结果为准。</view>
     </view>
-    <view class="member-saving">已省 ¥{{discount}}</view>
   </view>
 
   <view class="cart-select-row">
@@ -31,14 +30,13 @@
         <view class="cart-name" bindtap="goProduct" data-id="{{item.product.id}}">{{item.product.name}}</view>
         <view class="cart-meta">{{item.product.brand}} · {{item.spec}}</view>
         <view class="cart-status-row">
-          <text class="cart-stock" wx:if="{{item.product.stock>0}}">现货可售</text>
+          <text class="cart-stock" wx:if="{{item.product.stock>0}}">库存 {{item.product.stock}}{{item.product.unit}}</text>
           <text class="cart-stock cart-stock-warn" wx:else>库存需确认</text>
-          <text class="cart-member-tag">会员价</text>
+          <text class="cart-member-tag">{{item.product.moq}}{{item.product.unit}}起订</text>
         </view>
         <view class="cart-price-line">
           <view>
-            <text class="cart-price">¥{{item.product.memberPrice}}</text>
-            <text class="cart-old">¥{{item.product.price}}</text>
+            <text class="cart-price">采购价 ¥{{item.product.price}}</text>
           </view>
           <button class="remove-btn" bindtap="remove" data-key="{{item.key}}">移除</button>
         </view>
@@ -52,23 +50,22 @@
   </view>
 
   <view class="cart-summary">
-    <view class="summary-line"><text>商品金额</text><text>¥{{amount}}</text></view>
-    <view class="summary-line saving"><text>会员优惠</text><text>-¥{{discount}}</text></view>
-    <view class="summary-line total"><text>预计实付</text><text>¥{{total}}</text></view>
-    <view class="summary-help">最终金额以结算页库存、优惠和配送校验结果为准。</view>
+    <view class="summary-line"><text>采购金额</text><text>¥{{amount}}</text></view>
+    <view class="summary-line total"><text>预计合计</text><text>¥{{total}}</text></view>
+    <view class="summary-help">运费、活动政策、发票与最终供货条件在确认采购单时统一校验。</view>
   </view>
 
   <view class="bottom-space"></view>
   <view class="cart-footer premium-cart-footer">
     <view class="footer-select" bindtap="toggleAll"><view class="checkbox {{allChecked?'checked':''}}"></view><text>全选</text></view>
     <view class="footer-total"><text class="footer-label">合计</text><text class="footer-price">¥{{total}}</text><text class="footer-meta">已选 {{selectedCount}} 件</text></view>
-    <button class="btn-primary checkout-btn" bindtap="checkout" disabled="{{selectedCount===0}}">去结算</button>
+    <button class="btn-primary checkout-btn" bindtap="checkout" disabled="{{selectedCount===0}}">确认采购</button>
   </view>
 </view>
 
 <view wx:else class="empty-state premium-empty">
-  <view class="empty-kicker">SHOPPING BAG</view>
-  <text class="strong">购物袋还是空的</text>
-  <text>把真正需要的健康商品放进购物袋。结算前会再次校验库存、优惠和购买限制。</text>
-  <button class="btn-primary empty-button" bindtap="goHome">去逛逛</button>
+  <view class="empty-kicker">PROCUREMENT LIST</view>
+  <text class="strong">采购单还是空的</text>
+  <text>从首页、分类或搜索中选择需要补货的商品。加入时会自动按起订量计算。</text>
+  <button class="btn-primary empty-button" bindtap="goHome">去选品</button>
 </view>
