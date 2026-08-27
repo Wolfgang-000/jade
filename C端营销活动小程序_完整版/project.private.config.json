@@ -1,5 +1,5 @@
 {
-  "libVersion": "3.17.1",
+  "libVersion": "3.6.5",
   "projectname": "c-marketing-miniapp",
   "setting": {
     "urlCheck": false,
@@ -8,7 +8,7 @@
     "skylineRenderEnable": false,
     "preloadBackgroundData": false,
     "autoAudits": false,
-    "useApiHook": true,
+    "useApiHook": false,
     "showShadowRootInWxmlPanel": false,
     "useStaticServer": false,
     "useLanDebug": false,
