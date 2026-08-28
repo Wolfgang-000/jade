@@ -1,6 +1,6 @@
 <view class="checkout-page">
   <view class="checkout-head">
-    <view class="checkout-title-main">确认采购单</view>
+    <view class="checkout-title-main">确认订单</view>
     <view class="checkout-sub-main">提交前再次校验库存、起订量、采购资质与供货条件</view>
   </view>
 
@@ -61,6 +61,6 @@
   <view class="bottom-space"></view>
   <view class="checkout-footer">
     <view class="checkout-footer-total"><text class="footer-label">预计合计</text><text class="footer-price">¥{{total}}</text><text class="footer-note">最终以订单确认结果为准</text></view>
-    <button class="btn-primary submit-order-btn" bindtap="submit">提交采购单</button>
+    <button class="btn-primary submit-order-btn" bindtap="submit">提交订单</button>
   </view>
 </view>
