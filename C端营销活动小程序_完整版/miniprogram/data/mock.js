@@ -3,7 +3,7 @@ const products = [
     id:'p1', name:'复方草珊瑚含片', generic:'复方草珊瑚含片', brand:'江中', maker:'示例生产企业',
     spec:'0.44g×48片', category:'咽喉清热', otc:'OTC', regulatoryMode:'otc',
     price:25.8, memberPrice:25.8, oldPrice:29.8, stock:128, sales:862, moq:10, unit:'盒', taxInclusive:true,
-    batch:'示例批号 A01', expiry:'2027-12',
+    batch:'示例批号 A01', expiry:'2027-12', sceneTags:['咽喉不适','秋冬常备','含片'],
     image:'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=900&q=80',
     gallery:[
       'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1200&q=80',
@@ -17,7 +17,7 @@ const products = [
     id:'p2', name:'清咽滴丸', generic:'清咽滴丸', brand:'达仁堂', maker:'示例生产企业',
     spec:'20mg×30丸', category:'咽喉清热', otc:'OTC', regulatoryMode:'otc',
     price:29.9, memberPrice:29.9, oldPrice:32.0, stock:76, sales:540, moq:10, unit:'盒', taxInclusive:true,
-    batch:'示例批号 B02', expiry:'2027-10',
+    batch:'示例批号 B02', expiry:'2027-10', sceneTags:['咽喉不适','秋冬常备','清咽'],
     image:'https://images.unsplash.com/photo-1576602976047-174e57a47881?auto=format&fit=crop&w=900&q=80',
     gallery:['https://images.unsplash.com/photo-1576602976047-174e57a47881?auto=format&fit=crop&w=1200&q=80'],
     approval:'国药准字示例', storage:'密封保存',
@@ -28,9 +28,9 @@ const products = [
     id:'p3', name:'金喉健喷雾剂', generic:'金喉健喷雾剂', brand:'宏宇', maker:'示例生产企业',
     spec:'20ml', category:'咽喉清热', otc:'OTC', regulatoryMode:'otc',
     price:36.9, memberPrice:36.9, oldPrice:39.9, stock:52, sales:316, moq:5, unit:'盒', taxInclusive:true,
-    batch:'示例批号 C03', expiry:'2027-09',
+    batch:'示例批号 C03', expiry:'2027-09', sceneTags:['咽喉不适','秋冬常备','喷雾'],
     image:'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=900&q=80',
-    gallery:['https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=1200&q=80'],
+    gallery:['https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2ae?auto=format&fit=crop&w=1200&q=80'],
     approval:'国药准字示例', storage:'阴凉处保存',
     sell:'采购端优先说明库存、起订量、批号与效期，减少询价往返。', tags:['OTC','现货'], specs:['20ml']
   },
@@ -38,7 +38,7 @@ const products = [
     id:'p4', name:'小儿柴桂退热颗粒', generic:'小儿柴桂退热颗粒', brand:'示例品牌', maker:'示例生产企业',
     spec:'5g×10袋', category:'儿童用药', otc:'OTC', regulatoryMode:'otc',
     price:22.8, memberPrice:22.8, oldPrice:25.0, stock:96, sales:621, moq:10, unit:'盒', taxInclusive:true,
-    batch:'示例批号 D04', expiry:'2027-11',
+    batch:'示例批号 D04', expiry:'2027-11', sceneTags:['儿童发热','秋冬常备','儿童常用'],
     image:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80',
     gallery:['https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80'],
     approval:'国药准字示例', storage:'密封保存',
@@ -49,7 +49,7 @@ const products = [
     id:'p5', name:'维生素C营养补充片', generic:'维生素C', brand:'Wellness Lab', maker:'示例营养企业',
     spec:'60片', category:'营养健康', otc:'营养', regulatoryMode:'wellness',
     price:79.0, memberPrice:79.0, oldPrice:88.0, stock:210, sales:735, moq:6, unit:'瓶', taxInclusive:true,
-    batch:'示例批号 E05', expiry:'2028-03',
+    batch:'示例批号 E05', expiry:'2028-03', sceneTags:['营养补充','维生素','常购'],
     image:'https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=900&q=80',
     gallery:['https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=1200&q=80'],
     approval:'营养健康商品示例', storage:'阴凉干燥处',
@@ -59,7 +59,7 @@ const products = [
     id:'p6', name:'家庭急救护理包', generic:'护理组合', brand:'Care Studio', maker:'示例健康用品企业',
     spec:'家庭版', category:'外用护理', otc:'用品', regulatoryMode:'general',
     price:116.0, memberPrice:116.0, oldPrice:129.0, stock:32, sales:146, moq:3, unit:'套', taxInclusive:true,
-    batch:'示例批号 F06', expiry:'按单品标识',
+    batch:'示例批号 F06', expiry:'按单品标识', sceneTags:['外用护理','家庭常备','护理'],
     image:'https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=900&q=80',
     gallery:['https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=1200&q=80'],
     approval:'健康用品示例', storage:'干燥保存',
@@ -69,7 +69,7 @@ const products = [
     id:'p7', name:'处方药采购示例', generic:'受监管药品示意', brand:'示例药品', maker:'示例生产企业',
     spec:'示例规格', category:'处方专区', otc:'Rx', regulatoryMode:'rx',
     price:18.6, memberPrice:18.6, oldPrice:20.0, stock:88, sales:0, moq:20, unit:'盒', taxInclusive:true,
-    batch:'示例批号 G07', expiry:'2027-08',
+    batch:'示例批号 G07', expiry:'2027-08', sceneTags:['处方专区','资质采购'],
     image:'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=900&q=80',
     gallery:['https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=1200&q=80'],
     approval:'演示：按实际批准文号配置', storage:'按说明书',
@@ -123,9 +123,20 @@ const activityProductMap = {
   a3:['p1','p3','p5','p6']
 };
 
+// 购物车推荐中的“搭配采购”关系。其余关联由 sceneTags / category / generic / brand / 常购权重计算。
+const cartRecommendMap = {
+  p1:['p2','p3','p4'],
+  p2:['p1','p3','p4'],
+  p3:['p1','p2','p4'],
+  p4:['p1','p2','p3'],
+  p5:['p1','p6'],
+  p6:['p5','p1'],
+  p7:[]
+};
+
 const orders = [
   {id:'o1001',status:'待收货',amount:258.0,created:'2026-08-24 18:32',productId:'p1',qty:10,logistics:'运输中'},
   {id:'o1002',status:'已完成',amount:348.0,created:'2026-08-13 10:20',productId:'p6',qty:3,logistics:'已签收'}
 ];
 
-module.exports={products,categories,scenes,activities,activityProductMap,orders};
+module.exports={products,categories,scenes,activities,activityProductMap,cartRecommendMap,orders};
