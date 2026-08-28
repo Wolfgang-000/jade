@@ -1,21 +1,34 @@
 <view class="cart-page">
   <view class="cart-head">
     <view class="cart-title">购物车</view>
-    <button class="continue-btn" bindtap="goCategory">继续选品</button>
+    <view class="cart-search">
+      <text class="cart-search-icon">⌕</text>
+      <input
+        class="cart-search-input"
+        value="{{searchKeyword}}"
+        placeholder="搜索购物车商品"
+        placeholder-class="cart-search-placeholder"
+        confirm-type="search"
+        bindinput="onCartSearchInput"
+      />
+      <text class="cart-search-clear" wx:if="{{searchKeyword}}" bindtap="clearCartSearch">×</text>
+    </view>
+    <button class="manage-btn {{items.length?'':'manage-btn--disabled'}}" bindtap="toggleManage" disabled="{{!items.length}}">{{managing?'完成':'管理'}}</button>
   </view>
 
   <block wx:if="{{items.length}}">
     <view class="cart-select-row">
       <view class="select-all" bindtap="toggleAll">
-        <view class="checkbox {{allChecked?'checked':''}}"></view>
+        <view class="checkbox {{managing?(manageAllChecked?'checked':''):(allChecked?'checked':'')}}"></view>
         <text>全选</text>
       </view>
-      <text class="cart-count-copy">共 {{items.length}} 种 · 已选 {{selectedSkuCount}} 种</text>
+      <text class="cart-count-copy" wx:if="{{!managing}}">共 {{items.length}} 种 · 已选 {{selectedSkuCount}} 种</text>
+      <text class="cart-count-copy" wx:else>已选 {{manageSelectedCount}} 种</text>
     </view>
 
-    <view class="cart-list">
-      <view class="cart-item premium-cart-item" wx:for="{{items}}" wx:key="key">
-        <view class="checkbox {{item.checked?'checked':''}}" bindtap="toggle" data-key="{{item.key}}"></view>
+    <view class="cart-list" wx:if="{{visibleItems.length}}">
+      <view class="cart-item premium-cart-item" wx:for="{{visibleItems}}" wx:key="key">
+        <view class="checkbox {{managing?(item.manageChecked?'checked':''):(item.checked?'checked':'')}}" bindtap="toggleItem" data-key="{{item.key}}"></view>
         <image class="cart-img" src="{{item.product.image}}" mode="aspectFill" bindtap="goProduct" data-id="{{item.product.id}}"></image>
         <view class="cart-content">
           <view class="cart-name" bindtap="goProduct" data-id="{{item.product.id}}">{{item.product.name}}</view>
@@ -31,18 +44,25 @@
               <text class="cart-price">¥{{item.product.price}}</text>
               <view class="cart-line-total">小计 ¥{{item.lineTotal}}</view>
             </view>
-            <button class="remove-btn" bindtap="remove" data-key="{{item.key}}">删除</button>
+            <button class="remove-btn" wx:if="{{!managing}}" bindtap="remove" data-key="{{item.key}}">删除</button>
           </view>
-          <view class="quantity premium-quantity">
+          <view class="quantity premium-quantity" wx:if="{{!managing}}">
             <button class="qty-btn" bindtap="minus" data-key="{{item.key}}">−</button>
             <text class="qty-value">{{item.qty}}</text>
             <button class="qty-btn" bindtap="plus" data-key="{{item.key}}">＋</button>
           </view>
+          <view class="manage-item-hint" wx:else>管理模式 · 可批量加入常购或删除</view>
         </view>
       </view>
     </view>
 
-    <view class="cart-summary">
+    <view class="cart-search-empty" wx:else>
+      <text class="strong">未找到购物车中的商品</text>
+      <text>换一个商品名、规格、品牌或厂家试试。</text>
+      <button class="btn-text cart-search-reset" bindtap="clearCartSearch">清除搜索</button>
+    </view>
+
+    <view class="cart-summary" wx:if="{{!managing && !searchKeyword}}">
       <view class="summary-line"><text>商品金额</text><text>¥{{amount}}</text></view>
       <view class="summary-line total"><text>预计合计</text><text>¥{{total}}</text></view>
       <view class="summary-help">运费、活动政策、发票与最终供货条件将在结算时统一校验。</view>
@@ -55,7 +75,7 @@
     <button class="btn-primary empty-button" bindtap="goCategory">去分类选品</button>
   </view>
 
-  <view class="recommend-section" wx:if="{{recommendations.length}}">
+  <view class="recommend-section" wx:if="{{recommendations.length && !managing && !searchKeyword}}">
     <view class="recommend-head">
       <view>
         <view class="recommend-title">相关采购推荐</view>
@@ -88,9 +108,17 @@
 
   <view class="bottom-space {{items.length?'bottom-space--footer':''}}"></view>
 
-  <view class="cart-footer premium-cart-footer" wx:if="{{items.length}}">
+  <view class="cart-footer premium-cart-footer" wx:if="{{items.length && !managing}}">
     <view class="footer-select" bindtap="toggleAll"><view class="checkbox {{allChecked?'checked':''}}"></view><text>全选</text></view>
     <view class="footer-total"><text class="footer-label">合计</text><text class="footer-price">¥{{total}}</text><text class="footer-meta">已选 {{selectedCount}} 件</text></view>
     <button class="btn-primary checkout-btn" bindtap="checkout" disabled="{{selectedCount===0}}">去结算</button>
+  </view>
+
+  <view class="cart-footer manage-footer" wx:if="{{items.length && managing}}">
+    <view class="footer-select" bindtap="toggleAll"><view class="checkbox {{manageAllChecked?'checked':''}}"></view><text>全选</text></view>
+    <view class="manage-actions">
+      <button class="manage-secondary" bindtap="addSelectedToFrequent" disabled="{{manageSelectedCount===0}}">加入常购</button>
+      <button class="manage-danger" bindtap="deleteSelected" disabled="{{manageSelectedCount===0}}">删除{{manageSelectedCount?'('+manageSelectedCount+')':''}}</button>
+    </view>
   </view>
 </view>
