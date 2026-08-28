@@ -9,4 +9,4 @@
     </view>
   </view>
 </view>
-<view wx:else class="empty-state"><text class="strong">常购清单还是空的</text><text>把高频采购商品加入常购，补货时可以更快找到。</text></view>
+<view wx:else class="empty-state"><text class="strong">暂无常购商品</text><text>把高频采购商品加入常购，后续采购时可以更快找到。</text></view>
