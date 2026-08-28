@@ -1,4 +1,4 @@
-.checkout-page{min-height:100vh;background:var(--bg);padding-bottom:calc(154rpx + env(safe-area-inset-bottom))}
+.checkout-page{min-height:100vh;background:var(--bg);padding-bottom:calc(110rpx + env(safe-area-inset-bottom))}
 .checkout-head{padding:34rpx 32rpx 26rpx;background:var(--surface-soft)}
 .checkout-title-main{font-size:42rpx;font-weight:650;letter-spacing:-1rpx}
 .checkout-sub-main{font-size:21rpx;color:#8E8781;line-height:1.6;margin-top:8rpx}
