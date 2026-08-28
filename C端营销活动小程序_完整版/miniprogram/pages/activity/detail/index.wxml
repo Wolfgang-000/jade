@@ -30,7 +30,7 @@
       </view>
       <view class="editorial-side">
         <view class="editorial-tile" bindtap="product" data-id="{{products[3].id}}"><view class="eyebrow">SEASONAL</view><view class="h3">{{products[3].name}}</view></view>
-        <view class="editorial-tile" bindtap="product" data-id="{{products[4].id}}"><view class="eyebrow">REPLENISH</view><view class="h3">{{products[4].name}}</view></view>
+        <view class="editorial-tile" bindtap="product" data-id="{{products[4].id}}"><view class="eyebrow">KEY SUPPLY</view><view class="h3">{{products[4].name}}</view></view>
       </view>
     </view>
   </view>
