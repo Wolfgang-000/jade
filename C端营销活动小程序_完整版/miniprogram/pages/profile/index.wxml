@@ -20,7 +20,7 @@
   <view class="section-title" style="margin-bottom:18rpx">采购工具与企业服务</view>
   <view class="menu">
     <view class="menu-row" bindtap="nav" data-url="/pages/favorites/index"><text>常购商品</text><text>›</text></view>
-    <view class="menu-row" bindtap="nav" data-url="/pages/orders/index"><text>历史采购</text><text>›</text></view>
+    <view class="menu-row" bindtap="orders"><text>历史采购</text><text>›</text></view>
     <view class="menu-row" bindtap="nav" data-url="/pages/history/index"><text>浏览记录</text><text>›</text></view>
     <view class="menu-row" bindtap="nav" data-url="/pages/address/index"><text>收货地址</text><text>›</text></view>
     <view class="menu-row" bindtap="nav" data-url="/pages/service/index"><text>客服咨询</text><text>›</text></view>
