@@ -49,6 +49,6 @@ Page({
      const qty=Math.max(line.product.moq||1,line.qty||line.product.moq||1);
      store.addCart(line.product,qty,line.spec||line.product.spec);
    });
-   wx.showToast({title:'已加入购物车',icon:'success'});
+   wx.showToast({title:'已加入采购车',icon:'success'});
  }
 });
