@@ -95,59 +95,6 @@
     </scroll-view>
   </view>
 
-  <view class="section home-section service-entry-section">
-    <view class="service-entry" bindtap="goService">
-      <view>
-        <view class="service-kicker">CUSTOMER SERVICE</view>
-        <view class="service-title">需要报价、找货或订单协助？</view>
-        <view class="service-desc">采购、商品、订单、物流或售后问题，可直接与客服沟通。</view>
-      </view>
-      <view class="service-arrow">→</view>
-    </view>
-  </view>
-
-  <view class="section home-section">
-    <view class="member-panel premium-member" bindtap="goProfile">
-      <view class="member-topline">
-        <view class="member-level">PROCUREMENT ACCOUNT · {{customer.level}}</view>
-        <view class="member-link">采购账户 →</view>
-      </view>
-      <view class="member-title">{{customer.companyName}}</view>
-      <view class="member-stats">
-        <view class="member-stat"><text class="strong">{{customer.pendingShip}}</text><text>待发货</text></view>
-        <view class="member-stat"><text class="strong">{{customer.pendingReceive}}</text><text>待收货</text></view>
-        <view class="member-stat"><text class="strong">{{customer.frequentSku}}</text><text>常购品种</text></view>
-      </view>
-    </view>
-  </view>
-
-  <view class="section home-section">
-    <view class="section-head">
-      <view>
-        <view class="section-title">更多采购推荐</view>
-        <view class="section-sub">优先展示采购价、起订量、库存与规格</view>
-      </view>
-    </view>
-    <view class="product-grid premium-product-grid">
-      <view class="product-card premium-product-card" wx:for="{{products}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
-        <view class="product-card__image premium-product-image">
-          <image src="{{item.image}}" mode="aspectFill"></image>
-          <view class="product-card__badge">{{item.otc}}</view>
-        </view>
-        <view class="product-card__name">{{item.name}}</view>
-        <view class="product-card__meta">{{item.brand}} · {{item.spec}}</view>
-        <view class="stock-line">{{item.stock>0?'库存 '+item.stock+item.unit:'库存需确认'}}</view>
-        <view class="product-card__price">
-          <view>
-            <text class="price-small">采购价 ¥{{item.price}}</text>
-            <view class="member-price">{{item.moq}}{{item.unit}}起订 · {{item.taxInclusive?'含税':'税费另计'}}</view>
-          </view>
-          <button class="quick-bag" catchtap="quickAdd" data-id="{{item.id}}">＋</button>
-        </view>
-      </view>
-    </view>
-  </view>
-
   <view class="section home-section safe-bottom">
     <view class="section-head"><view><view class="section-title">采购专区</view><view class="section-sub">把高频采购任务集中到更短路径</view></view></view>
     <view class="scene-list premium-scenes">
