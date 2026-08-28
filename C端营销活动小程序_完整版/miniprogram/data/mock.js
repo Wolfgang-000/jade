@@ -96,14 +96,36 @@ const scenes = [
 ];
 
 const activities = [
-  {id:'a1',title:'秋冬采购季',subtitle:'围绕感冒呼吸、咽喉与儿童用药组织季节采购',cta:'查看采购专区',image:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=80',status:'live'},
-  {id:'a2',title:'新品到货专区',subtitle:'集中查看近期新到商品、起订量与供应状态',cta:'查看新品',image:'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1400&q=80',status:'live'},
-  {id:'a3',title:'优势供应专区',subtitle:'聚焦现货、常购与阶段性优势供应品种，快速确认价格、库存与起订条件',cta:'查看供应品种',image:'https://images.unsplash.com/photo-1580281657527-47f249e8f4df?auto=format&fit=crop&w=1400&q=80',status:'live'}
+  {
+    id:'a1', themeKey:'autumn', title:'秋冬采购季',
+    subtitle:'围绕感冒呼吸、咽喉与儿童用药组织季节采购', cta:'下方查看主题商品',
+    recommendationTitle:'秋冬重点采购', recommendationSubtitle:'优先呈现秋冬高频、现货与常购品种',
+    image:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=80', status:'live'
+  },
+  {
+    id:'a2', themeKey:'new', title:'新品到货专区',
+    subtitle:'集中查看近期新到商品、起订量与供应状态', cta:'下方查看主题商品',
+    recommendationTitle:'新品到货', recommendationSubtitle:'查看近期新增并可直接采购的商品',
+    image:'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1400&q=80', status:'live'
+  },
+  {
+    id:'a3', themeKey:'supply', title:'优势供应专区',
+    subtitle:'聚焦现货、常购与阶段性优势供应品种，快速确认价格、库存与起订条件', cta:'下方查看主题商品',
+    recommendationTitle:'优势供应品种', recommendationSubtitle:'聚焦现货、常购与当前供应条件清晰的品种',
+    image:'https://images.unsplash.com/photo-1580281657527-47f249e8f4df?auto=format&fit=crop&w=1400&q=80', status:'live'
+  }
 ];
+
+// 首页 Banner 与商品池显式绑定，后续可直接由运营后台配置 activityId -> productIds。
+const activityProductMap = {
+  a1:['p1','p2','p3','p4'],
+  a2:['p3','p5','p6'],
+  a3:['p1','p3','p5','p6']
+};
 
 const orders = [
   {id:'o1001',status:'待收货',amount:258.0,created:'2026-08-24 18:32',productId:'p1',qty:10,logistics:'运输中'},
   {id:'o1002',status:'已完成',amount:348.0,created:'2026-08-13 10:20',productId:'p6',qty:3,logistics:'已签收'}
 ];
 
-module.exports={products,categories,scenes,activities,orders};
+module.exports={products,categories,scenes,activities,activityProductMap,orders};
