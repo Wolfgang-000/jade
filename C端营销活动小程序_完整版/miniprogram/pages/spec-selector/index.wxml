@@ -1,7 +1,7 @@
 <view wx:if="{{product}}" class="surface" style="min-height:100vh">
-  <view style="display:grid;grid-template-columns:180rpx 1fr;gap:20rpx;padding:32rpx;border-bottom:1rpx solid var(--border)">
+  <view style="display:grid;grid-template-columns:180rpx minmax(0,1fr);gap:20rpx;padding:32rpx;border-bottom:1rpx solid var(--border)">
     <image class="cart-img" src="{{product.image}}" mode="aspectFill"></image>
-    <view><view class="h3">{{product.name}}</view><view class="caption" style="margin-top:8rpx">{{product.brand}} · {{product.spec}}</view><view class="price-small" style="margin-top:16rpx">¥{{product.price}}</view></view>
+    <view style="min-width:0"><view class="h3" style="overflow-wrap:anywhere">{{product.name}}</view><view class="caption" style="margin-top:8rpx;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{product.brand}} · {{product.spec}}</view><view class="price-small" style="margin-top:16rpx;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">¥{{product.price}}</view></view>
   </view>
   <view class="container" style="padding-top:28rpx">
     <view class="h3">选择规格</view>
@@ -9,6 +9,6 @@
       <text>{{item}}</text><view class="radio {{selected===index?'active':''}}"></view>
     </view>
     <view class="row-between" style="padding:30rpx 0"><text class="h3">数量</text><view class="quantity"><button class="qty-btn" bindtap="minus">−</button><text class="qty-value">{{qty}}</text><button class="qty-btn" bindtap="plus">＋</button></view></view>
-    <button class="btn-primary" bindtap="add">确认加入购物袋</button>
+    <button class="btn-primary" bindtap="add">确认加入采购车</button>
   </view>
 </view>
