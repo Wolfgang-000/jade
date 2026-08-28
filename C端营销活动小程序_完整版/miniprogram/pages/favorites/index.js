@@ -8,6 +8,6 @@ Page({
    const p=products.find(x=>x.id===e.currentTarget.dataset.id);
    if(!p)return;
    store.addCart(p,p.moq||1,p.spec);
-   wx.showToast({title:'已加入购物车'});
+   wx.showToast({title:'已加入采购车'});
  }
 });
