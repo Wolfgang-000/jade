@@ -34,11 +34,10 @@
   </view>
 
   <view class="pdp-block purchase-block">
-    <view class="purchase-row" bindtap="selectSpec">
+    <view class="purchase-row">
       <text class="purchase-label">规格</text>
       <view class="purchase-value">
-        <text class="purchase-main">{{currentSpec}}</text>
-        <text class="purchase-arrow">›</text>
+        <text class="purchase-main">{{product.spec}}</text>
       </view>
     </view>
     <view class="purchase-row">
@@ -72,6 +71,27 @@
     </view>
   </view>
 
+  <view class="pdp-block variant-block" wx:if="{{otherVariants.length}}">
+    <view class="pdp-section-head">
+      <view>
+        <view class="pdp-section-title">同品名其他规格</view>
+        <view class="pdp-section-sub">不同规格作为独立商品，价格、库存与采购条件分别计算</view>
+      </view>
+    </view>
+    <view class="variant-list">
+      <view class="variant-card" wx:for="{{otherVariants}}" wx:key="id" bindtap="goVariant" data-id="{{item.id}}">
+        <image class="variant-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="variant-copy">
+          <view class="variant-name">{{item.name}}</view>
+          <view class="variant-spec">规格 {{item.spec}}</view>
+          <view class="variant-meta">库存 {{item.stock}}{{item.unit}} · {{item.moq}}{{item.unit}}起订</view>
+        </view>
+        <view class="variant-price">¥{{item.price}}</view>
+        <text class="variant-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
   <view class="pdp-block pharmacist-entry" bindtap="service">
     <view>
       <view class="service-kicker">CUSTOMER SERVICE</view>
@@ -93,13 +113,39 @@
     <view class="pdp-row"><text class="label">批准文号</text><text>{{product.approval}}</text></view>
     <view class="pdp-row"><text class="label">储存条件</text><text>{{product.storage}}</text></view>
     <view class="pdp-row"><text class="label">效期</text><text>{{product.expiry}}</text></view>
-    <button class="info-link" bindtap="instructions">查看完整说明书 / 产品资料 →</button>
   </view>
 
-  <view class="pdp-block content-block">
-    <view class="pdp-section-title">采购说明</view>
-    <view class="content-lead">{{product.sell}}</view>
-    <image class="content-image" src="{{product.gallery[0]}}" mode="widthFix"></image>
+  <view class="pdp-block instruction-block">
+    <view class="pdp-section-head instruction-head">
+      <view>
+        <view class="pdp-section-title">{{instructionTitle}}</view>
+        <view class="pdp-section-sub" wx:if="{{product.instruction}}">以下为说明书字段展示，正式上线以经核准说明书原文为准</view>
+        <view class="pdp-section-sub" wx:else>当前商品使用产品资料说明</view>
+      </view>
+    </view>
+
+    <block wx:if="{{product.instruction}}">
+      <view class="instruction-row"><text class="instruction-label">药品名称</text><text class="instruction-value">{{product.instruction.name}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">通用名称</text><text class="instruction-value">{{product.instruction.generic}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">规格</text><text class="instruction-value">{{product.instruction.spec}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">成份</text><text class="instruction-value">{{product.instruction.ingredients}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">功能主治 / 适应症</text><text class="instruction-value">{{product.instruction.indications}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">用法用量</text><text class="instruction-value">{{product.instruction.dosage}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">不良反应</text><text class="instruction-value">{{product.instruction.adverse}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">禁忌</text><text class="instruction-value">{{product.instruction.contraindications}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">注意事项</text><text class="instruction-value">{{product.instruction.precautions}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">贮藏</text><text class="instruction-value">{{product.instruction.storage}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">包装</text><text class="instruction-value">{{product.instruction.package}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">有效期</text><text class="instruction-value">{{product.instruction.expiry}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">批准文号</text><text class="instruction-value">{{product.instruction.approval}}</text></view>
+      <view class="instruction-row"><text class="instruction-label">生产企业</text><text class="instruction-value">{{product.instruction.maker}}</text></view>
+      <button class="info-link instruction-link" bindtap="instructions">查看完整说明书 / 产品资料 →</button>
+    </block>
+
+    <block wx:else>
+      <view class="content-lead">{{product.sell}}</view>
+      <button class="info-link instruction-link" bindtap="instructions">查看完整产品资料 →</button>
+    </block>
   </view>
 
   <view class="pdp-block trust-block">
