@@ -1,13 +1,13 @@
 <view wx:if="{{order}}">
   <view class="surface" style="padding:34rpx 32rpx"><view class="eyebrow">ORDER STATUS</view><view class="h2" style="margin-top:10rpx">{{order.status}}</view><view class="section-sub">{{order.logistics}} · 到货时间以实际物流为准</view></view>
-  <view class="checkout-block" bindtap="logistics"><view class="row-between"><view><view class="row-title">物流信息</view><view class="caption">查看配送时间轴与最新节点</view></view><text>›</text></view></view>
+  <view class="checkout-block" bindtap="logistics"><view class="row-between"><view style="min-width:0"><view class="row-title">物流信息</view><view class="caption">查看配送时间轴与最新节点</view></view><text>›</text></view></view>
   <view class="checkout-block"><view class="checkout-title">收货信息</view><view class="address-main">林经理 · 138****6688</view><view class="address-sub">广东省广州市天河区 · 示例药房收货地址</view></view>
-  <view class="checkout-block"><view class="order-product"><image class="order-img" src="{{order.product.image}}" mode="aspectFill"></image><view><view class="row-title">{{order.product.name}}</view><view class="caption">{{order.product.spec}} × {{order.qty}}{{order.product.unit}}</view><view class="price-small" style="margin-top:14rpx">¥{{order.amount}}</view></view></view></view>
+  <view class="checkout-block"><view class="order-product"><image class="order-img" src="{{order.product.image}}" mode="aspectFill"></image><view style="min-width:0"><view class="row-title" style="overflow-wrap:anywhere">{{order.product.name}}</view><view class="caption" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{order.product.spec}} × {{order.qty}}{{order.product.unit}}</view><view class="price-small" style="margin-top:14rpx;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">¥{{order.amount}}</view></view></view></view>
   <view class="checkout-block">
     <view class="summary-row"><text>订单号</text><text>{{order.id}}</text></view>
     <view class="summary-row"><text>下单时间</text><text>{{order.created}}</text></view>
     <view class="summary-row"><text>结算方式</text><text>按订单规则</text></view>
     <view class="summary-row total-row"><text>订单金额</text><text>¥{{order.amount}}</text></view>
   </view>
-  <view class="container" style="padding-top:28rpx;display:flex;gap:14rpx"><button class="btn-secondary" style="flex:1" bindtap="service">联系客服</button><button class="btn-primary" style="flex:1" bindtap="afterSales">申请售后</button></view>
+  <view class="container" style="padding-top:28rpx;display:flex;gap:14rpx"><button class="btn-secondary" style="flex:1;min-width:0" bindtap="service">联系客服</button><button class="btn-primary" style="flex:1;min-width:0" bindtap="afterSales">申请售后</button></view>
 </view>
