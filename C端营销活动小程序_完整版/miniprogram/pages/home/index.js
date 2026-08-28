@@ -68,7 +68,11 @@ Page({
     const id=e?.currentTarget?.dataset?.id||'a1';
     wx.navigateTo({url:'/pages/activity/detail/index?id='+id});
   },
-  goCategory(){wx.switchTab({url:'/pages/category/index'})},
+  goCategory(e){
+    const categoryId=e?.currentTarget?.dataset?.id;
+    if(categoryId)wx.setStorageSync('targetCategoryId',categoryId);
+    wx.switchTab({url:'/pages/category/index'});
+  },
   goAllProducts(){this.goCategory()},
   goProduct(e){wx.navigateTo({url:'/pages/product-detail/index?id='+e.currentTarget.dataset.id})},
   goCart(){wx.switchTab({url:'/pages/cart/index'})},
