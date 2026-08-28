@@ -19,13 +19,13 @@ Page({
   },
   address(){wx.navigateTo({url:'/pages/address/index?select=1'})},
   submit(){
-    if(!this.data.items.length){wx.showToast({title:'购物车中没有可提交商品',icon:'none'});return}
+    if(!this.data.items.length){wx.showToast({title:'采购车中没有可提交商品',icon:'none'});return}
     const customer=getApp().globalData.customer||{};
     const invalid=this.data.items.find(x=>x.product.stock<x.qty||x.qty<(x.product.moq||1)||(x.product.regulatoryMode==='rx'&&!customer.qualified));
     if(invalid){
       wx.showModal({
         title:'订单需要调整',
-        content:'部分商品库存、起订量或采购资质未通过校验，请返回购物车处理或联系客服。',
+        content:'部分商品库存、起订量或采购资质未通过校验，请返回采购车处理或联系客服。',
         showCancel:false
       });
       return;
