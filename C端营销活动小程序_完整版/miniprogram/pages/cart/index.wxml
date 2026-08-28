@@ -1,17 +1,7 @@
 <view class="cart-page">
   <view class="cart-head">
-    <view>
-      <view class="cart-title">购物车</view>
-      <view class="cart-sub">库存、起订量、价格与采购资质将在结算前再次校验</view>
-    </view>
-    <button class="continue-btn" bindtap="goHome">继续选品</button>
-  </view>
-
-  <view class="member-note">
-    <view>
-      <view class="member-note-title">当前显示 B 端采购价</view>
-      <view class="member-note-sub">最终价格、库存、区域及业务政策以结算确认结果为准。</view>
-    </view>
+    <view class="cart-title">购物车</view>
+    <button class="continue-btn" bindtap="goCategory">继续选品</button>
   </view>
 
   <block wx:if="{{items.length}}">
@@ -60,10 +50,9 @@
   </block>
 
   <view wx:else class="empty-state premium-empty cart-empty-under-head">
-    <view class="empty-kicker">SHOPPING CART</view>
-    <text class="strong">购物车还是空的</text>
-    <text>从首页、分类或搜索中选择需要采购的商品，新商品会按起订量加入购物车。</text>
-    <button class="btn-primary empty-button" bindtap="goHome">去选品</button>
+    <text class="strong">购物车暂无商品</text>
+    <text>去分类挑选需要采购的商品。</text>
+    <button class="btn-primary empty-button" bindtap="goCategory">去分类选品</button>
   </view>
 
   <view class="recommend-section" wx:if="{{recommendations.length}}">
