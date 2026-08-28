@@ -1,6 +1,21 @@
+const demoDrugInstruction=(name,generic,spec,maker,approval,storage,expiry)=>({
+  name,generic,spec,
+  ingredients:'演示字段：正式上线请录入经核准说明书中的【成份】原文。',
+  indications:'演示字段：正式上线请录入经核准说明书中的【功能主治 / 适应症】原文。',
+  dosage:'演示字段：正式上线请录入经核准说明书中的【用法用量】原文。',
+  adverse:'演示字段：正式上线请录入经核准说明书中的【不良反应】原文。',
+  contraindications:'演示字段：正式上线请录入经核准说明书中的【禁忌】原文。',
+  precautions:'演示字段：正式上线请录入经核准说明书中的【注意事项】原文。',
+  storage,
+  package:'以实际商品包装及经核准说明书为准。',
+  expiry,
+  approval,
+  maker
+});
+
 const products = [
   {
-    id:'p1', name:'复方草珊瑚含片', generic:'复方草珊瑚含片', brand:'江中', maker:'示例生产企业',
+    id:'p1', skuGroup:'csjc', name:'复方草珊瑚含片', generic:'复方草珊瑚含片', brand:'江中', maker:'示例生产企业',
     spec:'0.44g×48片', category:'咽喉清热', otc:'OTC', regulatoryMode:'otc',
     price:25.8, memberPrice:25.8, oldPrice:29.8, stock:128, sales:862, moq:10, unit:'盒', taxInclusive:true,
     batch:'示例批号 A01', expiry:'2027-12', sceneTags:['咽喉不适','秋冬常备','含片'],
@@ -11,7 +26,20 @@ const products = [
     ],
     approval:'国药准字示例', storage:'密封，置阴凉干燥处',
     sell:'用于B端采购展示：规格、起订量、库存、批号效期与资质信息优先呈现。',
-    tags:['OTC','常购品种'], specs:['0.44g×48片','0.44g×24片']
+    tags:['OTC','常购品种'],
+    instruction:demoDrugInstruction('复方草珊瑚含片','复方草珊瑚含片','0.44g×48片','示例生产企业','国药准字示例','密封，置阴凉干燥处','2027-12')
+  },
+  {
+    id:'p8', skuGroup:'csjc', name:'复方草珊瑚含片', generic:'复方草珊瑚含片', brand:'江中', maker:'示例生产企业',
+    spec:'0.44g×24片', category:'咽喉清热', otc:'OTC', regulatoryMode:'otc',
+    price:15.8, memberPrice:15.8, oldPrice:18.8, stock:64, sales:348, moq:10, unit:'盒', taxInclusive:true,
+    batch:'示例批号 A08', expiry:'2027-12', sceneTags:['咽喉不适','秋冬常备','含片'],
+    image:'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=900&q=80',
+    gallery:['https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1200&q=80'],
+    approval:'国药准字示例', storage:'密封，置阴凉干燥处',
+    sell:'同品名不同规格作为独立SKU展示，价格、库存、起订量和批号效期分别管理。',
+    tags:['OTC'],
+    instruction:demoDrugInstruction('复方草珊瑚含片','复方草珊瑚含片','0.44g×24片','示例生产企业','国药准字示例','密封，置阴凉干燥处','2027-12')
   },
   {
     id:'p2', name:'清咽滴丸', generic:'清咽滴丸', brand:'达仁堂', maker:'示例生产企业',
@@ -22,7 +50,8 @@ const products = [
     gallery:['https://images.unsplash.com/photo-1576602976047-174e57a47881?auto=format&fit=crop&w=1200&q=80'],
     approval:'国药准字示例', storage:'密封保存',
     sell:'适合作为咽喉类重点采购品种展示，突出供货条件与履约信息。',
-    tags:['OTC','重点品种'], specs:['20mg×30丸']
+    tags:['OTC','重点品种'],
+    instruction:demoDrugInstruction('清咽滴丸','清咽滴丸','20mg×30丸','示例生产企业','国药准字示例','密封保存','2027-10')
   },
   {
     id:'p3', name:'金喉健喷雾剂', generic:'金喉健喷雾剂', brand:'宏宇', maker:'示例生产企业',
@@ -32,7 +61,8 @@ const products = [
     image:'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=900&q=80',
     gallery:['https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=1200&q=80'],
     approval:'国药准字示例', storage:'阴凉处保存',
-    sell:'采购端优先说明库存、起订量、批号与效期，减少询价往返。', tags:['OTC','现货'], specs:['20ml']
+    sell:'采购端优先说明库存、起订量、批号与效期，减少询价往返。', tags:['OTC','现货'],
+    instruction:demoDrugInstruction('金喉健喷雾剂','金喉健喷雾剂','20ml','示例生产企业','国药准字示例','阴凉处保存','2027-09')
   },
   {
     id:'p4', name:'小儿柴桂退热颗粒', generic:'小儿柴桂退热颗粒', brand:'示例品牌', maker:'示例生产企业',
@@ -43,17 +73,28 @@ const products = [
     gallery:['https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80'],
     approval:'国药准字示例', storage:'密封保存',
     sell:'用于儿童用药采购场景的示例商品，正式上线以真实资质和库存为准。',
-    tags:['OTC','秋冬采购'], specs:['5g×10袋']
+    tags:['OTC','秋冬采购'],
+    instruction:demoDrugInstruction('小儿柴桂退热颗粒','小儿柴桂退热颗粒','5g×10袋','示例生产企业','国药准字示例','密封保存','2027-11')
   },
   {
-    id:'p5', name:'维生素C营养补充片', generic:'维生素C', brand:'Wellness Lab', maker:'示例营养企业',
+    id:'p5', skuGroup:'vitc', name:'维生素C营养补充片', generic:'维生素C', brand:'Wellness Lab', maker:'示例营养企业',
     spec:'60片', category:'营养健康', otc:'营养', regulatoryMode:'wellness',
     price:79.0, memberPrice:79.0, oldPrice:88.0, stock:210, sales:735, moq:6, unit:'瓶', taxInclusive:true,
     batch:'示例批号 E05', expiry:'2028-03', sceneTags:['营养补充','维生素','常购'],
     image:'https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=900&q=80',
     gallery:['https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=1200&q=80'],
     approval:'营养健康商品示例', storage:'阴凉干燥处',
-    sell:'营养健康品按采购价、库存与起订量展示，减少面向消费者的促销噪音。', tags:['营养','常购'], specs:['60片','120片']
+    sell:'营养健康品按采购价、库存与起订量展示，减少面向消费者的促销噪音。', tags:['营养','常购']
+  },
+  {
+    id:'p9', skuGroup:'vitc', name:'维生素C营养补充片', generic:'维生素C', brand:'Wellness Lab', maker:'示例营养企业',
+    spec:'120片', category:'营养健康', otc:'营养', regulatoryMode:'wellness',
+    price:139.0, memberPrice:139.0, oldPrice:158.0, stock:86, sales:402, moq:6, unit:'瓶', taxInclusive:true,
+    batch:'示例批号 E09', expiry:'2028-03', sceneTags:['营养补充','维生素','常购'],
+    image:'https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=900&q=80',
+    gallery:['https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=1200&q=80'],
+    approval:'营养健康商品示例', storage:'阴凉干燥处',
+    sell:'同品名不同规格作为独立SKU展示，价格、库存和采购条件分别管理。', tags:['营养']
   },
   {
     id:'p6', name:'家庭急救护理包', generic:'护理组合', brand:'Care Studio', maker:'示例健康用品企业',
@@ -63,7 +104,7 @@ const products = [
     image:'https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=900&q=80',
     gallery:['https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=1200&q=80'],
     approval:'健康用品示例', storage:'干燥保存',
-    sell:'适合门店日常护理采购，正式供货条件以业务后台为准。', tags:['护理','组合装'], specs:['家庭版']
+    sell:'适合门店日常护理采购，正式供货条件以业务后台为准。', tags:['护理','组合装']
   },
   {
     id:'p7', name:'处方药采购示例', generic:'受监管药品示意', brand:'示例药品', maker:'示例生产企业',
@@ -73,7 +114,8 @@ const products = [
     image:'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=900&q=80',
     gallery:['https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=1200&q=80'],
     approval:'演示：按实际批准文号配置', storage:'按说明书',
-    sell:'仅用于B端资质采购流程演示；正式业务需校验客户经营资质、经营范围及平台规则。', tags:['Rx','资质采购'], specs:['示例规格']
+    sell:'仅用于B端资质采购流程演示；正式业务需校验客户经营资质、经营范围及平台规则。', tags:['Rx','资质采购'],
+    instruction:demoDrugInstruction('处方药采购示例','受监管药品示意','示例规格','示例生产企业','演示：按实际批准文号配置','按说明书','2027-08')
   }
 ];
 
@@ -116,21 +158,21 @@ const activities = [
   }
 ];
 
-// 首页 Banner 与商品池显式绑定，后续可直接由运营后台配置 activityId -> productIds。
 const activityProductMap = {
-  a1:['p1','p2','p3','p4'],
-  a2:['p3','p5','p6'],
+  a1:['p1','p8','p2','p3','p4'],
+  a2:['p3','p5','p9','p6'],
   a3:['p1','p3','p5','p6']
 };
 
-// 购物车推荐中的“搭配采购”关系。其余关联由 sceneTags / category / generic / brand / 常购权重计算。
 const cartRecommendMap = {
-  p1:['p2','p3','p4'],
-  p2:['p1','p3','p4'],
-  p3:['p1','p2','p4'],
+  p1:['p8','p2','p3','p4'],
+  p8:['p1','p2','p3','p4'],
+  p2:['p1','p8','p3','p4'],
+  p3:['p1','p8','p2','p4'],
   p4:['p1','p2','p3'],
-  p5:['p1','p6'],
-  p6:['p5','p1'],
+  p5:['p9','p1','p6'],
+  p9:['p5','p1','p6'],
+  p6:['p5','p9','p1'],
   p7:[]
 };
 
