@@ -1,5 +1,11 @@
-const {products,categories,scenes,activities}=require('../../data/mock');
+const {products,categories,scenes,activities,activityProductMap}=require('../../data/mock');
 const store=require('../../utils/store');
+
+function getThemeProducts(activity){
+  if(!activity)return [];
+  const ids=activityProductMap[activity.id]||[];
+  return ids.map(id=>products.find(p=>p.id===id)).filter(Boolean).slice(0,6);
+}
 
 Page({
   data:{
@@ -7,11 +13,37 @@ Page({
     categories:categories.map(x=>({...x,short:x.name.slice(0,2)})),
     scenes,
     activities,
+    activeBannerIndex:0,
+    activeActivity:activities[0]||null,
+    themeProducts:getThemeProducts(activities[0]),
+    themeSwitching:false,
     cartCount:0,
     customer:getApp().globalData.customer
   },
   onShow(){
     this.setData({cartCount:store.getCartCount(),customer:getApp().globalData.customer});
+  },
+  onUnload(){
+    if(this.themeTimer)clearTimeout(this.themeTimer);
+  },
+  setThemeByIndex(index){
+    const safeIndex=activities[index]?index:0;
+    const activeActivity=activities[safeIndex]||null;
+    this.setData({
+      activeBannerIndex:safeIndex,
+      activeActivity,
+      themeProducts:getThemeProducts(activeActivity)
+    });
+  },
+  onBannerChange(e){
+    const index=Number(e.detail.current)||0;
+    if(index===this.data.activeBannerIndex)return;
+    if(this.themeTimer)clearTimeout(this.themeTimer);
+    this.setData({themeSwitching:true});
+    this.themeTimer=setTimeout(()=>{
+      this.setThemeByIndex(index);
+      this.setData({themeSwitching:false});
+    },120);
   },
   goSearch(){wx.navigateTo({url:'/pages/search/index'})},
   goService(){wx.navigateTo({url:'/pages/service/index'})},
@@ -37,6 +69,7 @@ Page({
     wx.navigateTo({url:'/pages/activity/detail/index?id='+id});
   },
   goCategory(){wx.switchTab({url:'/pages/category/index'})},
+  goAllProducts(){this.goCategory()},
   goProduct(e){wx.navigateTo({url:'/pages/product-detail/index?id='+e.currentTarget.dataset.id})},
   goCart(){wx.switchTab({url:'/pages/cart/index'})},
   goZone(e){
