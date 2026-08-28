@@ -18,8 +18,8 @@
 
     <view class="price-zone">
       <view class="price-line">
-        <text class="member-price-label">会员价</text>
-        <text class="member-price-value">¥{{product.memberPrice}}</text>
+        <text class="purchase-price-label">采购价</text>
+        <text class="purchase-price-value">¥{{product.memberPrice}}</text>
       </view>
     </view>
 
@@ -32,15 +32,13 @@
   <view class="pdp-block purchase-block">
     <view class="purchase-row">
       <text class="purchase-label">规格</text>
-      <view class="purchase-value">
-        <text class="purchase-main">{{product.spec}}</text>
-      </view>
+      <view class="purchase-value"><text class="purchase-main">{{product.spec}}</text></view>
     </view>
     <view class="purchase-row">
       <text class="purchase-label">起订</text>
       <view class="purchase-value">
         <text class="purchase-main">{{product.moq}}{{product.unit}}起订</text>
-        <text class="purchase-sub">加入购物车默认按起订量</text>
+        <text class="purchase-sub">加入采购车默认按起订量</text>
       </view>
     </view>
     <view class="purchase-row">
@@ -88,7 +86,7 @@
     </view>
   </view>
 
-  <view class="pdp-block pharmacist-entry" bindtap="service">
+  <view class="pdp-block customer-service-entry" bindtap="service">
     <view>
       <view class="service-kicker">CUSTOMER SERVICE</view>
       <view class="service-title">采购有疑问？联系客服</view>
@@ -152,16 +150,29 @@
     </view>
   </view>
 
-  <view class="pdp-spacer"></view>
-  <view class="pdp-bottom premium-pdp-bottom">
-    <view class="pdp-mini-actions">
-      <button class="pdp-icon" bindtap="toggleFav"><text class="icon-text">{{isFav?'♥':'♡'}}</text><text>常购</text></button>
-      <button class="pdp-icon bag-icon" bindtap="goCart">
-        <text class="icon-text">车</text><text>购物车</text><text class="mini-badge" wx:if="{{cartCount>0}}">{{cartCount}}</text>
-      </button>
-      <button class="pdp-icon pdp-service-mini" bindtap="service"><text>客服</text></button>
+  <view class="pdp-action-bar">
+    <view class="pdp-action-inner">
+      <view class="pdp-aux-actions">
+        <button class="pdp-aux-btn" bindtap="toggleFav">
+          <text class="pdp-aux-icon">{{isFav?'♥':'♡'}}</text>
+          <text>常购</text>
+        </button>
+        <button class="pdp-aux-btn" bindtap="goCart">
+          <view class="pdp-aux-icon-wrap">
+            <text class="pdp-aux-icon">车</text>
+            <text class="mini-badge" wx:if="{{cartCount>0}}">{{cartCount}}</text>
+          </view>
+          <text>采购车</text>
+        </button>
+        <button class="pdp-aux-btn" bindtap="service">
+          <text class="pdp-aux-icon">客</text>
+          <text>客服</text>
+        </button>
+      </view>
+      <view class="pdp-primary-actions">
+        <button class="pdp-action-secondary" bindtap="addCart">加入采购车</button>
+        <button class="pdp-action-primary" bindtap="buyNow">立即采购</button>
+      </view>
     </view>
-    <button class="btn-secondary pdp-cart-btn" bindtap="addCart">加入购物车</button>
-    <button class="btn-primary pdp-buy-btn" bindtap="buyNow">立即采购</button>
   </view>
 </view>
