@@ -148,7 +148,6 @@ Page({
     if(invalid){wx.showToast({title:'部分商品未达到起订量',icon:'none'});return}
     wx.navigateTo({url:'/pages/checkout/index'});
   },
-  goHome(){wx.switchTab({url:'/pages/home/index'})},
   goCategory(){wx.switchTab({url:'/pages/category/index'})},
   goProduct(e){wx.navigateTo({url:'/pages/product-detail/index?id='+e.currentTarget.dataset.id})}
 });
