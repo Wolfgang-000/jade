@@ -6,7 +6,7 @@ Page({
     products:products.slice(0,6),
     categories:categories.map(x=>({...x,short:x.name.slice(0,2)})),
     scenes,
-    heroActivity:activities.find(x=>x.id==='a3')||activities[0],
+    activities,
     cartCount:0,
     customer:getApp().globalData.customer
   },
@@ -33,7 +33,7 @@ Page({
   },
   goProfile(){wx.switchTab({url:'/pages/profile/index'})},
   goActivity(e){
-    const id=e?.currentTarget?.dataset?.id||'a3';
+    const id=e?.currentTarget?.dataset?.id||'a1';
     wx.navigateTo({url:'/pages/activity/detail/index?id='+id});
   },
   goCategory(){wx.switchTab({url:'/pages/category/index'})},
