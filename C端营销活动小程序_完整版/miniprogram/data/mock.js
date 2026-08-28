@@ -30,7 +30,7 @@ const products = [
     price:36.9, memberPrice:36.9, oldPrice:39.9, stock:52, sales:316, moq:5, unit:'盒', taxInclusive:true,
     batch:'示例批号 C03', expiry:'2027-09', sceneTags:['咽喉不适','秋冬常备','喷雾'],
     image:'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=900&q=80',
-    gallery:['https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2ae?auto=format&fit=crop&w=1200&q=80'],
+    gallery:['https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=1200&q=80'],
     approval:'国药准字示例', storage:'阴凉处保存',
     sell:'采购端优先说明库存、起订量、批号与效期，减少询价往返。', tags:['OTC','现货'], specs:['20ml']
   },
