@@ -9,16 +9,16 @@
     </view>
   </view>
 
-  <swiper class="hero-swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,.45)" indicator-active-color="#ffffff" autoplay interval="5200" circular>
+  <swiper class="hero-swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,.45)" indicator-active-color="#ffffff" autoplay interval="5200" circular bindchange="onBannerChange">
     <swiper-item wx:for="{{activities}}" wx:key="id">
-      <view class="hero-slide" bindtap="goActivity" data-id="{{item.id}}">
+      <view class="hero-slide">
         <image src="{{item.image}}" mode="aspectFill"></image>
         <view class="hero-shade"></view>
         <view class="hero-copy">
           <view class="hero-kicker">B2B PROCUREMENT</view>
           <view class="hero-title">{{item.title}}</view>
           <view class="hero-sub">{{item.subtitle}}</view>
-          <view class="hero-link">{{item.cta}} →</view>
+          <view class="hero-link">{{item.cta}} ↓</view>
         </view>
       </view>
     </swiper-item>
@@ -39,6 +39,42 @@
       <text class="proof-title">客服咨询</text>
       <text class="proof-sub">采购与订单问题</text>
       <text class="proof-action">立即咨询 ›</text>
+    </view>
+  </view>
+
+  <view class="section home-section theme-recommend-section">
+    <view class="section-head theme-section-head">
+      <view>
+        <view class="theme-kicker">CURRENT THEME · 0{{activeBannerIndex+1}}</view>
+        <view class="section-title">{{activeActivity.recommendationTitle}}</view>
+        <view class="section-sub">{{activeActivity.recommendationSubtitle}}</view>
+      </view>
+      <text class="theme-count">0{{activeBannerIndex+1}} / 0{{activities.length}}</text>
+    </view>
+
+    <view class="theme-product-panel {{themeSwitching?'theme-product-panel--switching':''}}">
+      <view wx:if="{{themeProducts.length}}" class="theme-product-list">
+        <view class="theme-product-row" wx:for="{{themeProducts}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
+          <image class="theme-product-image" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="theme-product-content">
+            <view class="theme-product-name">{{item.name}}</view>
+            <view class="theme-product-meta">{{item.brand}} · {{item.maker}}</view>
+            <view class="theme-product-spec">{{item.spec}} · {{item.moq}}{{item.unit}}起订</view>
+            <view class="theme-product-bottom">
+              <view>
+                <view class="theme-product-price">采购价 ¥{{item.price}}</view>
+                <view class="theme-product-stock">{{item.stock>0?'库存 '+item.stock+item.unit:'库存需确认'}}</view>
+              </view>
+              <button class="theme-add" catchtap="quickAdd" data-id="{{item.id}}">加入</button>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="theme-empty">
+        <text class="strong">当前暂无该主题可采购商品</text>
+        <text class="section-sub">可查看全部商品继续采购。</text>
+        <text class="link" bindtap="goAllProducts">查看全部商品 →</text>
+      </view>
     </view>
   </view>
 
@@ -88,49 +124,7 @@
   <view class="section home-section">
     <view class="section-head">
       <view>
-        <view class="section-title">重点品种</view>
-        <view class="section-sub">结合季节、供应与采购需求做少量重点陈列</view>
-      </view>
-    </view>
-    <view class="editorial-feature premium-editorial">
-      <view class="editorial-main" bindtap="goProduct" data-id="{{products[0].id}}">
-        <image src="{{products[0].image}}" mode="aspectFill"></image>
-        <view class="editorial-copy">
-          <view class="editorial-kicker">KEY SKU</view>
-          <view class="editorial-name">{{products[0].name}}</view>
-          <view class="editorial-meta">{{products[0].brand}} · {{products[0].spec}}</view>
-          <view class="editorial-price">采购价 ¥{{products[0].price}} · {{products[0].moq}}{{products[0].unit}}起订</view>
-        </view>
-      </view>
-      <view class="editorial-side">
-        <view class="editorial-tile" bindtap="goProduct" data-id="{{products[3].id}}">
-          <image class="editorial-tile-image" src="{{products[3].image}}" mode="aspectFill"></image>
-          <view class="editorial-tile-copy">
-            <view class="editorial-kicker">SEASONAL</view>
-            <view class="editorial-tile-name">{{products[3].name}}</view>
-            <view class="caption">{{products[3].spec}} · {{products[3].moq}}{{products[3].unit}}起订</view>
-            <view class="tile-price">采购价 ¥{{products[3].price}}</view>
-            <view class="tile-link">查看采购条件 →</view>
-          </view>
-        </view>
-        <view class="editorial-tile editorial-tile-alt" bindtap="goProduct" data-id="{{products[4].id}}">
-          <image class="editorial-tile-image" src="{{products[4].image}}" mode="aspectFill"></image>
-          <view class="editorial-tile-copy">
-            <view class="editorial-kicker">KEY SUPPLY</view>
-            <view class="editorial-tile-name">{{products[4].name}}</view>
-            <view class="caption">{{products[4].spec}} · {{products[4].moq}}{{products[4].unit}}起订</view>
-            <view class="tile-price">采购价 ¥{{products[4].price}}</view>
-            <view class="tile-link">查看采购条件 →</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-
-  <view class="section home-section">
-    <view class="section-head">
-      <view>
-        <view class="section-title">采购推荐</view>
+        <view class="section-title">更多采购推荐</view>
         <view class="section-sub">优先展示采购价、起订量、库存与规格</view>
       </view>
     </view>
