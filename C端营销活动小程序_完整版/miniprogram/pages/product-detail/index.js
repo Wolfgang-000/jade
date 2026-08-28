@@ -4,16 +4,22 @@ const store=require('../../utils/store');
 Page({
   data:{
     product:null,
+    otherVariants:[],
+    instructionTitle:'药品说明书',
     isFav:false,
-    currentSpec:'',
     galleryIndex:0,
     cartCount:0
   },
   onLoad(o){
     const p=products.find(x=>x.id===(o.id||'p1'))||products[0];
+    const otherVariants=p.skuGroup
+      ?products.filter(x=>x.skuGroup===p.skuGroup&&x.id!==p.id)
+      :[];
+    const isDrug=p.regulatoryMode==='otc'||p.regulatoryMode==='rx';
     this.setData({
       product:p,
-      currentSpec:p.spec,
+      otherVariants,
+      instructionTitle:isDrug?'药品说明书':'产品说明',
       isFav:store.getFavorites().includes(p.id),
       cartCount:store.getCartCount()
     });
@@ -27,13 +33,10 @@ Page({
     this.setData({isFav:yes});
     wx.showToast({title:yes?'已加入常购':'已移出常购',icon:'none'});
   },
-  selectSpec(){
-    const p=this.data.product;
-    const list=(p.specs&&p.specs.length?p.specs:[p.spec]);
-    wx.showActionSheet({
-      itemList:list,
-      success:r=>this.setData({currentSpec:list[r.tapIndex]})
-    });
+  goVariant(e){
+    const id=e.currentTarget.dataset.id;
+    if(!id||id===this.data.product.id)return;
+    wx.redirectTo({url:'/pages/product-detail/index?id='+id});
   },
   canPurchase(){
     const p=this.data.product;
@@ -56,14 +59,14 @@ Page({
   addCart(){
     const p=this.data.product;
     if(!this.canPurchase())return;
-    store.addCart(p,p.moq||1,this.data.currentSpec||p.spec);
+    store.addCart(p,p.moq||1,p.spec);
     this.setData({cartCount:store.getCartCount()});
     wx.showToast({title:'已加入购物车',icon:'success'});
   },
   buyNow(){
     const p=this.data.product;
     if(!this.canPurchase())return;
-    store.addCart(p,p.moq||1,this.data.currentSpec||p.spec);
+    store.addCart(p,p.moq||1,p.spec);
     wx.switchTab({url:'/pages/cart/index'});
   },
   goCart(){wx.switchTab({url:'/pages/cart/index'})},
