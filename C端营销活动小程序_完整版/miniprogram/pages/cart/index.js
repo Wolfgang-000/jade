@@ -7,9 +7,13 @@ Page({
     amount:'0.00',
     total:'0.00',
     allChecked:false,
-    selectedCount:0
+    selectedCount:0,
+    customer:getApp().globalData.customer
   },
-  onShow(){this.refresh()},
+  onShow(){
+    this.setData({customer:getApp().globalData.customer});
+    this.refresh();
+  },
   refresh(){
     const cart=store.getCart();
     const items=cart.map(c=>({...c,product:products.find(p=>p.id===c.productId)})).filter(x=>x.product);
@@ -53,5 +57,7 @@ Page({
     wx.navigateTo({url:'/pages/checkout/index'});
   },
   goHome(){wx.switchTab({url:'/pages/home/index'})},
-  goProduct(e){wx.navigateTo({url:'/pages/product-detail/index?id='+e.currentTarget.dataset.id})}
+  goProduct(e){wx.navigateTo({url:'/pages/product-detail/index?id='+e.currentTarget.dataset.id})},
+  goService(){wx.navigateTo({url:'/pages/service/index'})},
+  goProfile(){wx.switchTab({url:'/pages/profile/index'})}
 });
