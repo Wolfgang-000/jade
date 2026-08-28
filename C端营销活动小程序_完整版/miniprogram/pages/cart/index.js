@@ -65,39 +65,135 @@ function buildRecommendations(cartItems){
     .slice(0,4);
 }
 
+function matchCartItem(item,keyword){
+  if(!keyword)return true;
+  const p=item.product||{};
+  const text=[
+    p.name,p.generic,p.brand,p.maker,p.category,p.approval,
+    item.spec,p.spec
+  ].filter(Boolean).join(' ').toLowerCase();
+  return text.includes(keyword.toLowerCase());
+}
+
 Page({
   data:{
     items:[],
+    visibleItems:[],
     recommendations:[],
     amount:'0.00',
     total:'0.00',
     allChecked:false,
     selectedCount:0,
-    selectedSkuCount:0
+    selectedSkuCount:0,
+    searchKeyword:'',
+    managing:false,
+    manageSelectedCount:0,
+    manageAllChecked:false
   },
+  onLoad(){this.manageSelectedKeys=new Set()},
   onShow(){this.refresh()},
   enrichItems(items){
     return items.map(x=>({...x,lineTotal:(x.product.price*x.qty).toFixed(2)}));
+  },
+  buildVisibleItems(items,keyword){
+    const selected=this.manageSelectedKeys||new Set();
+    return items
+      .filter(item=>matchCartItem(item,keyword))
+      .map(item=>({...item,manageChecked:selected.has(item.key)}));
+  },
+  syncVisible(items=this.data.items,keyword=this.data.searchKeyword){
+    const visibleItems=this.buildVisibleItems(items,keyword);
+    const selected=this.manageSelectedKeys||new Set();
+    this.setData({
+      visibleItems,
+      manageSelectedCount:selected.size,
+      manageAllChecked:visibleItems.length>0&&visibleItems.every(x=>selected.has(x.key))
+    });
   },
   refresh(){
     const cart=store.getCart();
     const items=this.enrichItems(
       cart.map(c=>({...c,product:products.find(p=>p.id===c.productId)})).filter(x=>x.product)
     );
+
+    if(!this.manageSelectedKeys)this.manageSelectedKeys=new Set();
+    const validKeys=new Set(items.map(x=>x.key));
+    this.manageSelectedKeys=new Set([...this.manageSelectedKeys].filter(key=>validKeys.has(key)));
+
     const selected=items.filter(x=>x.checked);
     const amount=selected.reduce((s,x)=>s+x.product.price*x.qty,0);
+    const visibleItems=this.buildVisibleItems(items,this.data.searchKeyword);
     this.setData({
       items,
+      visibleItems,
       recommendations:buildRecommendations(items),
       amount:amount.toFixed(2),
       total:amount.toFixed(2),
       allChecked:items.length>0&&items.every(x=>x.checked),
       selectedCount:selected.reduce((s,x)=>s+x.qty,0),
-      selectedSkuCount:selected.length
+      selectedSkuCount:selected.length,
+      manageSelectedCount:this.manageSelectedKeys.size,
+      manageAllChecked:visibleItems.length>0&&visibleItems.every(x=>this.manageSelectedKeys.has(x.key))
     });
   },
-  toggle(e){store.toggleCart(e.currentTarget.dataset.key);this.refresh()},
-  toggleAll(){store.setAllChecked(!this.data.allChecked);this.refresh()},
+  onCartSearchInput(e){
+    const searchKeyword=(e.detail.value||'').trim();
+    const visibleItems=this.buildVisibleItems(this.data.items,searchKeyword);
+    this.setData({
+      searchKeyword,
+      visibleItems,
+      manageAllChecked:visibleItems.length>0&&visibleItems.every(x=>this.manageSelectedKeys.has(x.key))
+    });
+  },
+  clearCartSearch(){
+    this.setData({searchKeyword:''});
+    this.syncVisible(this.data.items,'');
+  },
+  toggleManage(){
+    if(!this.data.items.length)return;
+    const managing=!this.data.managing;
+    this.manageSelectedKeys=new Set();
+    this.setData({
+      managing,
+      manageSelectedCount:0,
+      manageAllChecked:false
+    });
+    this.syncVisible();
+  },
+  toggleItem(e){
+    const key=e.currentTarget.dataset.key;
+    if(this.data.managing){
+      if(this.manageSelectedKeys.has(key))this.manageSelectedKeys.delete(key);
+      else this.manageSelectedKeys.add(key);
+      this.syncVisible();
+      return;
+    }
+    store.toggleCart(key);
+    this.refresh();
+  },
+  toggleAll(){
+    if(this.data.managing){
+      const visibleKeys=this.data.visibleItems.map(x=>x.key);
+      const shouldSelect=!this.data.manageAllChecked;
+      visibleKeys.forEach(key=>{
+        if(shouldSelect)this.manageSelectedKeys.add(key);
+        else this.manageSelectedKeys.delete(key);
+      });
+      this.syncVisible();
+      return;
+    }
+
+    if(this.data.searchKeyword){
+      const shouldSelect=!this.data.visibleItems.every(x=>x.checked);
+      this.data.visibleItems.forEach(item=>{
+        if(item.checked!==shouldSelect)store.toggleCart(item.key);
+      });
+      this.refresh();
+      return;
+    }
+    store.setAllChecked(!this.data.allChecked);
+    this.refresh();
+  },
   plus(e){store.updateQty(e.currentTarget.dataset.key,1);this.refresh()},
   minus(e){
     const key=e.currentTarget.dataset.key;
@@ -108,7 +204,8 @@ Page({
       wx.showToast({title:`该商品${min}${item.product.unit||'件'}起订`,icon:'none'});
       return;
     }
-    store.updateQty(key,-1);this.refresh();
+    store.updateQty(key,-1);
+    this.refresh();
   },
   remove(e){
     const key=e.currentTarget.dataset.key;
@@ -117,6 +214,35 @@ Page({
       content:'移除后仍可在商品页重新加入购物车。',
       confirmText:'移除',
       success:r=>{if(r.confirm){store.removeCart(key);this.refresh()}}
+    });
+  },
+  addSelectedToFrequent(){
+    if(!this.manageSelectedKeys.size)return;
+    const selectedIds=this.data.items
+      .filter(item=>this.manageSelectedKeys.has(item.key))
+      .map(item=>item.productId);
+    const current=store.getFavorites();
+    const merged=[...new Set([...selectedIds,...current])];
+    wx.setStorageSync('favorites',merged);
+    wx.showToast({title:`已加入常购 ${selectedIds.length} 种`,icon:'success'});
+    this.manageSelectedKeys=new Set();
+    this.syncVisible();
+  },
+  deleteSelected(){
+    const count=this.manageSelectedKeys.size;
+    if(!count)return;
+    wx.showModal({
+      title:`删除 ${count} 种商品？`,
+      content:'删除后仍可重新从商品页加入购物车。',
+      confirmText:'删除',
+      confirmColor:'#A3443B',
+      success:r=>{
+        if(!r.confirm)return;
+        [...this.manageSelectedKeys].forEach(key=>store.removeCart(key));
+        this.manageSelectedKeys=new Set();
+        this.refresh();
+        if(!store.getCart().length)this.setData({managing:false});
+      }
     });
   },
   addRecommended(e){
