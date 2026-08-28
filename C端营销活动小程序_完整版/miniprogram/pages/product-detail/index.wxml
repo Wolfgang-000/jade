@@ -36,27 +36,39 @@
   <view class="pdp-block purchase-block">
     <view class="purchase-row" bindtap="selectSpec">
       <text class="purchase-label">规格</text>
-      <view class="purchase-value"><text>{{currentSpec}}</text><text class="purchase-arrow">›</text></view>
+      <view class="purchase-value">
+        <text class="purchase-main">{{currentSpec}}</text>
+        <text class="purchase-arrow">›</text>
+      </view>
     </view>
     <view class="purchase-row">
       <text class="purchase-label">起订</text>
-      <view class="purchase-value"><text>{{product.moq}}{{product.unit}}起订</text><text class="purchase-sub">加入购物车默认按起订量</text></view>
+      <view class="purchase-value">
+        <text class="purchase-main">{{product.moq}}{{product.unit}}起订</text>
+        <text class="purchase-sub">加入购物车默认按起订量</text>
+      </view>
     </view>
     <view class="purchase-row">
       <text class="purchase-label">库存</text>
       <view class="purchase-value">
-        <text class="stock-ok" wx:if="{{product.stock>10}}">可售 {{product.stock}}{{product.unit}}</text>
-        <text class="stock-low" wx:elif="{{product.stock>0}}">仅剩 {{product.stock}}{{product.unit}}</text>
-        <text class="stock-warn" wx:else>库存需确认</text>
+        <text class="purchase-main stock-ok" wx:if="{{product.stock>10}}">可售 {{product.stock}}{{product.unit}}</text>
+        <text class="purchase-main stock-low" wx:elif="{{product.stock>0}}">仅剩 {{product.stock}}{{product.unit}}</text>
+        <text class="purchase-main stock-warn" wx:else>库存需确认</text>
       </view>
     </view>
     <view class="purchase-row">
       <text class="purchase-label">批号/效期</text>
-      <view class="purchase-value"><text>{{product.batch}}</text><text class="purchase-sub">效期：{{product.expiry}}</text></view>
+      <view class="purchase-value">
+        <text class="purchase-main">{{product.batch}}</text>
+        <text class="purchase-sub">效期：{{product.expiry}}</text>
+      </view>
     </view>
     <view class="purchase-row">
       <text class="purchase-label">配送</text>
-      <view class="purchase-value"><text>以收货地区和订单量核算</text><text class="purchase-sub">正式下单前再次确认库存与运费</text></view>
+      <view class="purchase-value">
+        <text class="purchase-main">以收货地区和订单量核算</text>
+        <text class="purchase-sub">正式下单前再次确认库存与运费</text>
+      </view>
     </view>
   </view>
 
@@ -64,7 +76,7 @@
     <view>
       <view class="service-kicker">CUSTOMER SERVICE</view>
       <view class="service-title">采购有疑问？联系客服</view>
-      <view class="service-copy">支持大单询价、缺货找货、库存效期、订单物流、资质与售后问题。</view>
+      <view class="service-copy">支持询价、库存效期、订单物流、资质与售后问题。</view>
     </view>
     <view class="service-arrow">→</view>
   </view>
@@ -100,11 +112,13 @@
 
   <view class="pdp-spacer"></view>
   <view class="pdp-bottom premium-pdp-bottom">
-    <button class="pdp-icon" bindtap="service"><text class="icon-text">客</text><text>客服</text></button>
-    <button class="pdp-icon" bindtap="toggleFav"><text class="icon-text">{{isFav?'♥':'♡'}}</text><text>常购</text></button>
-    <button class="pdp-icon bag-icon" bindtap="goCart">
-      <text class="icon-text">车</text><text>购物车</text><text class="mini-badge" wx:if="{{cartCount>0}}">{{cartCount}}</text>
-    </button>
+    <view class="pdp-mini-actions">
+      <button class="pdp-icon" bindtap="service"><text class="icon-text">客</text><text>客服</text></button>
+      <button class="pdp-icon" bindtap="toggleFav"><text class="icon-text">{{isFav?'♥':'♡'}}</text><text>常购</text></button>
+      <button class="pdp-icon bag-icon" bindtap="goCart">
+        <text class="icon-text">车</text><text>购物车</text><text class="mini-badge" wx:if="{{cartCount>0}}">{{cartCount}}</text>
+      </button>
+    </view>
     <button class="btn-secondary pdp-cart-btn" bindtap="addCart">加入购物车</button>
     <button class="btn-primary pdp-buy-btn" bindtap="buyNow">立即采购</button>
   </view>
