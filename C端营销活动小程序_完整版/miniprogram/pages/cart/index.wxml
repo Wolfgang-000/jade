@@ -30,9 +30,7 @@
 
     <view class="cart-list" wx:if="{{visibleItems.length}}">
       <view class="cart-item premium-cart-item" wx:for="{{visibleItems}}" wx:key="key">
-        <view class="cart-check-wrap">
-          <view class="checkbox {{managing?(item.manageChecked?'checked':''):(item.checked?'checked':'')}}" bindtap="toggleItem" data-key="{{item.key}}"></view>
-        </view>
+        <view class="checkbox item-checkbox {{managing?(item.manageChecked?'checked':''):(item.checked?'checked':'')}}" bindtap="toggleItem" data-key="{{item.key}}"></view>
         <image class="cart-img" src="{{item.product.image}}" mode="aspectFill" bindtap="goProduct" data-id="{{item.product.id}}"></image>
         <view class="cart-content">
           <view class="cart-name" bindtap="goProduct" data-id="{{item.product.id}}">{{item.product.name}}</view>
@@ -44,8 +42,10 @@
             <text class="cart-member-tag">{{item.product.moq}}{{item.product.unit}}起订</text>
           </view>
           <view class="cart-price-line">
-            <text class="cart-price">¥{{item.product.price}}</text>
-            <text class="cart-line-total">小计 ¥{{item.lineTotal}}</text>
+            <view class="cart-price-block">
+              <text class="cart-price">¥{{item.product.price}}</text>
+              <text class="cart-line-total">小计 ¥{{item.lineTotal}}</text>
+            </view>
           </view>
           <view class="cart-item-actions" wx:if="{{!managing}}">
             <button class="remove-btn" bindtap="remove" data-key="{{item.key}}">删除</button>
@@ -55,6 +55,7 @@
               <button class="qty-btn" bindtap="plus" data-key="{{item.key}}">＋</button>
             </view>
           </view>
+          <view class="manage-item-hint" wx:else>管理模式 · 可批量加入常购或删除</view>
         </view>
       </view>
     </view>
@@ -112,13 +113,25 @@
   <view class="bottom-space {{items.length?'bottom-space--footer':''}}"></view>
 
   <view class="cart-footer premium-cart-footer" wx:if="{{items.length && !managing}}">
-    <view class="footer-select" bindtap="toggleAll"><view class="checkbox {{allChecked?'checked':''}}"></view><text>全选</text></view>
-    <view class="footer-total"><text class="footer-label">合计</text><text class="footer-price">¥{{total}}</text><text class="footer-meta">已选 {{selectedCount}} 件</text></view>
+    <view class="footer-select" bindtap="toggleAll">
+      <view class="checkbox {{allChecked?'checked':''}}"></view>
+      <text>全选</text>
+    </view>
+    <view class="footer-total">
+      <view class="footer-total-row">
+        <text class="footer-label">合计</text>
+        <text class="footer-price">¥{{total}}</text>
+      </view>
+      <text class="footer-meta">已选 {{selectedCount}} 件</text>
+    </view>
     <button class="btn-primary checkout-btn" bindtap="checkout" disabled="{{selectedCount===0}}">去结算</button>
   </view>
 
   <view class="cart-footer manage-footer" wx:if="{{items.length && managing}}">
-    <view class="footer-select" bindtap="toggleAll"><view class="checkbox {{manageAllChecked?'checked':''}}"></view><text>全选</text></view>
+    <view class="footer-select" bindtap="toggleAll">
+      <view class="checkbox {{manageAllChecked?'checked':''}}"></view>
+      <text>全选</text>
+    </view>
     <view class="manage-actions">
       <button class="manage-secondary" bindtap="addSelectedToFrequent" disabled="{{manageSelectedCount===0}}">加入常购</button>
       <button class="manage-danger" bindtap="deleteSelected" disabled="{{manageSelectedCount===0}}">删除{{manageSelectedCount?'('+manageSelectedCount+')':''}}</button>
