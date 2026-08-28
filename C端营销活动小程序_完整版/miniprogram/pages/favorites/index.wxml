@@ -5,7 +5,7 @@
       <view class="product-row__name">{{item.name}}</view>
       <view class="product-row__meta">{{item.brand}} · {{item.spec}}</view>
       <view class="product-row__tags"><text class="tag">{{item.moq}}{{item.unit}}起订</text><text class="tag tag-brand">库存 {{item.stock}}{{item.unit}}</text></view>
-      <view class="product-row__bottom"><text class="price-small">采购价 ¥{{item.price}}</text><button class="btn-secondary" style="height:60rpx;margin-top:12rpx" catchtap="cart" data-id="{{item.id}}">加入采购单</button></view>
+      <view class="product-row__bottom"><text class="price-small">采购价 ¥{{item.price}}</text><button class="btn-secondary" style="height:60rpx;margin-top:12rpx" catchtap="cart" data-id="{{item.id}}">加入采购车</button></view>
     </view>
   </view>
 </view>
