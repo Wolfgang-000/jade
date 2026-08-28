@@ -35,9 +35,7 @@
           <text class="cart-member-tag">{{item.product.moq}}{{item.product.unit}}起订</text>
         </view>
         <view class="cart-price-line">
-          <view>
-            <text class="cart-price">采购价 ¥{{item.product.price}}</text>
-          </view>
+          <view><text class="cart-price">采购价 ¥{{item.product.price}}</text></view>
           <button class="remove-btn" bindtap="remove" data-key="{{item.key}}">移除</button>
         </view>
         <view class="quantity premium-quantity">
@@ -45,6 +43,30 @@
           <text class="qty-value">{{item.qty}}</text>
           <button class="qty-btn" bindtap="plus" data-key="{{item.key}}">＋</button>
         </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cart-support-block">
+    <view class="cart-service-entry" bindtap="goService" hover-class="cart-support-pressed">
+      <view>
+        <view class="cart-support-kicker">CUSTOMER SERVICE</view>
+        <view class="cart-support-title">需要报价、找货或订单协助？</view>
+        <view class="cart-support-desc">采购、商品、订单、物流或售后问题，可直接与客服沟通。</view>
+      </view>
+      <view class="cart-support-arrow">→</view>
+    </view>
+
+    <view class="cart-account" bindtap="goProfile" hover-class="cart-account-pressed">
+      <view class="cart-account-topline">
+        <view class="cart-account-level">PROCUREMENT ACCOUNT · {{customer.level}}</view>
+        <view class="cart-account-link">采购账户 →</view>
+      </view>
+      <view class="cart-account-company">{{customer.companyName}}</view>
+      <view class="cart-account-stats">
+        <view class="cart-account-stat"><text class="strong">{{customer.pendingShip}}</text><text>待发货</text></view>
+        <view class="cart-account-stat"><text class="strong">{{customer.pendingReceive}}</text><text>待收货</text></view>
+        <view class="cart-account-stat"><text class="strong">{{customer.frequentSku}}</text><text>常购品种</text></view>
       </view>
     </view>
   </view>
@@ -66,6 +88,6 @@
 <view wx:else class="empty-state premium-empty">
   <view class="empty-kicker">PROCUREMENT LIST</view>
   <text class="strong">采购单还是空的</text>
-  <text>从首页、分类或搜索中选择需要补货的商品。加入时会自动按起订量计算。</text>
+  <text>从首页、分类或搜索中选择需要采购的商品。加入时会自动按起订量计算。</text>
   <button class="btn-primary empty-button" bindtap="goHome">去选品</button>
 </view>
