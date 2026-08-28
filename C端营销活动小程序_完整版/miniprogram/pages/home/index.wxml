@@ -87,7 +87,7 @@
       <text class="link" bindtap="goCategory">全部分类</text>
     </view>
     <scroll-view class="category-scroll premium-category-scroll" scroll-x enable-flex="{{true}}" show-scrollbar="{{false}}">
-      <view class="category-item premium-category" wx:for="{{categories}}" wx:key="id" bindtap="goCategory">
+      <view class="category-item premium-category" wx:for="{{categories}}" wx:key="id" bindtap="goCategory" data-id="{{item.id}}">
         <view class="category-visual premium-category-visual">{{item.short}}</view>
         <view class="category-name">{{item.name}}</view>
         <view class="category-desc">{{item.desc}}</view>
