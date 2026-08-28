@@ -1,3 +1,4 @@
+.activity-list-card{margin-left:0;margin-right:0}
 .activity-list-card .row-between{align-items:flex-start}
 .activity-list-card .h3{min-width:0;overflow-wrap:anywhere}
 .activity-list-card .tag{flex:none;white-space:nowrap}
