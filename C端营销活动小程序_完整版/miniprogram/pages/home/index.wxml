@@ -9,16 +9,20 @@
     </view>
   </view>
 
-  <view class="hero-static hero-slide" bindtap="goActivity" data-id="{{heroActivity.id}}">
-    <image src="{{heroActivity.image}}" mode="aspectFill"></image>
-    <view class="hero-shade"></view>
-    <view class="hero-copy">
-      <view class="hero-kicker">KEY SKU PROCUREMENT</view>
-      <view class="hero-title">{{heroActivity.title}}</view>
-      <view class="hero-sub">{{heroActivity.subtitle}}</view>
-      <view class="hero-link">{{heroActivity.cta}} →</view>
-    </view>
-  </view>
+  <swiper class="hero-swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,.45)" indicator-active-color="#ffffff" autoplay interval="5200" circular>
+    <swiper-item wx:for="{{activities}}" wx:key="id">
+      <view class="hero-slide" bindtap="goActivity" data-id="{{item.id}}">
+        <image src="{{item.image}}" mode="aspectFill"></image>
+        <view class="hero-shade"></view>
+        <view class="hero-copy">
+          <view class="hero-kicker">B2B PROCUREMENT</view>
+          <view class="hero-title">{{item.title}}</view>
+          <view class="hero-sub">{{item.subtitle}}</view>
+          <view class="hero-link">{{item.cta}} →</view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
 
   <view class="service-proof">
     <view class="proof-item proof-item--interactive" bindtap="showChannelInfo" hover-class="proof-item--pressed">
