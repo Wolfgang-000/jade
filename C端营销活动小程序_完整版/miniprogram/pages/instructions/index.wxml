@@ -1,1 +1,30 @@
-<view class="doc" wx:if="{{product}}"><view class="doc-title">{{product.name}} · 产品说明</view><view class="notice" style="margin:0 0 24rpx">这里采用“摘要 + 查看完整材料”的信息结构。正式药品说明书应使用经核准的真实内容，不得由前端自行改写替代。</view><view class="doc-h2">通用名称</view><view class="doc-p">{{product.generic}}</view><view class="doc-h2">规格</view><view class="doc-p">{{product.spec}}</view><view class="doc-h2">生产企业</view><view class="doc-p">{{product.maker}}</view><view class="doc-h2">批准 / 注册信息</view><view class="doc-p">{{product.approval}}</view><view class="doc-h2">储存条件</view><view class="doc-p">{{product.storage}}</view><view class="doc-h2">注意事项</view><view class="doc-p">请以商品法定说明书、包装和专业人员指导为准。原型不提供真实医学用药建议。</view></view>
+<view class="doc" wx:if="{{product}}">
+  <view class="doc-title">{{product.name}} · {{product.regulatoryMode==='otc'||product.regulatoryMode==='rx'?'药品说明书':'产品说明'}}</view>
+  <view class="notice" style="margin:0 0 24rpx">当前为原型字段结构。正式上线的药品说明书必须使用经核准的真实说明书原文，不由前端自行改写。</view>
+
+  <block wx:if="{{product.instruction}}">
+    <view class="doc-h2">药品名称</view><view class="doc-p">{{product.instruction.name}}</view>
+    <view class="doc-h2">通用名称</view><view class="doc-p">{{product.instruction.generic}}</view>
+    <view class="doc-h2">规格</view><view class="doc-p">{{product.instruction.spec}}</view>
+    <view class="doc-h2">成份</view><view class="doc-p">{{product.instruction.ingredients}}</view>
+    <view class="doc-h2">功能主治 / 适应症</view><view class="doc-p">{{product.instruction.indications}}</view>
+    <view class="doc-h2">用法用量</view><view class="doc-p">{{product.instruction.dosage}}</view>
+    <view class="doc-h2">不良反应</view><view class="doc-p">{{product.instruction.adverse}}</view>
+    <view class="doc-h2">禁忌</view><view class="doc-p">{{product.instruction.contraindications}}</view>
+    <view class="doc-h2">注意事项</view><view class="doc-p">{{product.instruction.precautions}}</view>
+    <view class="doc-h2">贮藏</view><view class="doc-p">{{product.instruction.storage}}</view>
+    <view class="doc-h2">包装</view><view class="doc-p">{{product.instruction.package}}</view>
+    <view class="doc-h2">有效期</view><view class="doc-p">{{product.instruction.expiry}}</view>
+    <view class="doc-h2">批准文号</view><view class="doc-p">{{product.instruction.approval}}</view>
+    <view class="doc-h2">生产企业</view><view class="doc-p">{{product.instruction.maker}}</view>
+  </block>
+
+  <block wx:else>
+    <view class="doc-h2">通用名称</view><view class="doc-p">{{product.generic}}</view>
+    <view class="doc-h2">规格</view><view class="doc-p">{{product.spec}}</view>
+    <view class="doc-h2">生产企业</view><view class="doc-p">{{product.maker}}</view>
+    <view class="doc-h2">批准 / 注册信息</view><view class="doc-p">{{product.approval}}</view>
+    <view class="doc-h2">储存条件</view><view class="doc-p">{{product.storage}}</view>
+    <view class="doc-h2">产品说明</view><view class="doc-p">{{product.sell}}</view>
+  </block>
+</view>
