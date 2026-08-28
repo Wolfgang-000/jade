@@ -18,13 +18,8 @@
 
     <view class="price-zone">
       <view class="price-line">
-        <text class="purchase-price-label">采购价</text>
-        <text class="purchase-price-value">¥{{product.price}}</text>
-      </view>
-      <view class="member-benefit-line">
-        <text class="member-mark">B2B</text>
-        <text>{{product.moq}}{{product.unit}}起订</text>
-        <text class="member-benefit-link">{{product.taxInclusive?'含税价':'税费另计'}}</text>
+        <text class="member-price-label">会员价</text>
+        <text class="member-price-value">¥{{product.memberPrice}}</text>
       </view>
     </view>
 
@@ -87,7 +82,7 @@
           <view class="variant-spec">规格 {{item.spec}}</view>
           <view class="variant-meta">库存 {{item.stock}}{{item.unit}} · {{item.moq}}{{item.unit}}起订</view>
         </view>
-        <view class="variant-price">¥{{item.price}}</view>
+        <view class="variant-price">¥{{item.memberPrice}}</view>
         <text class="variant-arrow">›</text>
       </view>
     </view>
