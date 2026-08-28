@@ -1,11 +1,11 @@
 <view class="success-page">
   <view class="success-mark">✓</view>
-  <view class="success-title">采购单已提交</view>
+  <view class="success-title">订单已提交</view>
   <view class="success-copy">订单已进入履约流程。库存、发货与物流状态可在订单中心查看；如需调整可联系客服。</view>
   <view class="h2" style="margin-top:28rpx">¥{{amount}}</view>
-  <view class="caption" style="margin-top:10rpx">采购单号 CH202608260001</view>
+  <view class="caption" style="margin-top:10rpx">订单号 CH202608260001</view>
   <view class="row" style="gap:16rpx;justify-content:center;margin-top:42rpx"><button class="btn-secondary" style="width:230rpx" bindtap="home">继续选品</button><button class="btn-primary" style="width:230rpx" bindtap="orders">查看订单</button></view>
   <view class="divider"></view>
   <view class="h3">需要协助可直接联系客服</view>
-  <view class="section-sub">支持订单、物流、批号效期、发票、售后及后续补货需求。</view>
+  <view class="section-sub">支持订单、物流、批号效期、发票、售后及再次采购相关问题。</view>
 </view>
