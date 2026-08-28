@@ -1,18 +1,17 @@
 <view class="cart-page">
   <view class="cart-head">
     <view>
-      <view class="cart-title">采购单</view>
-      <view class="cart-sub">库存、起订量、价格与采购资质将在提交前再次校验</view>
+      <view class="cart-title">购物车</view>
+      <view class="cart-sub">库存、起订量、价格与采购资质将在结算前再次校验</view>
     </view>
     <button class="continue-btn" bindtap="goHome">继续选品</button>
   </view>
 
   <view class="member-note">
     <view>
-      <view class="member-note-title">当前显示B端采购价</view>
-      <view class="member-note-sub">正式订单以提交时库存、区域、数量及业务政策校验结果为准。</view>
+      <view class="member-note-title">当前显示 B 端采购价</view>
+      <view class="member-note-sub">最终价格、库存、区域及业务政策以结算确认结果为准。</view>
     </view>
-    <text class="preview-tag" wx:if="{{isPreview}}">界面预览</text>
   </view>
 
   <block wx:if="{{items.length}}">
@@ -21,7 +20,7 @@
         <view class="checkbox {{allChecked?'checked':''}}"></view>
         <text>全选</text>
       </view>
-      <text class="cart-count-copy">共 {{items.length}} 种商品 · 已选 {{selectedSkuCount}} 种</text>
+      <text class="cart-count-copy">共 {{items.length}} 种 · 已选 {{selectedSkuCount}} 种</text>
     </view>
 
     <view class="cart-list">
@@ -39,10 +38,10 @@
           </view>
           <view class="cart-price-line">
             <view>
-              <text class="cart-price">采购价 ¥{{item.product.price}}</text>
+              <text class="cart-price">¥{{item.product.price}}</text>
               <view class="cart-line-total">小计 ¥{{item.lineTotal}}</view>
             </view>
-            <button class="remove-btn" bindtap="remove" data-key="{{item.key}}">移除</button>
+            <button class="remove-btn" bindtap="remove" data-key="{{item.key}}">删除</button>
           </view>
           <view class="quantity premium-quantity">
             <button class="qty-btn" bindtap="minus" data-key="{{item.key}}">−</button>
@@ -53,48 +52,56 @@
       </view>
     </view>
 
-    <view class="cart-support-block">
-      <view class="cart-service-entry" bindtap="goService" hover-class="cart-support-pressed">
-        <view>
-          <view class="cart-support-kicker">CUSTOMER SERVICE</view>
-          <view class="cart-support-title">需要报价、找货或订单协助？</view>
-          <view class="cart-support-desc">采购、商品、订单、物流或售后问题，可直接与客服沟通。</view>
-        </view>
-        <view class="cart-support-arrow">→</view>
-      </view>
-
-      <view class="cart-account" bindtap="goProfile" hover-class="cart-account-pressed">
-        <view class="cart-account-topline">
-          <view class="cart-account-level">PROCUREMENT ACCOUNT · {{customer.level}}</view>
-          <view class="cart-account-link">采购账户 →</view>
-        </view>
-        <view class="cart-account-company">{{customer.companyName}}</view>
-        <view class="cart-account-stats">
-          <view class="cart-account-stat"><text class="strong">{{customer.pendingShip}}</text><text>待发货</text></view>
-          <view class="cart-account-stat"><text class="strong">{{customer.pendingReceive}}</text><text>待收货</text></view>
-          <view class="cart-account-stat"><text class="strong">{{customer.frequentSku}}</text><text>常购品种</text></view>
-        </view>
-      </view>
-    </view>
-
     <view class="cart-summary">
-      <view class="summary-line"><text>采购金额</text><text>¥{{amount}}</text></view>
+      <view class="summary-line"><text>商品金额</text><text>¥{{amount}}</text></view>
       <view class="summary-line total"><text>预计合计</text><text>¥{{total}}</text></view>
-      <view class="summary-help">运费、活动政策、发票与最终供货条件在确认采购单时统一校验。</view>
-    </view>
-
-    <view class="bottom-space"></view>
-    <view class="cart-footer premium-cart-footer">
-      <view class="footer-select" bindtap="toggleAll"><view class="checkbox {{allChecked?'checked':''}}"></view><text>全选</text></view>
-      <view class="footer-total"><text class="footer-label">合计</text><text class="footer-price">¥{{total}}</text><text class="footer-meta">已选 {{selectedCount}} 件</text></view>
-      <button class="btn-primary checkout-btn" bindtap="checkout" disabled="{{selectedCount===0}}">确认采购</button>
+      <view class="summary-help">运费、活动政策、发票与最终供货条件将在结算时统一校验。</view>
     </view>
   </block>
 
   <view wx:else class="empty-state premium-empty cart-empty-under-head">
-    <view class="empty-kicker">PROCUREMENT LIST</view>
-    <text class="strong">采购单还是空的</text>
-    <text>从首页、分类或搜索中选择需要采购的商品。加入时会自动按起订量计算。</text>
+    <view class="empty-kicker">SHOPPING CART</view>
+    <text class="strong">购物车还是空的</text>
+    <text>从首页、分类或搜索中选择需要采购的商品，新商品会按起订量加入购物车。</text>
     <button class="btn-primary empty-button" bindtap="goHome">去选品</button>
+  </view>
+
+  <view class="recommend-section" wx:if="{{recommendations.length}}">
+    <view class="recommend-head">
+      <view>
+        <view class="recommend-title">相关采购推荐</view>
+        <view class="recommend-sub" wx:if="{{items.length}}">根据购物车商品的场景、品类与采购关联度排序</view>
+        <view class="recommend-sub" wx:else>购物车为空时优先展示高频可采购商品</view>
+      </view>
+      <text class="recommend-all" bindtap="goCategory">全部商品</text>
+    </view>
+
+    <view class="recommend-grid">
+      <view class="recommend-card" wx:for="{{recommendations}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
+        <view class="recommend-image-wrap">
+          <image class="recommend-image" src="{{item.image}}" mode="aspectFill"></image>
+          <text class="recommend-reason">{{item.recommendReason}}</text>
+        </view>
+        <view class="recommend-name">{{item.name}}</view>
+        <view class="recommend-meta">{{item.brand}} · {{item.spec}}</view>
+        <view class="recommend-maker">{{item.maker}}</view>
+        <view class="recommend-stock">{{item.stock>0?'库存 '+item.stock+item.unit:'库存需确认'}} · {{item.moq}}{{item.unit}}起订</view>
+        <view class="recommend-bottom">
+          <view>
+            <view class="recommend-price">¥{{item.price}}</view>
+            <view class="recommend-price-label">采购价</view>
+          </view>
+          <button class="recommend-add" catchtap="addRecommended" data-id="{{item.id}}">加入购物车</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-space {{items.length?'bottom-space--footer':''}}"></view>
+
+  <view class="cart-footer premium-cart-footer" wx:if="{{items.length}}">
+    <view class="footer-select" bindtap="toggleAll"><view class="checkbox {{allChecked?'checked':''}}"></view><text>全选</text></view>
+    <view class="footer-total"><text class="footer-label">合计</text><text class="footer-price">¥{{total}}</text><text class="footer-meta">已选 {{selectedCount}} 件</text></view>
+    <button class="btn-primary checkout-btn" bindtap="checkout" disabled="{{selectedCount===0}}">去结算</button>
   </view>
 </view>
