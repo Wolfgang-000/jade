@@ -210,8 +210,8 @@ Page({
   remove(e){
     const key=e.currentTarget.dataset.key;
     wx.showModal({
-      title:'移出购物车？',
-      content:'移除后仍可在商品页重新加入购物车。',
+      title:'移出采购车？',
+      content:'移除后仍可在商品页重新加入采购车。',
       confirmText:'移除',
       success:r=>{if(r.confirm){store.removeCart(key);this.refresh()}}
     });
@@ -233,7 +233,7 @@ Page({
     if(!count)return;
     wx.showModal({
       title:`删除 ${count} 种商品？`,
-      content:'删除后仍可重新从商品页加入购物车。',
+      content:'删除后仍可重新从商品页加入采购车。',
       confirmText:'删除',
       confirmColor:'#A3443B',
       success:r=>{
@@ -261,15 +261,15 @@ Page({
     const existing=store.getCart().find(x=>x.productId===id&&(x.spec||'')===(product.spec||''));
     if(existing){
       store.updateQty(existing.key,1);
-      wx.showToast({title:'购物车数量已更新',icon:'success'});
+      wx.showToast({title:'采购车数量已更新',icon:'success'});
     }else{
       store.addCart(product,product.moq||1,product.spec);
-      wx.showToast({title:'已加入购物车',icon:'success'});
+      wx.showToast({title:'已加入采购车',icon:'success'});
     }
     this.refresh();
   },
   checkout(){
-    if(this.data.selectedCount===0){wx.showToast({title:'请选择购物车商品',icon:'none'});return}
+    if(this.data.selectedCount===0){wx.showToast({title:'请选择采购车商品',icon:'none'});return}
     const invalid=this.data.items.filter(x=>x.checked).find(x=>x.qty<(x.product.moq||1));
     if(invalid){wx.showToast({title:'部分商品未达到起订量',icon:'none'});return}
     wx.navigateTo({url:'/pages/checkout/index'});
