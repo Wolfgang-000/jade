@@ -1,1 +1,11 @@
-.card{background:#fff;border:1rpx solid #ebe6e0;border-radius:16rpx;overflow:hidden}.pic{height:248rpx;background:#f2ece5;display:flex;align-items:center;justify-content:center;color:#aaa19a;font-size:22rpx}.product-image{width:100%;height:100%}.body{padding:20rpx}.name{font-size:26rpx;line-height:1.45;font-weight:600;min-height:76rpx}.spec{font-size:22rpx;color:#8d857f;margin-top:6rpx}.price-row{margin-top:16rpx;display:flex;align-items:baseline;gap:10rpx}.price{font-size:34rpx;color:#9b1c1f;font-weight:700}.old{font-size:21rpx;color:#aaa19b;text-decoration:line-through}.buy{margin-top:18rpx;height:68rpx;line-height:68rpx;background:#9b1c1f;color:#fff;border-radius:10rpx;font-size:24rpx;font-weight:600;padding:0}.buy::after{border:0}
+.product-card-common{background:#fff;border:1rpx solid var(--border);border-radius:var(--radius-md);overflow:hidden;min-width:0}
+.pic{height:248rpx;background:#F2ECE5;display:flex;align-items:center;justify-content:center;color:#AAA19A;font-size:22rpx;overflow:hidden}
+.product-image{width:100%;height:100%}
+.body{padding:20rpx}
+.name{font-size:26rpx;line-height:1.45;font-weight:600;min-height:76rpx;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere}
+.spec{font-size:21rpx;color:#8D857F;margin-top:6rpx;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.purchase-meta{display:flex;flex-wrap:wrap;gap:8rpx;margin-top:10rpx;font-size:18rpx;color:#756E69}
+.price-row{margin-top:16rpx;display:flex;align-items:baseline;gap:8rpx;min-width:0}
+.price-label{font-size:18rpx;color:#8D857F;white-space:nowrap;flex:none}
+.price{min-width:0;font-size:32rpx;color:var(--text);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.buy{margin-top:18rpx;height:68rpx;background:var(--brand);color:#fff;border:0;border-radius:var(--radius-sm);font-size:23rpx;font-weight:600;padding:0 16rpx;display:flex;align-items:center;justify-content:center;white-space:nowrap}
