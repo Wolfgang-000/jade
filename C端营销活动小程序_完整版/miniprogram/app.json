@@ -50,7 +50,11 @@
       },
       {
         "pagePath": "pages/cart/index",
-        "text": "购物车"
+        "text": "采购车"
+      },
+      {
+        "pagePath": "pages/orders/index",
+        "text": "订单"
       },
       {
         "pagePath": "pages/profile/index",
