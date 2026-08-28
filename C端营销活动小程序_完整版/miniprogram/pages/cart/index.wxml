@@ -1,19 +1,21 @@
 <view class="cart-page">
   <view class="cart-head">
     <view class="cart-title">购物车</view>
-    <view class="cart-search">
-      <text class="cart-search-icon">⌕</text>
-      <input
-        class="cart-search-input"
-        value="{{searchKeyword}}"
-        placeholder="搜索购物车商品"
-        placeholder-class="cart-search-placeholder"
-        confirm-type="search"
-        bindinput="onCartSearchInput"
-      />
-      <text class="cart-search-clear" wx:if="{{searchKeyword}}" bindtap="clearCartSearch">×</text>
+    <view class="cart-head-actions">
+      <view class="cart-search">
+        <text class="cart-search-icon">⌕</text>
+        <input
+          class="cart-search-input"
+          value="{{searchKeyword}}"
+          placeholder="搜索购物车商品"
+          placeholder-class="cart-search-placeholder"
+          confirm-type="search"
+          bindinput="onCartSearchInput"
+        />
+        <text class="cart-search-clear" wx:if="{{searchKeyword}}" bindtap="clearCartSearch">×</text>
+      </view>
+      <button class="manage-btn {{items.length?'':'manage-btn--disabled'}}" bindtap="toggleManage" disabled="{{!items.length}}">{{managing?'完成':'管理'}}</button>
     </view>
-    <button class="manage-btn {{items.length?'':'manage-btn--disabled'}}" bindtap="toggleManage" disabled="{{!items.length}}">{{managing?'完成':'管理'}}</button>
   </view>
 
   <block wx:if="{{items.length}}">
@@ -28,7 +30,9 @@
 
     <view class="cart-list" wx:if="{{visibleItems.length}}">
       <view class="cart-item premium-cart-item" wx:for="{{visibleItems}}" wx:key="key">
-        <view class="checkbox {{managing?(item.manageChecked?'checked':''):(item.checked?'checked':'')}}" bindtap="toggleItem" data-key="{{item.key}}"></view>
+        <view class="cart-check-wrap">
+          <view class="checkbox {{managing?(item.manageChecked?'checked':''):(item.checked?'checked':'')}}" bindtap="toggleItem" data-key="{{item.key}}"></view>
+        </view>
         <image class="cart-img" src="{{item.product.image}}" mode="aspectFill" bindtap="goProduct" data-id="{{item.product.id}}"></image>
         <view class="cart-content">
           <view class="cart-name" bindtap="goProduct" data-id="{{item.product.id}}">{{item.product.name}}</view>
@@ -40,18 +44,17 @@
             <text class="cart-member-tag">{{item.product.moq}}{{item.product.unit}}起订</text>
           </view>
           <view class="cart-price-line">
-            <view>
-              <text class="cart-price">¥{{item.product.price}}</text>
-              <view class="cart-line-total">小计 ¥{{item.lineTotal}}</view>
+            <text class="cart-price">¥{{item.product.price}}</text>
+            <text class="cart-line-total">小计 ¥{{item.lineTotal}}</text>
+          </view>
+          <view class="cart-item-actions" wx:if="{{!managing}}">
+            <button class="remove-btn" bindtap="remove" data-key="{{item.key}}">删除</button>
+            <view class="quantity premium-quantity">
+              <button class="qty-btn" bindtap="minus" data-key="{{item.key}}">−</button>
+              <text class="qty-value">{{item.qty}}</text>
+              <button class="qty-btn" bindtap="plus" data-key="{{item.key}}">＋</button>
             </view>
-            <button class="remove-btn" wx:if="{{!managing}}" bindtap="remove" data-key="{{item.key}}">删除</button>
           </view>
-          <view class="quantity premium-quantity" wx:if="{{!managing}}">
-            <button class="qty-btn" bindtap="minus" data-key="{{item.key}}">−</button>
-            <text class="qty-value">{{item.qty}}</text>
-            <button class="qty-btn" bindtap="plus" data-key="{{item.key}}">＋</button>
-          </view>
-          <view class="manage-item-hint" wx:else>管理模式 · 可批量加入常购或删除</view>
         </view>
       </view>
     </view>
