@@ -58,7 +58,7 @@ Page({
   showFulfillmentInfo(){
     wx.showModal({
       title:'库存履约说明',
-      content:'页面优先展示当前可售库存、批号与效期信息。实际发货数量、发货时间和运费以提交采购单后的订单确认结果为准；库存不足时可直接联系客服确认。',
+      content:'页面优先展示当前可售库存、批号与效期信息。实际发货数量、发货时间和运费以提交订单后的确认结果为准；库存不足时可直接联系客服确认。',
       showCancel:false,
       confirmText:'知道了'
     });
@@ -99,6 +99,6 @@ Page({
     }
     store.addCart(p,p.moq||1,p.spec);
     this.setData({cartCount:store.getCartCount()});
-    wx.showToast({title:'已加入采购单',icon:'success'});
+    wx.showToast({title:'已加入购物车',icon:'success'});
   }
 });
