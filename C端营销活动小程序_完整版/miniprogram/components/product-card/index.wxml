@@ -1,15 +1,19 @@
-<view class="card">
+<view class="card product-card-common">
   <view class="pic">
     <image class="product-image" wx:if="{{product.image}}" src="{{product.image}}" mode="aspectFill" />
     <text wx:else>商品图片</text>
   </view>
   <view class="body">
     <view class="name">{{product.name}}</view>
-    <view class="spec">{{product.spec}}</view>
-    <view class="price-row">
-      <text class="price">¥{{product.activityPrice}}</text>
-      <text class="old">¥{{product.dailyPrice}}</text>
+    <view class="spec">{{product.brand || product.maker}} · {{product.spec}}</view>
+    <view class="purchase-meta">
+      <text wx:if="{{product.moq}}">{{product.moq}}{{product.unit || '件'}}起订</text>
+      <text wx:if="{{product.stock || product.stock===0}}">库存 {{product.stock}}{{product.unit || '件'}}</text>
     </view>
-    <button class="buy" bindtap="onBuy">立即购买</button>
+    <view class="price-row">
+      <text class="price-label">采购价</text>
+      <text class="price">¥{{product.price || product.activityPrice}}</text>
+    </view>
+    <button class="buy" bindtap="onBuy">加入采购车</button>
   </view>
 </view>
