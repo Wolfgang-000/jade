@@ -15,6 +15,22 @@ Page({
   },
   goSearch(){wx.navigateTo({url:'/pages/search/index'})},
   goService(){wx.navigateTo({url:'/pages/service/index'})},
+  showChannelInfo(){
+    wx.showModal({
+      title:'正规渠道说明',
+      content:'采购商品以平台实际展示的生产企业、批准文号及相关资质信息为准。正式交易支持按业务规则核验商品来源、经营资质与开票信息。',
+      showCancel:false,
+      confirmText:'知道了'
+    });
+  },
+  showFulfillmentInfo(){
+    wx.showModal({
+      title:'库存履约说明',
+      content:'页面优先展示当前可售库存、批号与效期信息。实际发货数量、发货时间和运费以提交采购单后的订单确认结果为准；库存不足时可直接联系客服确认。',
+      showCancel:false,
+      confirmText:'知道了'
+    });
+  },
   goProfile(){wx.switchTab({url:'/pages/profile/index'})},
   goActivity(e){
     const id=e?.currentTarget?.dataset?.id||'a1';
