@@ -58,7 +58,7 @@ Page({
     if(!this.canPurchase())return;
     store.addCart(p,p.moq||1,this.data.currentSpec||p.spec);
     this.setData({cartCount:store.getCartCount()});
-    wx.showToast({title:'已加入采购单',icon:'success'});
+    wx.showToast({title:'已加入购物车',icon:'success'});
   },
   buyNow(){
     const p=this.data.product;
