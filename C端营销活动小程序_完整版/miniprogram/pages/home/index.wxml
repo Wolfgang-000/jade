@@ -25,9 +25,21 @@
   </swiper>
 
   <view class="service-proof">
-    <view class="proof-item"><text class="proof-title">正规渠道</text><text class="proof-sub">商品与资质信息可查</text></view>
-    <view class="proof-item"><text class="proof-title">库存履约</text><text class="proof-sub">库存、批号、效期确认</text></view>
-    <view class="proof-item" bindtap="goService"><text class="proof-title">客服咨询</text><text class="proof-sub">报价、物流与售后</text></view>
+    <view class="proof-item proof-item--interactive" bindtap="showChannelInfo" hover-class="proof-item--pressed">
+      <text class="proof-title">正规渠道</text>
+      <text class="proof-sub">商品与资质信息可查</text>
+      <text class="proof-action">查看说明 ›</text>
+    </view>
+    <view class="proof-item proof-item--interactive" bindtap="showFulfillmentInfo" hover-class="proof-item--pressed">
+      <text class="proof-title">库存履约</text>
+      <text class="proof-sub">库存、批号、效期确认</text>
+      <text class="proof-action">查看说明 ›</text>
+    </view>
+    <view class="proof-item proof-item--interactive" bindtap="goService" hover-class="proof-item--pressed">
+      <text class="proof-title">客服咨询</text>
+      <text class="proof-sub">采购与订单问题</text>
+      <text class="proof-action">立即咨询 ›</text>
+    </view>
   </view>
 
   <view class="section home-section">
@@ -52,7 +64,7 @@
       <view>
         <view class="service-kicker">CUSTOMER SERVICE</view>
         <view class="service-title">需要报价、找货或订单协助？</view>
-        <view class="service-desc">大单询价、缺货找货、订单物流、资质与售后问题统一由客服承接。</view>
+        <view class="service-desc">采购、商品、订单、物流或售后问题，可直接与客服沟通。</view>
       </view>
       <view class="service-arrow">→</view>
     </view>
@@ -92,16 +104,24 @@
       </view>
       <view class="editorial-side">
         <view class="editorial-tile" bindtap="goProduct" data-id="{{products[3].id}}">
-          <view class="editorial-kicker">SEASONAL</view>
-          <view class="editorial-tile-name">{{products[3].name}}</view>
-          <view class="caption">{{products[3].spec}} · {{products[3].moq}}{{products[3].unit}}起订</view>
-          <view class="tile-link">查看采购条件 →</view>
+          <image class="editorial-tile-image" src="{{products[3].image}}" mode="aspectFill"></image>
+          <view class="editorial-tile-copy">
+            <view class="editorial-kicker">SEASONAL</view>
+            <view class="editorial-tile-name">{{products[3].name}}</view>
+            <view class="caption">{{products[3].spec}} · {{products[3].moq}}{{products[3].unit}}起订</view>
+            <view class="tile-price">采购价 ¥{{products[3].price}}</view>
+            <view class="tile-link">查看采购条件 →</view>
+          </view>
         </view>
         <view class="editorial-tile editorial-tile-alt" bindtap="goProduct" data-id="{{products[4].id}}">
-          <view class="editorial-kicker">KEY SUPPLY</view>
-          <view class="editorial-tile-name">{{products[4].name}}</view>
-          <view class="caption">采购价 ¥{{products[4].price}}</view>
-          <view class="tile-link">查看采购条件 →</view>
+          <image class="editorial-tile-image" src="{{products[4].image}}" mode="aspectFill"></image>
+          <view class="editorial-tile-copy">
+            <view class="editorial-kicker">KEY SUPPLY</view>
+            <view class="editorial-tile-name">{{products[4].name}}</view>
+            <view class="caption">{{products[4].spec}} · {{products[4].moq}}{{products[4].unit}}起订</view>
+            <view class="tile-price">采购价 ¥{{products[4].price}}</view>
+            <view class="tile-link">查看采购条件 →</view>
+          </view>
         </view>
       </view>
     </view>
