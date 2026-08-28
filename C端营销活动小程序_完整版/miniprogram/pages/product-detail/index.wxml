@@ -40,7 +40,7 @@
     </view>
     <view class="purchase-row">
       <text class="purchase-label">起订</text>
-      <view class="purchase-value"><text>{{product.moq}}{{product.unit}}起订</text><text class="purchase-sub">加入采购单默认按起订量</text></view>
+      <view class="purchase-value"><text>{{product.moq}}{{product.unit}}起订</text><text class="purchase-sub">加入购物车默认按起订量</text></view>
     </view>
     <view class="purchase-row">
       <text class="purchase-label">库存</text>
@@ -103,9 +103,9 @@
     <button class="pdp-icon" bindtap="service"><text class="icon-text">客</text><text>客服</text></button>
     <button class="pdp-icon" bindtap="toggleFav"><text class="icon-text">{{isFav?'♥':'♡'}}</text><text>常购</text></button>
     <button class="pdp-icon bag-icon" bindtap="goCart">
-      <text class="icon-text">单</text><text>采购单</text><text class="mini-badge" wx:if="{{cartCount>0}}">{{cartCount}}</text>
+      <text class="icon-text">车</text><text>购物车</text><text class="mini-badge" wx:if="{{cartCount>0}}">{{cartCount}}</text>
     </button>
-    <button class="btn-secondary pdp-cart-btn" bindtap="addCart">加入采购单</button>
+    <button class="btn-secondary pdp-cart-btn" bindtap="addCart">加入购物车</button>
     <button class="btn-primary pdp-buy-btn" bindtap="buyNow">立即采购</button>
   </view>
 </view>
