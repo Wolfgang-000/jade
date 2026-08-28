@@ -7,12 +7,16 @@ function intersectionCount(a=[],b=[]){
 }
 
 function scoreRecommendation(candidate,cartProducts){
+  const frequent=(candidate.tags||[]).some(x=>x.includes('常购'))?20:0;
+  const popularity=Math.min(10,Math.floor((candidate.sales||0)/100));
   if(!cartProducts.length){
-    const frequent=(candidate.tags||[]).some(x=>x.includes('常购'))?20:0;
-    return {score:frequent+Math.min(10,Math.floor((candidate.sales||0)/100)),reason:'高频采购'};
+    return {score:frequent+popularity,reason:'高频采购'};
   }
 
-  let best={score:0,reason:'高频采购'};
+  let totalScore=frequent+popularity;
+  let bestPriority=5;
+  let reason='高频采购';
+
   cartProducts.forEach(source=>{
     if(source.id===candidate.id)return;
     const sharedScene=intersectionCount(source.sceneTags,candidate.sceneTags);
@@ -22,20 +26,30 @@ function scoreRecommendation(candidate,cartProducts){
     const sameBrand=source.brand&&candidate.brand&&source.brand===candidate.brand;
     const sharedTags=intersectionCount(source.tags,candidate.tags);
 
-    let score=0;
-    let reason='高频采购';
-    if(sharedScene){score+=sharedScene*120;reason='同场景关联'}
-    if(explicit){score+=90;if(reason==='高频采购')reason='搭配采购'}
-    if(sameGeneric){score+=75;if(reason==='高频采购')reason='同通用名'}
-    if(sameCategory){score+=65;if(reason==='高频采购')reason='同品类'}
-    if(sameBrand){score+=35;if(reason==='高频采购')reason='同品牌'}
-    score+=sharedTags*20;
-    if((candidate.tags||[]).some(x=>x.includes('常购')))score+=20;
-    score+=Math.min(10,Math.floor((candidate.sales||0)/100));
-
-    if(score>best.score)best={score,reason};
+    if(sharedScene){
+      totalScore+=sharedScene*120;
+      if(bestPriority>1){bestPriority=1;reason='同场景关联'}
+    }
+    if(explicit){
+      totalScore+=90;
+      if(bestPriority>2){bestPriority=2;reason='搭配采购'}
+    }
+    if(sameGeneric){
+      totalScore+=75;
+      if(bestPriority>3){bestPriority=3;reason='同通用名'}
+    }
+    if(sameCategory){
+      totalScore+=65;
+      if(bestPriority>3){bestPriority=3;reason='同品类'}
+    }
+    if(sameBrand){
+      totalScore+=35;
+      if(bestPriority>4){bestPriority=4;reason='同品牌'}
+    }
+    totalScore+=sharedTags*20;
   });
-  return best;
+
+  return {score:totalScore,reason};
 }
 
 function buildRecommendations(cartItems){
