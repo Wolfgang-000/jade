@@ -58,7 +58,6 @@
     <view><text class="trust-title">客服支持</text><text class="trust-sub">报价、物流与售后协助</text></view>
   </view>
 
-  <view class="bottom-space"></view>
   <view class="checkout-footer">
     <view class="checkout-footer-total"><text class="footer-label">预计合计</text><text class="footer-price">¥{{total}}</text><text class="footer-note">最终以订单确认结果为准</text></view>
     <button class="btn-primary submit-order-btn" bindtap="submit">提交订单</button>
