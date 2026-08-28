@@ -1,7 +1,7 @@
 .pdp-page{
   min-height:100vh;
   background:var(--bg);
-  padding-bottom:calc(124rpx + env(safe-area-inset-bottom));
+  padding-bottom:calc(112rpx + env(safe-area-inset-bottom));
 }
 .pdp-gallery-wrap{position:relative;background:#ECE7E0}
 .pdp-gallery{height:720rpx}
