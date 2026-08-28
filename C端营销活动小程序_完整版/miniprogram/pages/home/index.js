@@ -103,6 +103,6 @@ Page({
     }
     store.addCart(p,p.moq||1,p.spec);
     this.setData({cartCount:store.getCartCount()});
-    wx.showToast({title:'已加入购物车',icon:'success'});
+    wx.showToast({title:'已加入采购车',icon:'success'});
   }
 });
