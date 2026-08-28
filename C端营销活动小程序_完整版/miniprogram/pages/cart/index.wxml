@@ -100,10 +100,7 @@
         <view class="recommend-maker">{{item.maker}}</view>
         <view class="recommend-stock">{{item.stock>0?'库存 '+item.stock+item.unit:'库存需确认'}} · {{item.moq}}{{item.unit}}起订</view>
         <view class="recommend-bottom">
-          <view>
-            <view class="recommend-price">¥{{item.price}}</view>
-            <view class="recommend-price-label">采购价</view>
-          </view>
+          <view class="recommend-price-line"><text class="recommend-price-label">采购价</text><text class="recommend-price">¥{{item.price}}</text></view>
           <button class="recommend-add" catchtap="addRecommended" data-id="{{item.id}}">加入购物车</button>
         </view>
       </view>
