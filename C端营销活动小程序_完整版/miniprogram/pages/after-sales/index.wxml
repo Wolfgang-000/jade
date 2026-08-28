@@ -1,7 +1,7 @@
-<view class="section"><view class="h2">售后服务</view><view class="section-sub">药品、医疗器械和健康商品的退换规则可能不同，实际可操作范围应按商品属性、法律法规和平台政策控制。</view></view>
+<view class="section"><view class="h2">售后服务</view><view class="section-sub">药品及其他当前可采购商品的售后处理范围可能不同，实际可操作范围应按商品属性、法律法规和平台政策控制。</view></view>
 <view class="section section--tight">
   <view class="h3">选择问题类型</view>
   <view class="spec-option" wx:for="{{reasons}}" wx:key="*this" bindtap="choose" data-i="{{index}}"><text>{{item}}</text><view class="radio {{selected===index?'active':''}}"></view></view>
-  <view class="field" style="margin-top:28rpx"><textarea style="width:100%;min-height:180rpx;background:#fff;border:1rpx solid var(--border);padding:20rpx" placeholder="补充说明（选填）"></textarea></view>
+  <view class="field" style="margin-top:28rpx"><textarea style="width:100%;min-height:180rpx;background:#fff;border:1rpx solid var(--border);padding:20rpx;border-radius:var(--radius-md)" placeholder="补充说明（选填）"></textarea></view>
   <button class="btn-primary" style="margin-top:24rpx" bindtap="submit">提交售后申请</button>
 </view>
