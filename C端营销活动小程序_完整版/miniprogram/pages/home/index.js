@@ -25,6 +25,7 @@ Page({
   goCart(){wx.switchTab({url:'/pages/cart/index'})},
   goZone(e){
     const id=e.currentTarget.dataset.id;
+    if(id==='s1') return wx.navigateTo({url:'/pages/favorites/index'});
     if(id==='s4') return this.goService();
     if(id==='s2'||id==='s3') return wx.navigateTo({url:'/pages/activity/list/index'});
     this.goCategory();
