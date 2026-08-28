@@ -98,7 +98,7 @@ const scenes = [
 const activities = [
   {id:'a1',title:'秋冬采购季',subtitle:'围绕感冒呼吸、咽喉与儿童用药组织季节采购',cta:'查看采购专区',image:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=80',status:'live'},
   {id:'a2',title:'新品到货专区',subtitle:'集中查看近期新到商品、起订量与供应状态',cta:'查看新品',image:'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1400&q=80',status:'live'},
-  {id:'a3',title:'重点品种采购',subtitle:'常购、现货与阶段性重点供应品种',cta:'查看品种',image:'https://images.unsplash.com/photo-1580281657527-47f249e8f4df?auto=format&fit=crop&w=1400&q=80',status:'upcoming'}
+  {id:'a3',title:'重点品种采购',subtitle:'聚焦现货、常购与阶段性重点供应品种，快速确认价格、库存与起订条件',cta:'查看重点品种',image:'https://images.unsplash.com/photo-1580281657527-47f249e8f4df?auto=format&fit=crop&w=1400&q=80',status:'live'}
 ];
 
 const orders = [
