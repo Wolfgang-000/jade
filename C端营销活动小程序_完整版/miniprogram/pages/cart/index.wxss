@@ -1,5 +1,5 @@
 .cart-page{min-height:100vh;background:var(--bg)}
-.cart-page--has-footer{padding-bottom:calc(156rpx + env(safe-area-inset-bottom))}
+.cart-page--has-footer{padding-bottom:calc(112rpx + env(safe-area-inset-bottom))}
 .cart-head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:20rpx;padding:22rpx 28rpx 18rpx;background:var(--surface-soft);border-bottom:1rpx solid var(--border);position:sticky;top:0;z-index:12}
 .cart-title{font-size:36rpx;font-weight:700;letter-spacing:-1rpx;white-space:nowrap}
 .cart-head-actions{min-width:0;display:flex;align-items:center;justify-content:flex-end;gap:16rpx}
